@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page-index">
 
     <terminal title="cesargb.dev">
       <h1 class="primary">
