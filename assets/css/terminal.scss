@@ -1,0 +1,91 @@
+
+$background: #173347;
+$blue: #1477db;
+$white: #feffff;
+$yellow: #f1d000;
+
+@use '~/assets/css/text.scss' as text;
+
+.terminal {
+  border-radius: 1em;
+  background-color: $background;
+  color: $white;
+  @include text.code;
+  transition: all 0.1s ease-in-out;
+
+  &.hidden {
+    transform: scale(0.1);
+    min-height: 32em;
+    min-width: 32em;
+    border-radius: 10em;
+    padding: 5em;
+
+    .terminal__body, .terminal__header {
+      display: none;
+    }
+
+    &::before {
+      content: 'Term';
+      font-size: 8em;
+      border-radius: 10em;
+    }
+  }
+
+  &__header {
+    padding: 0.5em 1em;
+    font-size: small;
+    color: #8c8c8c;
+    display: flex;
+
+    button {
+      width: 1em;
+      height: 1em;
+      background-color: #8c8c8c;
+      color: #8c8c8c;
+      border: none;
+      outline: none;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        color:hsl(0, 0%, 35%)
+      }
+    }
+    &__title {
+      flex: 1;
+      text-align: center;
+      color:hsl(0, 0%, 55%) !important;
+    }
+  }
+
+  &__body {
+    padding: 3em;
+  }
+
+  * {
+    color: $white;
+  }
+
+  .cursor {
+    margin: 0 0.5em;
+    font-weight: lighter;
+    animation: blinker 1s linear infinite;
+  }
+
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .primary {
+    color: $blue;
+  }
+
+  .yellow {
+    color: $yellow;
+  }
+}

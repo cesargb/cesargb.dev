@@ -1,0 +1,48 @@
+@use '~/assets/css/terminal.scss';
+@use '~/assets/css/icon.scss';
+
+.page {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.terminal {
+  max-width: 600px;
+  box-shadow: 0 0 1em rgb(87, 87, 87);
+
+  h1 {
+    font-size: 2em;
+    margin: 0 0 1em 0;
+  }
+
+  h2 {
+    font-weight: lighter !important;
+  }
+}
+
+.experience  {
+  margin-top: 1.5em;
+  font-size: 1.2em;
+
+  > div {
+    margin-bottom: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    align-items: center;
+
+    > div:nth-child(1) {
+      width: 8em;
+      font-weight: bold;
+    }
+
+    > div:nth-child(2) {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1em;
+      font-size: 1.5em;
+    }
+  }
+}

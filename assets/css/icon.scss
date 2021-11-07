@@ -1,0 +1,43 @@
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
+
+
+.icon {
+  @extend %fa-icon;
+  @extend .fab;
+
+  &.laravel:before {
+    content: fa-content($fa-var-laravel);
+    color: #ff2d1f;
+  }
+
+  &.vue:before {
+    content: fa-content($fa-var-vuejs);
+    color: #4fc08d;
+  }
+
+  &.html5:before {
+    content: fa-content($fa-var-html5);
+    color: #d94a24;
+  }
+
+  &.css3:before {
+    content: fa-content($fa-var-css3-alt);
+    color: #3492ca;
+  }
+
+  &.linux:before {
+    content: fa-content($fa-var-linux);
+    color: #fff;
+  }
+
+  &.aws:before {
+    content: fa-content($fa-var-aws);
+    color: #f29200;
+  }
+
+  &.git:before {
+    content: fa-content($fa-var-git);
+  }
+}

@@ -1,0 +1,16 @@
+@use '~/assets/css/variables.scss' as var;
+
+@mixin special {
+  font-family: 'Fira Code', monospace;
+  color: var.$color-primary;
+}
+
+@mixin code {
+  font-family: 'Fira Code', monospace;
+}
+
+.text {
+  &--code {
+    font-family: 'Fira Code', monospace;
+  }
+}

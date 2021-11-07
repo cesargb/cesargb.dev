@@ -1,0 +1,47 @@
+@use '~/assets/css/text.scss' as text;
+@use '~/assets/css/variables.scss' as *;
+
+.article {
+  margin: 2em;
+  padding: 1em;
+  border: 1px solid $color-primary;
+  border-radius: 1em;
+  box-shadow: 0 0 1em $color-primary;
+
+  h1 {
+    @include text.special;
+    font-size: 2em;
+  }
+
+  h2, em, strong {
+    color: $color-primary;
+    font-weight: bold;
+  }
+
+  p {
+    text-align: justify;
+  }
+
+
+  a {
+    color: $color-primary;
+  }
+}
+
+.close {
+  text-align: right;
+
+  > button {
+    background-color: transparent;
+    border: 0px;
+    font-size: 3em;
+    color: $color-primary;
+    transform: rotate(45deg);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      transform: rotate(135deg);
+    }
+  }
+}
