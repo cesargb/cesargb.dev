@@ -7,8 +7,8 @@ $yellow: #f1d000;
 @use '~/assets/css/text.scss' as text;
 
 .terminal {
-  border-radius: 1em;
   background-color: $background;
+  border-radius: 1em;
   color: $white;
   @include text.code;
   transition: all 0.1s ease-in-out;
