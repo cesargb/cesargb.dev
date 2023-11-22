@@ -47,5 +47,13 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  nitro: {
+    awsAmplify: {
+      // catchAllStaticFallback: true,
+      // imageOptimization: { "/_image", cacheControl: "public, max-age=3600, immutable" },
+      // imageSettings: { ... },
+    }
   }
 }
