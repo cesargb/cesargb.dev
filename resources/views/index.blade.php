@@ -9,11 +9,10 @@
         <meta name="robots" content="noindex, nofollow" />
         <meta name="description" content="{{
             __("page-index.description")
-        }}" /> @vite('resources/css/app.css') @if (app()->getLocale() === 'en')
-        <link rel="alternate" hreflang="es" href="/es" />
-        @else
-        <link rel="alternate" hreflang="en" href="/en" />
-        @endif
+        }}" /> @vite('resources/css/app.css')
+        <link rel="alternate" hreflang="es" href="{{ url('/es') }}" />
+        <link rel="alternate" hreflang="en" href="{{ url('/en') }}" />
+        <link rel="alternate" href="{{ url('/en') }}" hreflang="x-default" />
     </head>
     <body>
         <header>
