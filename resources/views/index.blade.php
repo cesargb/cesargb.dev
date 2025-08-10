@@ -4,10 +4,12 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>
-            {{ _("Cesar Garcia: software architect and developer") }}
+            {{ __("page-index.title") }}
         </title>
         <meta name="robots" content="noindex, nofollow" />
-        @vite('resources/css/app.css') @if (app()->getLocale() === 'en')
+        <meta name="description" content="{{
+            __("page-index.description")
+        }}" /> @vite('resources/css/app.css') @if (app()->getLocale() === 'en')
         <link rel="alternate" hreflang="es" href="/es" />
         @else
         <link rel="alternate" hreflang="en" href="/en" />
@@ -24,7 +26,7 @@
                         <a
                             href="https://github.com/cesargb"
                             target="_blank"
-                            title="Mi perfil in Github"
+                            title="{{ __('page-index.header_github_alt') }}"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -47,29 +49,25 @@
             <div class="page">
                 <section class="profile">
                     <div class="profile__title">
-                        <div>Hola,</div>
-                        <h1>mi nombre es César García</h1>
+                        <div>{{ __("page-index.profile_title_hello") }},</div>
+                        <h1>{{ __("page-index.profile_title_name") }}</h1>
                     </div>
 
                     <div class="profile__content">
-                        Soy un entusiasta desarrollador, me encanta aprender
-                        cosas nuevas y siempre estoy buscando nuevos desafíos.
+                        {{ __("page-index.profile_content") }}
                     </div>
 
                     <div class="profile__work">
-                        Trabajo en
+                        {{ __("page-index.profile_work_init") }}
                         <a href="https://www.descom.es" target="__blank"
                             >Descom.es</a
-                        >, una empresa técnologica con más de 30 años en el
-                        sector como Arquitecto de Software, donde mis
-                        principales funciones son diseñar y desarrollar
-                        soluciones mediante la innovación y la tecnología.
+                        >, {{ __("page-index.profile_work") }}
                     </div>
                 </section>
 
                 <section class="experience">
                     <div class="experience__title">
-                        <h2>Mi experiencia como desarrollador:</h2>
+                        <h2>{{ __("page-index.experience_title") }}:</h2>
                     </div>
 
                     <div class="experience__content">
@@ -3642,7 +3640,7 @@
 
                 <section class="open-source">
                     <div class="open-source__title">
-                        <h2>Proyectos</h2>
+                        <h2>{{ __("page-index.projects_title") }}</h2>
                     </div>
 
                     <div class="open-source__content">
