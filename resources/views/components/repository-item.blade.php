@@ -21,7 +21,11 @@
     <div class="badges">
         @foreach($repository['badges'] as $badge)
         <a href="{{ $badge['url'] }}" target="_blank">
-            <img src="{{ $badge['image'] }}" alt="{{ $badge['alt'] }}" />
+            <img
+                src="{{ $badge['image'] }}"
+                alt="{{ $badge['alt'] }}"
+                loading="lazy"
+            />
         </a>
         @endforeach
     </div>
