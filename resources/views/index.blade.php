@@ -10,6 +10,8 @@
         <meta name="description" content="{{
             __("page-index.description")
         }}" /> @vite('resources/css/app.css')
+        <link rel="canonical" href="{{ url()->current() }}" />
+        <link rel="icon" href="favicon.ico" />
         <link rel="alternate" hreflang="es" href="{{ url('/es') }}" />
         <link rel="alternate" hreflang="en" href="{{ url('/en') }}" />
         <link rel="alternate" href="{{ url('/en') }}" hreflang="x-default" />
