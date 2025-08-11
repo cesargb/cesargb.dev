@@ -25,7 +25,8 @@
     document.addEventListener("DOMContentLoaded", function () {
         const langSelector = document.getElementById("selectedLang");
         langSelector.addEventListener("change", function () {
-            window.location.href = "{{ $to }}";
+            window.location.href =
+                "{{ app()->getLocale() === 'es' ? '/en' : '/es' }}";
         });
     });
 </script>

@@ -11,17 +11,8 @@ class langSelector extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(
-        public $currentLang = 'en',
-        public $to = null,
-    )
+    public function __construct()
     {
-        $this->currentLang = app()->getLocale();
-
-        $this->to = match($this->currentLang) {
-            'en' => '/',
-            'es' => '/en',
-        };
     }
 
     /**
