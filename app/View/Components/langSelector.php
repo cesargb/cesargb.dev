@@ -29,9 +29,6 @@ class langSelector extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.lang-selector', [
-            'currentLang' => $this->currentLang,
-            'to' => $this->to,
-        ]);
+        return view('components.lang-selector');
     }
 }
