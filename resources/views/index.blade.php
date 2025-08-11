@@ -21,7 +21,7 @@
             <nav>
                 <ul>
                     <li>
-                        <x-lang-selector current-lang="" to="" />
+                        <x-lang-selector />
                     </li>
                     <li>
                         <a
