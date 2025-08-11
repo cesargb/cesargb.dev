@@ -8,13 +8,13 @@ use Illuminate\View\Component;
 
 class langSelector extends Component
 {
-    public string $to;
-    public string $currentLang;
-
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(
+        public $currentLang = 'en',
+        public $to = null,
+    )
     {
         $this->currentLang = app()->getLocale();
 
@@ -29,9 +29,6 @@ class langSelector extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.lang-selector', [
-            'currentLang' => $this->currentLang,
-            'to' => $this->to,
-        ]);
+        return view('components.lang-selector');
     }
 }
