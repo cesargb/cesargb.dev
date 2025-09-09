@@ -7,14 +7,13 @@
             {{ __("page-index.title") }}
         </title>
         <meta name="robots" content="noindex, nofollow" />
-        <meta name="description" content="{{
-            __("page-index.description")
-        }}" /> @vite('resources/css/app.css')
-        <link rel="canonical" href="{{ url()->current() }}" />
+        <meta name="description" content="{{ __("page-index.description") }}" />
+        <link rel="canonical" href="{{ Context::getHidden('meta.canonical') }}" />
         <link rel="icon" href="favicon.ico" />
-        <link rel="alternate" hreflang="es" href="{{ url('/es') }}" />
-        <link rel="alternate" hreflang="en" href="{{ url('/en') }}" />
-        <link rel="alternate" href="{{ url('/en') }}" hreflang="x-default" />
+        @foreach (Context::getHidden('meta.hreflang') as $lang => $url)
+        <link rel="alternate" hreflang="{{ $lang }}" href="{{ $url }}" />
+        @endforeach
+        @vite('resources/css/app.css')
     </head>
     <body>
         <header>
