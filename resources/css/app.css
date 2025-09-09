@@ -198,7 +198,8 @@ body {
                     max-width: 300px;
                     font-size: 1em;
 
-                    svg {
+                    svg,
+                    img {
                         width: 3em;
                         height: 3em;
                     }
