@@ -19,3 +19,7 @@ Route::prefix('/en')->name('en.')->middleware(LanguageMiddleware::class . ':en')
 Route::prefix('/es')->name('es.')->middleware(LanguageMiddleware::class . ':es')->group(function () {
     Route::view('/', 'index')->name('index');
 });
+
+Route::get('/test', function () {
+    return response()->json(request()->headers->all());
+})->name('test');
