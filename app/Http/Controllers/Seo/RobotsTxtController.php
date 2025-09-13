@@ -8,8 +8,8 @@ class RobotsTxtController extends Controller
 {
     public function __invoke()
     {
-        $content = "User-agent: *\nDisallow: /";
-
-        return response($content)->header('Content-Type', 'text/plain');
+        return response()->view('robots', [], 200, [
+            'Content-Type' => 'text/plain',
+        ]);
     }
 }
