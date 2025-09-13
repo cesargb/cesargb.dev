@@ -21,5 +21,9 @@ Route::prefix('/es')->name('es.')->middleware(LanguageMiddleware::class . ':es')
 });
 
 Route::get('/test', function () {
-    return response()->json(request()->headers->all());
+    return response()->json([
+        'headers' => request()->headers->all(),
+        'ip' => request()->ip(),
+        'host' => request()->host(),
+    ]);
 })->name('test');
