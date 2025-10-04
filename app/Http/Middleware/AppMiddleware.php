@@ -11,7 +11,7 @@ class AppMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->host() !== 'www.cesargb.dev') {
+        if (! $request->header('cloudfront-viewer-address')) {
             Context::addHidden('meta.robots', 'noindex,nofollow');
         }
 
