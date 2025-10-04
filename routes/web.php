@@ -10,14 +10,24 @@ Route::get('/sitemap.xml', SitemapController::class)->name('sitemap.xml');
 
 Route::get('/', function () {
     return view('index');
-})->middleware(LanguageMiddleware::class)->name('index');
+})->middleware([
+    LanguageMiddleware::class,
+    'cache.headers:public;max_age=5;etag'
+])->name('index');
 
 Route::prefix('/en')->name('en.')->middleware(LanguageMiddleware::class . ':en')->group(function () {
-    Route::view('/', 'index')->name('index');
+
+    Route::middleware('cache.headers:public;max_age=5;etag')->group(function () {
+        Route::view('/', 'index')->name('index');
+    });
+
+
 });
 
 Route::prefix('/es')->name('es.')->middleware(LanguageMiddleware::class . ':es')->group(function () {
-    Route::view('/', 'index')->name('index');
+    Route::middleware('cache.headers:public;max_age=5;etag')->group(function () {
+        Route::view('/', 'index')->name('index');
+    });
 });
 
 Route::get('/test', function () {

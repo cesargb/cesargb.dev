@@ -6,7 +6,9 @@
         <title>
             {{ __("page-index.title") }}
         </title>
-        <meta name="robots" content="noindex, nofollow" />
+        @if (Context::getHidden('meta.robots'))
+        <meta name="robots" content="{{ Context::getHidden('meta.robots') }}" />
+        @endif
         <meta name="description" content="{{ __("page-index.description") }}" />
         <link rel="canonical" href="{{ Context::getHidden('meta.canonical') }}" />
         <link rel="icon" href="favicon.ico" />
