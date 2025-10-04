@@ -9,10 +9,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AppMiddleware
 {
-
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->host() !== 'www.cesargb.dev') {
+        if ($request->host() !== '127.0.0.1') {
             Context::addHidden('meta.robots', 'noindex,nofollow');
         }
 

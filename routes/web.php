@@ -3,6 +3,7 @@
 use App\Http\Controllers\Seo\RobotsTxtController;
 use App\Http\Controllers\Seo\SitemapController;
 use App\Http\Middleware\LanguageMiddleware;
+use App\Http\Middleware\MetaRobotsMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/robots.txt', RobotsTxtController::class)->name('robots.txt');
@@ -12,6 +13,7 @@ Route::get('/', function () {
     return view('index');
 })->middleware([
     LanguageMiddleware::class,
+    MetaRobotsMiddleware::class,
     'cache.headers:public;max_age=5;etag'
 ])->name('index');
 
