@@ -24,10 +24,7 @@
         <header>
             <nav>
                 <ul>
-                    <li>
-                        <x-lang-selector />
-                    </li>
-                    <li>
+                     <li>
                         <a
                             href="https://github.com/cesargb"
                             target="_blank"
@@ -47,6 +44,10 @@
                             </svg>
                         </a>
                     </li>
+                    <li>
+                        <x-lang-selector />
+                    </li>
+
                 </ul>
             </nav>
         </header>

@@ -65,7 +65,7 @@ body {
                 list-style: none;
                 display: flex;
                 justify-content: flex-end;
-                gap: 2em;
+                gap: 1em;
 
                 li {
                     text-transform: uppercase;
