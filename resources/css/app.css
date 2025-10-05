@@ -3,6 +3,12 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
+@property --rotate {
+    syntax: "<angle>";
+    initial-value: 45deg;
+    inherits: false;
+}
+
 :root {
     --bg-color: #191919;
     --fg-color: #fff;
@@ -221,29 +227,11 @@ body {
                     flex-direction: column;
                     justify-content: space-between;
                     gap: 0.5em;
-                    border: 1px solid var(--fg-color-light);
+                    /* border: 1px solid var(--fg-color-light); */
                     padding: 1em;
                     border-radius: 1em;
                     position: relative;
-
-                    .item::before {
-                        --deg: 90deg;
-                        --blur: 5px;
-                        content: "";
-                        position: absolute;
-                        top: 0;
-                        bottom: 0;
-                        left: 0;
-                        right: 0;
-                        filter: blur(var(--blur, 5px));
-                        background: linear-gradient(
-                            var(--deg, 45deg),
-                            black,
-                            #651b1b
-                        );
-                        z-index: -1;
-                        box-shadow: 0 0 10px rgb(125 101 101 / 80%);
-                    }
+                    background-color: var(--bg-color);
 
                     .title {
                         svg {
@@ -278,6 +266,7 @@ body {
                         font-size: 0.8em;
                         line-height: 1.3em;
                         color: var(--fg-color-light);
+                        flex: 1;
 
                         code {
                             color: var(--fg-color);
@@ -286,7 +275,38 @@ body {
                         }
                     }
                 }
+
+                .item:before {
+                    content: "";
+                    width: 101%;
+                    height: 101%;
+                    border-radius: 1em;
+                    background-image: linear-gradient(
+                        var(--rotate),
+                        #ff4b2b,
+                        #f86184 43%,
+                        #ffb347
+                    );
+                    position: absolute;
+                    z-index: -1;
+                    top: -0.5%;
+                    left: -0.5%;
+                    transition: all 0.5s;
+                }
+
+                .item:hover::before {
+                    animation: spin 2.5s linear infinite;
+                }
             }
         }
+    }
+}
+
+@keyframes spin {
+    0% {
+        --rotate: 0deg;
+    }
+    100% {
+        --rotate: 360deg;
     }
 }
