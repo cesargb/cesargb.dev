@@ -15,12 +15,12 @@ class Repositories
             ],
             "badges" => [
                 [
-                    "image" => "https://img.shields.io/packagist/v/cesargb/laravel-magiclink?color=%23e25151&label=version&style=for-the-badge",
+                    "image" => "https://img.shields.io/packagist/v/cesargb/laravel-magiclink?color=%23e25151&label=version&style=for-the-badge&cacheSeconds=86400",
                     "url" => "https://packagist.org/packages/cesargb/laravel-magiclink",
                     "alt" => "Version paquete cesargb laravel-magiclink"
                 ],
                 [
-                    "image" => "https://img.shields.io/packagist/dt/cesargb/laravel-magiclink?color=%23e25151&label=descargas&style=for-the-badge",
+                    "image" => "https://img.shields.io/packagist/dt/cesargb/laravel-magiclink?color=%23e25151&label=descargas&style=for-the-badge&cacheSeconds=3600",
                     "url" => "https://packagist.org/packages/cesargb/laravel-magiclink",
                     "alt" => "Descargas paquete cesargb laravel-magiclink"
                 ]
@@ -36,12 +36,12 @@ class Repositories
             ],
             "badges" => [
                 [
-                    "image" => "https://img.shields.io/packagist/v/cesargb/php-log-rotation?color=%23e25151&label=version&style=for-the-badge",
+                    "image" => "https://img.shields.io/packagist/v/cesargb/php-log-rotation?color=%23e25151&label=version&style=for-the-badge&cacheSeconds=86400",
                     "url" => "https://packagist.org/packages/cesargb/php-log-rotation",
                     "alt" => "Version paquete cesargb php log rotaion"
                 ],
                 [
-                    "image" => "https://img.shields.io/packagist/dt/cesargb/php-log-rotation?color=%23e25151&label=descargas&style=for-the-badge",
+                    "image" => "https://img.shields.io/packagist/dt/cesargb/php-log-rotation?color=%23e25151&label=descargas&style=for-the-badge&cacheSeconds=3600",
                     "url" => "https://packagist.org/packages/cesargb/php-log-rotation",
                     "alt" => "Descargas paquete cesargb php log rotaion"
                 ]
