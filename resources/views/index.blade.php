@@ -14,6 +14,9 @@
         <link rel="icon" href="favicon.ico" />
         @foreach (Context::getHidden('meta.hreflang') as $lang => $url)
         <link rel="alternate" hreflang="{{ $lang }}" href="{{ $url }}" />
+        <link rel="dns-prefetch" href="https://img.shields.io" />
+        <link rel="preconnect" href="https://img.shields.io" />
+
         @endforeach
         @vite('resources/css/app.css')
     </head>
