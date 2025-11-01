@@ -4,13 +4,13 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
 >
     <url>
-        <loc>{{ url("/es") }}</loc>
-        <xhtml:link rel="alternate" hreflang="es" href="{{ url('/es') }}" />
-        <xhtml:link rel="alternate" hreflang="en" href="{{ url('/en') }}" />
+        <loc>{{ secure_url("/es") }}</loc>
+        <xhtml:link rel="alternate" hreflang="es" href="{{ secure_url('/es') }}" />
+        <xhtml:link rel="alternate" hreflang="en" href="{{ secure_url('/en') }}" />
     </url>
     <url>
-        <loc>{{ url("/en") }}</loc>
-        <xhtml:link rel="alternate" hreflang="en" href="{{ url('/en') }}" />
-        <xhtml:link rel="alternate" hreflang="es" href="{{ url('/es') }}" />
+        <loc>{{ secure_url("/en") }}</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="{{ secure_url('/en') }}" />
+        <xhtml:link rel="alternate" hreflang="es" href="{{ secure_url('/es') }}" />
     </url>
 </urlset>
