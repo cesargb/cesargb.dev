@@ -36,8 +36,6 @@ class LanguageMiddleware
         Context::addHidden('meta.canonical', Uri::of($canonical)->withScheme('https')->value());
         Context::addHidden('meta.hreflang', array_map(fn($url) => Uri::of($url)->withScheme('https')->value(), $hrefLangs));
 
-        dd(Context::getHidden('meta.canonical'), Context::getHidden('meta.hreflang'));
-
         return $next($request);
     }
 
