@@ -23,6 +23,10 @@ class LanguageMiddleware
 
         app()->setLocale($currentLanguage);
 
+        if (Route::currentRouteName() === 'index') {
+            return redirect()->route($currentLanguage . '.index');
+        }
+
         $canonical = $languageByPath
             ? url()->current()
             : (Route::currentRouteName() === 'index' ? route($currentLanguage . '.index') : null);
