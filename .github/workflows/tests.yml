@@ -1,0 +1,55 @@
+name: tests
+
+on:
+  push:
+      paths:
+          - '**.php'
+          - 'phpunit.xml.dist'
+  pull_request:
+      paths:
+          - '**.php'
+          - 'phpunit.xml.dist'
+
+jobs:
+  phpstan:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.4
+        extensions: mbstring, pdo, pdo_mysql
+
+    - name: Cache Composer dependencies
+      uses: actions/cache@v5
+      with:
+        path: |
+          ~/.composer/cache
+          vendor
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-composer-
+
+    - name: Install dependencies
+      run: composer install --no-interaction --prefer-dist --no-progress
+
+    - name: Prepare environment
+      run: |
+        cp .env.example .env
+        mkdir -p database
+        touch database/database.sqlite
+        sed -i 's/DB_CONNECTION=.*/DB_CONNECTION=sqlite/' .env
+        sed -i 's|DB_DATABASE=.*|DB_DATABASE=database/database.sqlite|' .env
+
+    - name: Generate app key
+      run: php artisan key:generate
+
+    - name: Run migrations
+      run: php artisan migrate --force
+
+    - name: Run tests
+      run: php artisan test
