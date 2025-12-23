@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MetaRobotsMiddleware
 {
-
     public function handle(Request $request, Closure $next, string $defaultRobots = 'noindex, nofollow'): Response
     {
         Context::addHidden('meta.robots', $defaultRobots);

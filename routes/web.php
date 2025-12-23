@@ -14,16 +14,16 @@ Route::get('/', function () {
 })->middleware([
     LanguageMiddleware::class,
     MetaRobotsMiddleware::class,
-    'cache.headers:public;max_age=5;etag'
+    'cache.headers:public;max_age=5;etag',
 ])->name('index');
 
-Route::prefix('/en')->name('en.')->middleware(LanguageMiddleware::class . ':en')->group(function () {
+Route::prefix('/en')->name('en.')->middleware(LanguageMiddleware::class.':en')->group(function () {
     Route::middleware('cache.headers:public;max_age=5;etag')->group(function () {
         Route::view('/', 'index')->name('index');
     });
 });
 
-Route::prefix('/es')->name('es.')->middleware(LanguageMiddleware::class . ':es')->group(function () {
+Route::prefix('/es')->name('es.')->middleware(LanguageMiddleware::class.':es')->group(function () {
     Route::middleware('cache.headers:public;max_age=5;etag')->group(function () {
         Route::view('/', 'index')->name('index');
     });

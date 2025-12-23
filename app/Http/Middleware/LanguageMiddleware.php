@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 class LanguageMiddleware
 {
     private static array $languages = ['en', 'es'];
+
     private static string $defaultLanguage = 'en';
 
     public function handle(Request $request, Closure $next, $languageByPath = null): Response
@@ -24,12 +25,12 @@ class LanguageMiddleware
         app()->setLocale($currentLanguage);
 
         if (Route::currentRouteName() === 'index') {
-            return redirect()->route($currentLanguage . '.index');
+            return redirect()->route($currentLanguage.'.index');
         }
 
         $canonical = $languageByPath
             ? url()->current()
-            : (Route::currentRouteName() === 'index' ? route($currentLanguage . '.index') : null);
+            : (Route::currentRouteName() === 'index' ? route($currentLanguage.'.index') : null);
 
         if (! $canonical) {
             return $next($request);
@@ -38,7 +39,7 @@ class LanguageMiddleware
         $hrefLangs = $this->getHrefLangs($canonical);
 
         Context::addHidden('meta.canonical', Uri::of($canonical)->withScheme('https')->value());
-        Context::addHidden('meta.hreflang', array_map(fn($url) => Uri::of($url)->withScheme('https')->value(), $hrefLangs));
+        Context::addHidden('meta.hreflang', array_map(fn ($url) => Uri::of($url)->withScheme('https')->value(), $hrefLangs));
 
         return $next($request);
     }
@@ -62,8 +63,8 @@ class LanguageMiddleware
         $routeNameWithoutLang = Str::of($routeNameCanonical)->after('.')->toString();
 
         $hrefLangs = collect(self::$languages)
-            ->mapWithKeys(fn($language) => [
-                $language => $this->getUrlFromRouteName($language . '.' . $routeNameWithoutLang)
+            ->mapWithKeys(fn ($language) => [
+                $language => $this->getUrlFromRouteName($language.'.'.$routeNameWithoutLang),
             ])
             ->filter();
 
@@ -74,6 +75,7 @@ class LanguageMiddleware
     {
         $request = Request::create($path, 'GET'); // crea un request falso
         $route = app('router')->getRoutes()->match($request);
+
         return $route->getName() ?? null;
     }
 
@@ -89,8 +91,8 @@ class LanguageMiddleware
     private function languagePreferred(): ?string
     {
         return collect(request()->getLanguages())
-            ->map(fn($locale) => explode('-', $locale)[0])
-            ->first(fn($locale) => $this->isLanguagePermitted($locale));
+            ->map(fn ($locale) => explode('-', $locale)[0])
+            ->first(fn ($locale) => $this->isLanguagePermitted($locale));
     }
 
     private function isLanguagePermitted(string $language): bool

@@ -11,7 +11,7 @@ class RobotsTxtController extends Controller
     {
         $environment = App::environment('production') ? 'production' : 'default';
 
-        return response()->view('robots.' . $environment, [], 200, [
+        return response()->view('robots.'.$environment, [], 200, [
             'Content-Type' => 'text/plain',
         ]);
     }
