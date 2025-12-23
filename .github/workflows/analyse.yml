@@ -3,7 +3,7 @@ name: analyse
 on:
   push:
       paths:
-          - '**.php'
+          - 'app/**/**.php'
           - 'phpstan.neon.dist'
   pull_request:
       paths:
