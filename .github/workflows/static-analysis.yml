@@ -1,20 +1,23 @@
-name: analyse
+name: static analysis
 
 on:
   push:
       paths:
-          - 'app/**/**.php'
+          - '**.php'
           - 'phpstan.neon.dist'
-          - '.github/workflows/phpstan.yml'
+          - '.github/workflows/static-analysis.yml'
+
   pull_request:
       paths:
-          - 'app/**/**.php'
+          - '**.php'
           - 'phpstan.neon.dist'
-          - '.github/workflows/phpstan.yml'
+          - '.github/workflows/static-analysis.yml'
 
 jobs:
   phpstan:
+
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v6
 
@@ -22,10 +25,14 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: 8.4
-        coverage: none
 
     - name: Install composer dependencies
       uses: ramsey/composer-install@v3
+
+    - name: Install larastan
+      run: |
+        composer require "larastan/larastan" --no-interaction --no-update
+        composer update --prefer-dist --no-interaction
 
     - name: Run analyse phpstan
       run: vendor/bin/phpstan analyse --error-format github

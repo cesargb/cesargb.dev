@@ -5,13 +5,15 @@ on:
       paths:
           - '**.php'
           - 'phpunit.xml.dist'
+          - '.github/workflows/tests.yml'
   pull_request:
       paths:
           - '**.php'
           - 'phpunit.xml.dist'
+          - '.github/workflows/tests.yml'
 
 jobs:
-  phpstan:
+  tests:
 
     runs-on: ubuntu-latest
 
