@@ -16,4 +16,10 @@ class ExampleTest extends TestCase
 
         $response->assertRedirect('/en');
     }
+
+    public function test_the_application_returns_a_successful_response_for_spanish(): void
+    {
+        $this->get('/es')
+            ->assertStatus(200);
+    }
 }

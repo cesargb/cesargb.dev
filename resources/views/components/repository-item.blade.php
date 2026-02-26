@@ -1,3 +1,4 @@
+@props(['repository'])
 <div class="item">
     <a
         href="https://www.github.com/cesargb/{{ $repository['repository'] }}"
