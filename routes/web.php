@@ -36,5 +36,10 @@ Route::get('/assets/images/{path}', function ($path) {
         'cache' => storage_path('app/private/glide-cache'),
     ]);
 
-    return $server->outputImage($path, request()->all());
+    $request = request()->only('w', 'h', 'fit');
+
+    return response($server->outputImage($path, $request), 200, [
+        'Content-Type' => 'image/webp',
+        'Cache-Control' => 'public, max-age=31536000',
+    ]);
 })->where('path', '.*');

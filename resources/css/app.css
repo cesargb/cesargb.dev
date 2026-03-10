@@ -10,11 +10,12 @@
 }
 
 :root {
-    --bg-color: #191919;
+    --bg-color: #0a0a0a;
     --fg-color: #fff;
+    --fg-color-content: rgb(209 213 219);
     --bg-color-special: #191919;
     --fg-color-special: #e25151;
-    --fg-color-light: #acacac;
+    --fg-color-light: rgb(156 163 175);
 }
 
 * {
@@ -83,7 +84,6 @@ body {
                     text-transform: uppercase;
                     color: var(--fg-color-light);
                     fill: var(--fg-color-light);
-                    font-size: 1em;
                     display: flex;
                     align-items: center;
 
@@ -128,8 +128,6 @@ body {
     .page {
         padding: 0 1em;
 
-        font-size: clamp(1.2rem, 0.6429rem + 1.1429vw, 3rem);
-
         h1,
         h2,
         h3,
@@ -137,42 +135,159 @@ body {
         h5,
         h6 {
             margin: 0;
+            font-size: initial;
         }
 
         .profile {
-            font-size: 1.5em;
             max-width: 800px;
+            min-height: 100vh;
 
-            .profile__title {
+            > header {
+                margin-bottom: 1em;
                 font-size: 2em;
-                color: var(--fg-color-light);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 1em;
 
-                div,
-                h1 {
-                    display: contents;
+                .profile__image {
+                    margin-top: 0.5em;
+                    width: 100px;
+                    height: 100px;
+                    position: relative;
+
+                    .profile__image__bg {
+                        border-radius: 50%;
+                        position: absolute;
+                        inset: -0.25rem;
+                        filter: blur(8px);
+                        opacity: 0.25;
+                        background: linear-gradient(to right, #ff5f6d, #ffc371);
+                        transition-duration: 1000ms;
+                        transition-property:
+                            color,
+                            background-color,
+                            border-color,
+                            fill,
+                            stroke,
+                            opacity,
+                            box-shadow,
+                            transform,
+                            filter,
+                            -webkit-text-decoration-color,
+                            -webkit-backdrop-filter;
+                        transition-property:
+                            color, background-color, border-color,
+                            text-decoration-color, fill, stroke, opacity,
+                            box-shadow, transform, filter, backdrop-filter;
+                        transition-property:
+                            color,
+                            background-color,
+                            border-color,
+                            text-decoration-color,
+                            fill,
+                            stroke,
+                            opacity,
+                            box-shadow,
+                            transform,
+                            filter,
+                            backdrop-filter,
+                            -webkit-text-decoration-color,
+                            -webkit-backdrop-filter;
+                        transition-timing-function: cubic-bezier(
+                            0.4,
+                            0,
+                            0.2,
+                            1
+                        );
+                    }
+
+                    img {
+                        border-radius: 50%;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        filter: grayscale(100%) brightness(80%);
+                        border-width: 2px;
+                    }
                 }
 
-                div {
-                    margin-right: 0.2em;
+                .profile__image:hover .profile__image__bg {
+                    filter: blur(12px);
+                    opacity: 0.5;
                 }
 
-                h1 {
-                    color: var(--fg-color-special);
-                    margin: 0;
-                    font-size: 1em;
+                .profile__title {
+                    h1 {
+                        font-size: 1em;
+                        margin: 0;
+
+                        strong {
+                            background: linear-gradient(
+                                135deg,
+                                #ff5f6d 0%,
+                                #ffc371 100%
+                            );
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                        }
+                    }
+                }
+
+                .profile__subtitle {
+                    font-size: 1.25rem;
+                    font-weight: 300;
+                    color: var(--fg-color-light);
+                    margin-top: 0.5em;
+                }
+
+                @media (min-width: 768px) {
+                    flex-direction: row;
+                    align-items: flex-start;
+                    gap: 30px;
+                    text-align: left;
+                    font-size: 3.75em;
                 }
             }
 
             .profile__content {
-                margin-top: 1em;
+                color: var(--fg-color-content);
                 font-size: 1em;
+                font-weight: 300;
+                @media (min-width: 768px) {
+                    font-size: 1.25em;
+                }
             }
 
             .profile__work {
-                margin-top: 1em;
-                font-size: 0.5em;
-                line-height: 1.3em;
-                color: var(--fg-color-light);
+                margin-top: 2em;
+                display: flex;
+            }
+
+            .profile__work > div {
+                font-weight: 300;
+                font-size: 0.6em;
+                padding: 0.5rem 1rem;
+                border-radius: 9999px;
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                color: rgba(156, 163, 175, 1);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
+
+                a {
+                    color: white;
+                    text-decoration: none;
+                    transition: all 0.3s ease;
+                }
+            }
+
+            .profile__work > div:hover {
+                border-color: rgba(255, 95, 109, 0.4);
+                transform: translateY(-5px);
             }
         }
 
@@ -208,7 +323,6 @@ body {
                     justify-content: end;
                     gap: 0.5em;
                     max-width: 300px;
-                    font-size: 1em;
 
                     svg,
                     img {
@@ -233,7 +347,6 @@ body {
                     flex-direction: column;
                     justify-content: space-between;
                     gap: 0.5em;
-                    /* border: 1px solid var(--fg-color-light); */
                     padding: 1em;
                     border-radius: 1em;
                     position: relative;
@@ -254,7 +367,6 @@ body {
                         gap: 0.5em;
 
                         em {
-                            font-size: 0.6em;
                             padding: 0.2em 0.5em;
                             border: 1px solid var(--fg-color-light);
                             border-radius: 1em;
@@ -262,7 +374,6 @@ body {
                     }
 
                     .description {
-                        font-size: 0.8em;
                         line-height: 1.3em;
                         color: var(--fg-color-light);
                         flex: 1;

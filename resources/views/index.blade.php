@@ -51,30 +51,35 @@
         <main>
             <div class="page">
                 <section class="profile">
-                    <div class="profile__image">
-                        <img
-                            src="/assets/images/profile.webp?w=400&h=400&fit=crop"
-                            alt="César García"
-                        />
-                    </div>
-                    <div class="profile__title">
-                        <div>{{ __("page-index.profile_title_hello") }},</div>
-                        <h1>{{ __("page-index.profile_title_name") }}</h1>
-                    </div>
+                    <header>
+                        <div class="profile__image">
+                            <div class="profile__image__bg"></div>
+                            <img
+                                src="/assets/images/profile.webp?w=150&h=150&fit=crop"
+                                alt="César García"
+                            />
+                        </div>
 
-                    <div class="profile__subtitle">
-                        {{ __("page-index.profile_title_profession") }}
-                    </div>
+                        <div class="profile__title">
+                            <h1>
+                                {{ __("page-index.profile_title_hello") }}<br />
+                                <strong>{{ __("page-index.profile_title_name") }}</strong>
+                            </h1>
+                            <div class="profile__subtitle">
+                                {{ __("page-index.profile_title_profession") }}
+                            </div>
+                        </div>
+                    </header>
 
                     <div class="profile__content">
                         {{ __("page-index.profile_content") }}
                     </div>
 
                     <div class="profile__work">
-                        {{ __("page-index.profile_work_init") }}
-                        <a href="https://www.descom.es" target="__blank"
-                            >{{ __("page-index.profile_work_bold") }}</a
-                        >, {{ __("page-index.profile_work") }}
+                        <div>
+                            {{ __('page-index.profile_work_current_prefix')}}
+                        <a href="https://www.descom.es" target="_blank">Descom.es</a>
+                        </div>
                     </div>
                 </section>
 
