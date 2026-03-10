@@ -70,7 +70,14 @@ body {
     grid-template-rows: auto 1fr;
 
     > header {
+        z-index: 2;
         padding: 0.5em 1em;
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        position: fixed;
+        width: 100%;
 
         nav {
             ul {
@@ -104,6 +111,7 @@ body {
 
     main {
         margin: 1em;
+        margin-top: 4em;
 
         > * {
             max-width: 1280px;

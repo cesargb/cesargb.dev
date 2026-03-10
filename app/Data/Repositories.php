@@ -31,7 +31,7 @@ class Repositories
             'owner' => 'cesargb',
             'tags' => ['PHP'],
             'description' => [
-                'es' => "Este paquete desarrollado en `PHP` te permite agregar en tus proyectos una API sencilla para rotar los logs de tus aplicaciones. Estas son sus principales funcionalidades:\n- Eliminación de ficheros rotados antiguos\n- Compresion para lograr un ahorro de espacio",
+                'es' => "Paquete en PHP diseñado para `gestionar la rotación de logs de aplicaciones` de forma sencilla mediante una API ligera.\n\nFuncionalidades principales:\n\n- Rotación automática de archivos de log\n- Eliminación de logs antiguos\n- Compresión de archivos para optimizar el almacenamiento\n\nEste paquete permite integrar fácilmente la gestión de logs en cualquier aplicación PHP.",
                 'en' => "This package, developed in PHP, allows you to add a simple API to rotate the logs of your applications in your projects. These are its main functionalities:\n- Deletion of old rotated files\n- Compression to save space",
             ],
             'badges' => [
