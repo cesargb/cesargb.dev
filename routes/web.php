@@ -5,6 +5,7 @@ use App\Http\Controllers\Seo\SitemapController;
 use App\Http\Middleware\LanguageMiddleware;
 use App\Http\Middleware\MetaRobotsMiddleware;
 use Illuminate\Support\Facades\Route;
+use League\Glide\ServerFactory;
 
 Route::get('/robots.txt', RobotsTxtController::class)->name('robots.txt');
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap.xml');
@@ -29,10 +30,11 @@ Route::prefix('/es')->name('es.')->middleware(LanguageMiddleware::class.':es')->
     });
 });
 
-Route::get('/test', function () {
-    return response()->json([
-        'headers' => request()->headers->all(),
-        'ip' => request()->ip(),
-        'host' => request()->host(),
+Route::get('/assets/images/{path}', function ($path) {
+    $server = ServerFactory::create([
+        'source' => base_path('resources/images'),
+        'cache' => storage_path('app/private/glide-cache'),
     ]);
-})->name('test');
+
+    return $server->outputImage($path, request()->all());
+})->where('path', '.*');

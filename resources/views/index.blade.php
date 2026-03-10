@@ -15,8 +15,6 @@
         @foreach (Context::getHidden('meta.hreflang') as $lang => $url)
         <link rel="alternate" hreflang="{{ $lang }}" href="{{ $url }}" />
         @endforeach
-        <link rel="dns-prefetch" href="https://img.shields.io" />
-        <link rel="preconnect" href="https://img.shields.io" />
         @vite('resources/css/app.css')
     </head>
     <body>
@@ -53,9 +51,19 @@
         <main>
             <div class="page">
                 <section class="profile">
+                    <div class="profile__image">
+                        <img
+                            src="/assets/images/profile.webp?w=400&h=400&fit=crop"
+                            alt="César García"
+                        />
+                    </div>
                     <div class="profile__title">
                         <div>{{ __("page-index.profile_title_hello") }},</div>
                         <h1>{{ __("page-index.profile_title_name") }}</h1>
+                    </div>
+
+                    <div class="profile__subtitle">
+                        {{ __("page-index.profile_title_profession") }}
                     </div>
 
                     <div class="profile__content">
@@ -65,7 +73,7 @@
                     <div class="profile__work">
                         {{ __("page-index.profile_work_init") }}
                         <a href="https://www.descom.es" target="__blank"
-                            >Descom.es</a
+                            >{{ __("page-index.profile_work_bold") }}</a
                         >, {{ __("page-index.profile_work") }}
                     </div>
                 </section>
@@ -76,6 +84,9 @@
                     </div>
 
                     <div class="experience__content">
+                        <p>
+                            {{ __("page-index.experience_content") }}
+                        </p>
                         <div class="item">
                             <div class="item__image">
                                 <img src="{{ Vite::asset('resources/icons/php.svg') }}" alt="PHP">

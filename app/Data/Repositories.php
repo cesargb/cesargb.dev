@@ -10,7 +10,7 @@ class Repositories
             'owner' => 'cesargb',
             'tags' => ['Laravel', 'PHP'],
             'description' => [
-                'es' => "`MagicLink` es un paquete para `Laravel` que te permite generar una url segura que al visitarla realiza tareas que requieren una validación, estos son algunos ejemplos:\n- Login sin contraseña; podrás enviar un enlace seguro con un sistema de autologin\n- Descarga/Acceso de contenido privado\n- Tareas customizada según tus necesidades",
+                'es' => "`MagicLink` es un paquete para Laravel que permite generar enlaces seguros que ejecutan acciones que requieren autenticación o validación.\n\nCasos de uso habituales:\n\n- Inicio de sesión sin contraseña mediante enlaces seguros (passwordless login)\n- Acceso a contenido privado\n- Ejecución de acciones protegidas mediante enlaces temporales\n\nEste paquete facilita la implementación de flujos seguros y simplifica la experiencia de usuario en aplicaciones Laravel.",
                 'en' => "`MagicLink` is a package for `Laravel` that allows you to generate a secure URL that, when visited, performs tasks that require validation. Some examples are:\n- Passwordless login; you can send a secure link with an autologin system\n- Download / access of private content\n- Customized tasks according to your needs",
             ],
             'badges' => [

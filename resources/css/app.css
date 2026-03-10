@@ -23,8 +23,17 @@
 
 body {
     margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Oxygen,
+        Ubuntu,
+        Cantarell,
+        "Open Sans",
+        "Helvetica Neue",
         sans-serif;
     background-color: var(--bg-color);
     color: var(--fg-color);
@@ -38,12 +47,9 @@ body::before {
     height: 100vh;
     width: 100vw;
     position: fixed;
-    background: linear-gradient(
-                90deg,
-                var(--line) 1px,
-                transparent 1px var(--size)
-            )
-            50% 50% / var(--size) var(--size),
+    background:
+        linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)) 50%
+            50% / var(--size) var(--size),
         linear-gradient(var(--line) 1px, transparent 1px var(--size)) 50% 50% /
             var(--size) var(--size);
     mask: linear-gradient(-25deg, transparent 30%, white);
@@ -240,13 +246,6 @@ body {
                             height: 0.7em;
                             fill: var(--fg-color-light);
                         }
-                    }
-
-                    .badges {
-                        display: flex;
-                        gap: 0.5em;
-                        flex-wrap: wrap;
-                        justify-content: center;
                     }
 
                     .tags {
