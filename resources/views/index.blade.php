@@ -48,8 +48,10 @@
                 </ul>
             </nav>
         </header>
+
         <main>
             <div class="page">
+                <div class="glow"></div>
                 <section class="profile">
                     <header>
                         <div class="profile__image">
@@ -121,7 +123,12 @@
 
                 <section class="open-source">
                     <div class="open-source__title">
-                        <h2>{{ __("page-index.projects_title") }}</h2>
+                        <div class="icon-h">
+                            {!! file_get_contents(resource_path('icons/develop.svg')) !!}
+                        </div>
+                        <h2>
+                            {{ __("page-index.projects_title") }}:
+                        </h2>
                     </div>
 
                     <div class="open-source__content">

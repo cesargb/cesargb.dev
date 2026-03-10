@@ -1,19 +1,30 @@
 @props(['repository'])
 <div class="item">
-    <a
-        href="https://www.github.com/cesargb/{{ $repository['repository'] }}"
-        target="_blank"
-    >
-        <h3 class="title">
-            cesargb/{{ $repository["repository"] }} <IconLinkRemote />
-        </h3>
-    </a>
+    <header>
+        <div>
+            <div class="title">
+                {!! file_get_contents(resource_path('icons/github.svg')) !!}
+                <a
+                    href="https://www.github.com/cesargb/{{ $repository['repository'] }}"
+                    target="_blank"
+                >
+                    <h3>
+                        cesargb/{{ $repository["repository"] }}
+                    </h3>
+                </a>
+            </div>
+            <div class="tags">
+                @foreach($repository['tags'] as $tag)
+                <span> {{ $tag }} </span>
+                @endforeach
+            </div>
+        </div>
 
-    <div class="tags">
-        @foreach($repository['tags'] as $tag)
-        <em> {{ $tag }} </em>
-        @endforeach
-    </div>
+        <div>
+            {!! file_get_contents(resource_path('icons/external.svg')) !!}
+        </div>
+    </header>
+
 
     <div class="description">
         {!! Str::markdown($repository["description"][app()->getLocale()]) !!}

@@ -41,7 +41,7 @@ body {
     font-size: 18px;
 }
 
-body::before {
+/* body::before {
     --size: 100px;
     --line: color-mix(in lch, canvasText, #76707080 85%);
     content: "";
@@ -58,10 +58,31 @@ body::before {
     transform-style: flat;
     pointer-events: none;
     z-index: -1;
-}
+} */
 
 a {
     color: var(--fg-color);
+}
+
+.glow {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(
+        circle,
+        rgba(255, 95, 109, 0.15) 0%,
+        transparent 70%
+    );
+    z-index: -1;
+    filter: blur(60px);
+}
+
+::selection {
+    background: var(--fg-color-special);
+    color: var(--bg-color-special);
 }
 
 body {
@@ -72,7 +93,7 @@ body {
     > header {
         z-index: 2;
         padding: 0.5em 1em;
-        background: rgba(255, 255, 255, 0.03);
+        background: rgba(255, 255, 255, 0.01);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.1);
         transition: all 0.3s ease;
@@ -112,6 +133,7 @@ body {
     main {
         margin: 1em;
         margin-top: 4em;
+        padding-bottom: 1em;
 
         > * {
             max-width: 1280px;
@@ -306,7 +328,24 @@ body {
             .experience__title,
             .open-source__title {
                 font-size: 1.5em;
-                color: var(--fg-color-light);
+                display: flex;
+                align-items: center;
+                gap: 0.25em;
+                margin-top: 4em;
+                margin-bottom: 1.5em;
+
+                .icon-h {
+                    display: flex;
+                    padding: 0.5rem;
+                    background-color: rgb(249 115 22 / 0.1);
+                    border-radius: 8px;
+
+                    svg {
+                        color: rgb(249 115 22);
+                        width: 24px;
+                        height: 24px;
+                    }
+                }
 
                 h2 {
                     font-size: 1em;
@@ -319,6 +358,10 @@ body {
                 display: flex;
                 gap: 2em;
                 flex-wrap: wrap;
+
+                p {
+                    margin: 0;
+                }
             }
         }
 
@@ -355,29 +398,60 @@ body {
                     flex-direction: column;
                     justify-content: space-between;
                     gap: 0.5em;
-                    padding: 1em;
+                    padding: 2em;
                     border-radius: 1em;
                     position: relative;
                     background-color: var(--bg-color);
+                    font-size: 1rem;
+
+                    header {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: flex-start;
+                        margin-bottom: 2em;
+                    }
+
+                    svg {
+                        color: rgb(82 82 91);
+                        transition: all 0.3s ease;
+                    }
 
                     .title {
+                        display: flex;
+                        align-items: flex-start;
+                        gap: 0.25em;
+
                         svg {
-                            margin-left: 0.2em;
-                            width: 0.7em;
-                            height: 0.7em;
-                            fill: var(--fg-color-light);
+                            color: rgb(161 161 170);
+                        }
+
+                        a {
+                            color: rgb(244 244 245);
+                            font-weight: 600;
+                            text-decoration: none;
+                            transition: all 0.3s ease;
+                        }
+
+                        a:hover {
+                            color: rgb(249 115 22);
+                            text-decoration: underline;
                         }
                     }
 
                     .tags {
+                        margin-top: 0.75em;
                         display: flex;
                         flex-wrap: wrap;
                         gap: 0.5em;
 
-                        em {
-                            padding: 0.2em 0.5em;
+                        span {
+                            font-size: 0.65rem;
+                            line-height: 1rem;
+                            padding: 0.25em 0.75em;
                             border: 1px solid var(--fg-color-light);
                             border-radius: 1em;
+                            color: rgb(212 212 216);
+                            background-color: rgb(24 24 27 / 0.5);
                         }
                     }
 
@@ -391,13 +465,44 @@ body {
                             font-weight: bold;
                             font-family: inherit;
                         }
+
+                        ul {
+                            padding-left: 1em;
+                            margin-left: 0;
+
+                            li {
+                                margin-bottom: 0.5em;
+                                color: rgb(161 161 170);
+                                font-size: 0.87em;
+                                transition: all 0.5s ease;
+                            }
+
+                            li::marker {
+                                color: rgb(249 115 22);
+                            }
+                        }
+
+                        p:last-of-type::before {
+                            content: "";
+                            display: block;
+                            width: 100%;
+                            height: 0.5px;
+                            background-color: rgb(113 113 122);
+                            margin: 1.5rem 0 0.75rem;
+                        }
+
+                        p:last-of-type {
+                            color: rgb(113 113 122);
+                            padding-top: 1.5rem;
+                            font-size: 0.8em;
+                        }
                     }
                 }
 
                 .item:before {
                     content: "";
-                    width: 101%;
-                    height: 101%;
+                    width: 100.2%;
+                    height: 100.2%;
                     border-radius: 1em;
                     background-image: linear-gradient(
                         var(--rotate),
@@ -407,13 +512,24 @@ body {
                     );
                     position: absolute;
                     z-index: -1;
-                    top: -0.5%;
-                    left: -0.5%;
+                    top: -0.1%;
+                    left: -0.1%;
                     transition: all 0.5s;
                 }
 
                 .item:hover::before {
                     animation: spin 2.5s linear infinite;
+                }
+
+                .item:hover {
+                    li {
+                        transform: scale(1.01) translateY(-5px);
+                        color: rgb(255, 255, 255) !important;
+                    }
+
+                    svg {
+                        color: rgb(161 161 170);
+                    }
                 }
             }
         }
