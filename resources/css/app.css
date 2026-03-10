@@ -39,53 +39,6 @@ body {
     background-color: var(--bg-color);
     color: var(--fg-color);
     font-size: 18px;
-}
-
-/* body::before {
-    --size: 100px;
-    --line: color-mix(in lch, canvasText, #76707080 85%);
-    content: "";
-    height: 100vh;
-    width: 100vw;
-    position: fixed;
-    background:
-        linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)) 50%
-            50% / var(--size) var(--size),
-        linear-gradient(var(--line) 1px, transparent 1px var(--size)) 50% 50% /
-            var(--size) var(--size);
-    mask: linear-gradient(-25deg, transparent 30%, white);
-    top: 0;
-    transform-style: flat;
-    pointer-events: none;
-    z-index: -1;
-} */
-
-a {
-    color: var(--fg-color);
-}
-
-.glow {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 40vw;
-    height: 40vw;
-    background: radial-gradient(
-        circle,
-        rgba(255, 95, 109, 0.15) 0%,
-        transparent 70%
-    );
-    z-index: -1;
-    filter: blur(60px);
-}
-
-::selection {
-    background: var(--fg-color-special);
-    color: var(--bg-color-special);
-}
-
-body {
     min-height: 100vh;
     display: grid;
     grid-template-rows: auto 1fr;
@@ -285,6 +238,7 @@ body {
                 font-size: 1em;
                 font-weight: 300;
                 line-height: 1.6;
+
                 @media (min-width: 768px) {
                     font-size: 1.25em;
                 }
@@ -407,6 +361,7 @@ body {
                     position: relative;
                     background-color: var(--bg-color);
                     font-size: 1rem;
+
                     header {
                         display: flex;
                         justify-content: space-between;
@@ -537,6 +492,50 @@ body {
             }
         }
     }
+}
+
+/* body::before {
+    --size: 100px;
+    --line: color-mix(in lch, canvasText, #76707080 85%);
+    content: "";
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    background:
+        linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)) 50%
+            50% / var(--size) var(--size),
+        linear-gradient(var(--line) 1px, transparent 1px var(--size)) 50% 50% /
+            var(--size) var(--size);
+    mask: linear-gradient(-25deg, transparent 30%, white);
+    top: 0;
+    transform-style: flat;
+    pointer-events: none;
+    z-index: -1;
+} */
+
+a {
+    color: var(--fg-color);
+}
+
+::selection {
+    background: var(--fg-color-special);
+    color: var(--bg-color-special);
+}
+
+.glow {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(
+        circle,
+        rgba(255, 95, 109, 0.15) 0%,
+        transparent 70%
+    );
+    z-index: -1;
+    filter: blur(60px);
 }
 
 @keyframes spin {
