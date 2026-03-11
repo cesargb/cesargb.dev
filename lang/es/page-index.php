@@ -7,7 +7,7 @@ return [
     'profile_title_hello' => 'Hola, mi nombre es',
     'profile_title_name' => 'César García',
     'profile_title_profession' => 'Arquitecto de software y desarrollador',
-    'profile_content' => 'Soy desarrollador especializado en diseño y desarrollo de soluciones tecnológicas escalables. Me apasiona crear software eficiente, mantenerme actualizado con nuevas tecnologías y afrontar retos que aporten valor real a los proyectos.',
+    'profile_content' => 'Soy desarrollador especializado en la creación de soluciones tecnológicas escalables. Me apasiona construir software eficiente, mantenerme actualizado con las nuevas tecnologías y afrontar retos que generen valor real en cada proyecto.',
     'profile_work_current_prefix' => 'Actualmente trabajo en ',
     'profile_work_init' => 'Actualmente trabajo como',
     'profile_work_bold' => 'Arquitecto de Software en Descom.es',

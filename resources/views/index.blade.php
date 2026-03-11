@@ -92,7 +92,7 @@
                     </div>
                 </section>
 
-                <section class="experience">
+                <section class="experience full">
                     <div class="experience__title">
                         <div class="icon-h">
                             {!! file_get_contents(resource_path('icons/technology.svg')) !!}

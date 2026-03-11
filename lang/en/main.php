@@ -11,4 +11,10 @@ return [
         'Cloud computing',
         'Scalable technology solutions',
     ],
+    'experiences_senior' => 'senior',
+    'experiences_expert' => 'expert',
+    'experiences_advance' => 'advanced',
+    'experience_title_backend' => 'Languages & Backend',
+    'experience_title_frontend' => 'Frontend & Frameworks',
+    'experience_title_cloud' => 'Infrastructure & Cloud',
 ];

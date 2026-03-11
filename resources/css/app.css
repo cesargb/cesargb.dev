@@ -22,6 +22,11 @@
     box-sizing: border-box;
 }
 
+.full {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+}
+
 body {
     margin: 0;
     font-family:
@@ -132,7 +137,7 @@ body {
         }
 
         .profile {
-            max-width: 800px;
+            max-width: 1024px;
 
             > header {
                 margin-bottom: 1em;
@@ -228,7 +233,7 @@ body {
                 }
 
                 .profile__subtitle {
-                    font-size: 1.25rem;
+                    font-size: 1.75rem;
                     font-weight: 300;
                     color: var(--fg-color-light);
                     margin-top: 0.5em;
@@ -245,12 +250,12 @@ body {
 
             .profile__content {
                 color: var(--fg-color-content);
-                font-size: 1em;
+                font-size: 1.2em;
                 font-weight: 300;
                 line-height: 1.6;
 
                 @media (min-width: 768px) {
-                    font-size: 1.25em;
+                    font-size: 1.75em;
                 }
             }
 
@@ -335,9 +340,7 @@ body {
 
         .experience {
             background-color: rgb(255 255 255 / 0.02);
-            padding: 1em 2em;
-            margin-left: -2em;
-            margin-right: -2em;
+            padding: 2em 2em;
 
             .experience__content {
                 .items {
