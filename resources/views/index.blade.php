@@ -58,6 +58,7 @@
         <main>
             <div class="page">
                 <div class="glow"></div>
+
                 <section class="profile">
                     <header>
                         <div class="profile__image">
@@ -93,14 +94,20 @@
 
                 <section class="experience">
                     <div class="experience__title">
-                        <h2>{{ __("page-index.experience_title") }}:</h2>
+                        <div class="icon-h">
+                            {!! file_get_contents(resource_path('icons/technology.svg')) !!}
+                        </div>
+                        <h2>
+                            {{ __("page-index.experience_title") }}:
+                        </h2>
                     </div>
 
                     <div class="experience__content">
                         <p>
                             {{ __("page-index.experience_content") }}
                         </p>
-                        <div class="item">
+                        <div class="items">
+                            <div class="item">
                             <div class="item__image">
                                 <img src="{{ Vite::asset('resources/icons/php.svg') }}" alt="PHP">
                             </div>
@@ -124,12 +131,14 @@
                             </div>
                             <h3>Linux</h3>
                         </div>
+                        </div>
+
                     </div>
                 </section>
 
                 <section class="open-source">
                     <div class="open-source__title">
-                        <div class="icon-h">
+                        <div class="icon-h orange">
                             {!! file_get_contents(resource_path('icons/develop.svg')) !!}
                         </div>
                         <h2>
@@ -138,9 +147,11 @@
                     </div>
 
                     <div class="open-source__content">
+                        <div class="items">
                         @foreach(\App\Data\Repositories::all() as $repository)
                         <x-repository-item :repository="$repository" />
                         @endforeach
+                        </div>
                     </div>
                 </section>
             </div>

@@ -14,7 +14,7 @@
     --fg-color: #fff;
     --fg-color-content: rgb(209 213 219);
     --bg-color-special: #191919;
-    --fg-color-special: #e25151;
+    --fg-color-special: rgb(226, 81, 81);
     --fg-color-light: rgb(156 163 175);
 }
 
@@ -293,20 +293,28 @@ body {
             .open-source__title {
                 font-size: 1.5em;
                 display: flex;
-                align-items: center;
+                align-items: flex-start;
                 gap: 0.25em;
                 margin-bottom: 1.5em;
 
                 .icon-h {
                     display: flex;
                     padding: 0.5rem;
-                    background-color: rgb(249 115 22 / 0.1);
+                    background-color: rgb(37 99 235 / 0.1);
                     border-radius: 8px;
 
                     svg {
-                        color: rgb(249 115 22);
+                        color: rgb(37 99 235);
                         width: 24px;
                         height: 24px;
+                    }
+                }
+
+                .icon-h.orange {
+                    background-color: rgb(249 115 22 / 0.1);
+
+                    svg {
+                        color: rgb(249 115 22);
                     }
                 }
 
@@ -318,9 +326,6 @@ body {
             .experience__content,
             .open-source__content {
                 margin-top: 1em;
-                display: flex;
-                gap: 2em;
-                flex-wrap: wrap;
 
                 p {
                     margin: 0;
@@ -335,6 +340,12 @@ body {
             margin-right: -2em;
 
             .experience__content {
+                .items {
+                    margin-top: 1em;
+                    display: flex;
+                    gap: 2em;
+                    flex-wrap: wrap;
+                }
                 .item {
                     display: flex;
                     flex-direction: column;
@@ -354,11 +365,17 @@ body {
 
         .open-source {
             .open-source__content {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-
-                @media (max-width: 500px) {
-                    grid-template-columns: 1fr;
+                .items {
+                    display: grid;
+                    grid-template-columns: repeat(
+                        auto-fill,
+                        minmax(450px, 1fr)
+                    );
+                    gap: 2em;
+                    );
+                    @media (max-width: 500px) {
+                        grid-template-columns: 1fr;
+                    }
                 }
 
                 .item {
