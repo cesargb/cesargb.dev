@@ -397,7 +397,7 @@ body {
                     border-radius: 1em;
                     position: relative;
                     background-color: var(--bg-color);
-                    font-size: 1rem;
+                    font-size: 1em;
 
                     header {
                         display: flex;
@@ -470,6 +470,7 @@ body {
                                 color: rgb(161 161 170);
                                 font-size: 0.87em;
                                 transition: all 0.5s ease;
+                                list-style-type: "✓ ";
                             }
 
                             li::marker {
@@ -533,7 +534,7 @@ body {
 
 /* body::before {
     --size: 100px;
-    --line: color-mix(in lch, canvasText, #76707080 85%);
+    --line: color-mix(in lch, canvasText, #1d1d1d80 85%);
     content: "";
     height: 100vh;
     width: 100vw;
