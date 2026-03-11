@@ -48,7 +48,6 @@ body {
         padding: 0.5em 1em;
         background: rgba(255, 255, 255, 0.01);
         backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
         transition: all 0.3s ease;
         position: fixed;
         width: 100%;
@@ -65,8 +64,6 @@ body {
                     text-transform: uppercase;
                     color: var(--fg-color-light);
                     fill: var(--fg-color-light);
-                    display: flex;
-                    align-items: center;
 
                     label {
                         display: flex;
