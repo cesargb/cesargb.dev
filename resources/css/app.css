@@ -137,6 +137,7 @@ body {
         }
 
         .profile {
+            margin-top: 3em;
             max-width: 1024px;
 
             > header {
