@@ -20,6 +20,11 @@
     <body>
         <header>
             <nav>
+                <ul class="logo">
+                    <li>
+                        CÉSAR<span>GARCÍA</span>
+                    </li>
+                </ul>
                 <ul>
                      <li>
                         <a
