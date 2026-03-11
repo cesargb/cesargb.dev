@@ -372,7 +372,7 @@ body {
                         minmax(450px, 1fr)
                     );
                     gap: 2em;
-                    );
+
                     @media (max-width: 500px) {
                         grid-template-columns: 1fr;
                     }
