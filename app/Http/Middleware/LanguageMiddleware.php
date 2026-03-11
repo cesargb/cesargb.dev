@@ -73,7 +73,7 @@ class LanguageMiddleware
 
     private function getRouteName(string $path): ?string
     {
-        $request = Request::create($path, 'GET'); // crea un request falso
+        $request = Request::create($path, 'GET');
         $route = app('router')->getRoutes()->match($request);
 
         return $route->getName() ?? null;
