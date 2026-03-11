@@ -53,12 +53,16 @@ body {
         width: 100%;
 
         nav {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
             ul {
                 margin: 0.2em 0;
                 list-style: none;
-                display: flex;
-                justify-content: flex-end;
                 gap: 1em;
+                display: flex;
+                align-items: self-start;
 
                 li {
                     text-transform: uppercase;
@@ -248,7 +252,7 @@ body {
 
             .profile__work > div {
                 font-weight: 300;
-                font-size: 0.6em;
+                font-size: 0.75em;
                 padding: 0.5rem 1rem;
                 border-radius: 9999px;
                 background: rgba(255, 255, 255, 0.05);
