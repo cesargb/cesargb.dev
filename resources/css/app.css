@@ -30,6 +30,7 @@
     > div {
         max-width: var(--width-container);
         margin: 0 auto;
+        padding: 0 1em;
     }
 }
 

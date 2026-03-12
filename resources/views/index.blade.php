@@ -15,6 +15,7 @@
         @foreach (Context::getHidden('meta.hreflang') as $lang => $url)
         <link rel="alternate" hreflang="{{ $lang }}" href="{{ $url }}" />
         @endforeach
+        <link rel="alternate" hreflang="x-default" href="{{ Context::getHidden('meta.canonical') }}" />
         <x-schema-person />
         @vite('resources/css/app.css')
     </head>
