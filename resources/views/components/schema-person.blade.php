@@ -5,7 +5,7 @@
         'name' => 'César García',
         'jobTitle' => __('main.schema_person_job_title'),
         'description' => __('main.schema_person_description'),
-        'image' => 'http://localhost:8000/assets/images/profile.webp?w=500&h=500&fit=crop',
+        'image' => 'https://www.cesargb.dev/assets/images/profile.webp?w=500&h=500&fit=crop',
         'url' => 'https://www.cesargb.dev',
         'worksFor' => [
             '@type' => 'Organization',
