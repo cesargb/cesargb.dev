@@ -14,8 +14,10 @@
         <link rel="icon" href="favicon.ico" />
         @foreach (Context::getHidden('meta.hreflang') as $lang => $url)
         <link rel="alternate" hreflang="{{ $lang }}" href="{{ $url }}" />
+        @if ($lang === 'en')
+            <link rel="alternate" hreflang="x-default" href="{{ $url }}" />
+        @endif
         @endforeach
-        <link rel="alternate" hreflang="x-default" href="{{ Context::getHidden('meta.canonical') }}" />
         <x-schema-person />
         @vite('resources/css/app.css')
     </head>
