@@ -113,30 +113,9 @@
                             {{ __("page-index.experience_content") }}
                         </p>
                         <div class="items">
-                            <div class="item">
-                            <div class="item__image">
-                                <img src="{{ Vite::asset('resources/icons/php.svg') }}" alt="PHP">
-                            </div>
-                            <h3>PHP</h3>
-                        </div>
-                        <div class="item">
-                            <div class="item__image">
-                                <img src="{{ Vite::asset('resources/icons/nuxt.svg') }}" alt="Nuxt">
-                            </div>
-                            <h3>Nuxt</h3>
-                        </div>
-                        <div class="item">
-                            <div class="item__image">
-                                <img src="{{ Vite::asset('resources/icons/aws.svg') }}" alt="AWS">
-                            </div>
-                            <h3>AWS</h3>
-                        </div>
-                        <div class="item">
-                            <div class="item__image">
-                                <img src="{{ Vite::asset('resources/icons/linux.svg') }}" alt="Linux">
-                            </div>
-                            <h3>Linux</h3>
-                        </div>
+                            @foreach(\App\Data\Experiences::all() as $experience)
+                                <x-experience-item :experience="$experience" />
+                            @endforeach
                         </div>
 
                     </div>

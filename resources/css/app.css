@@ -356,24 +356,96 @@ body {
 
             .experience__content {
                 .items {
-                    margin-top: 1em;
-                    display: flex;
+                    margin-top: 1.5em;
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
                     gap: 2em;
-                    flex-wrap: wrap;
                 }
                 .item {
                     display: flex;
                     flex-direction: column;
+                    gap: 1.5em;
+                    padding: 1.75em;
+                    border-radius: 1.5em;
+                    background-color: var(--bg-color);
+                    border: 1px solid rgb(255 255 255 / 0.04);
+
+                    header {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                    }
+
+                    .title {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.75em;
+
+                        .icon-h {
+                            display: flex;
+                            padding: 0.5rem;
+                            background-color: rgb(37 99 235 / 0.12);
+                            border-radius: 0.75em;
+
+                            svg {
+                                color: rgb(37 99 235);
+                                width: 22px;
+                                height: 22px;
+                            }
+                        }
+
+                        h3 {
+                            font-size: 1.1em;
+                            margin: 0;
+                        }
+                    }
+                }
+
+                .experience-list {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1em;
+                }
+
+                .experience-list__item {
+                    display: flex;
                     align-items: center;
-                    justify-content: end;
-                    gap: 0.5em;
-                    max-width: 300px;
+                    justify-content: space-between;
+                    gap: 1em;
+                    padding: 0.9em 1.1em;
+                    border-radius: 1em;
+                    background-color: rgb(255 255 255 / 0.03);
+                    border: 1px solid rgb(255 255 255 / 0.04);
+                }
+
+                .experience-list__name {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.65em;
+                }
+
+                .experience-icon {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 2.2em;
+                    height: 2.2em;
+                    border-radius: 0.8em;
+                    background-color: rgb(255 255 255 / 0.05);
 
                     svg,
                     img {
-                        width: 3em;
-                        height: 3em;
+                        width: 1.4em;
+                        height: 1.4em;
                     }
+                }
+
+                .experience-list__level {
+                    color: rgb(161 161 170);
+                    font-size: 0.85em;
+                    letter-spacing: 0.08em;
+                    text-transform: uppercase;
+                    font-size: 0.6em;
                 }
             }
         }
