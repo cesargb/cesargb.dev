@@ -16,6 +16,11 @@
         <link rel="alternate" hreflang="{{ $lang }}" href="{{ $url }}" />
         @endforeach
         <link rel="alternate" hreflang="x-default" href="{{ Context::getHidden('meta.hreflang-default') }}" />
+        <meta property="og:url" content={{ Context::getHidden('meta.canonical') }}">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="{{ __("page-index.title") }}">
+        <meta property="og:description" content="{{ __("page-index.description") }}">
+        <meta property="og:image" content="https://www.cesargb.dev/assets/images/profile.webp">
         <x-schema-person />
         @vite('resources/css/app.css')
     </head>
