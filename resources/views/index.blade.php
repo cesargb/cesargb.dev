@@ -20,7 +20,7 @@
         <meta property="og:type" content="website">
         <meta property="og:title" content="{{ __("page-index.title") }}">
         <meta property="og:description" content="{{ __("page-index.description") }}">
-        <meta property="og:image" content="https://www.cesargb.dev/assets/images/profile.webp">
+        <meta property="og:image" content="https://www.cesargb.dev/assets/images/profile.webp?w=800&h=800&fit=crop">
         <x-schema-person />
         @vite('resources/css/app.css')
     </head>
