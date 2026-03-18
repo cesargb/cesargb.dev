@@ -8,6 +8,7 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^12.0",
+        "laravel/nightwatch": "^1.24",
         "laravel/octane": "^2.12",
         "laravel/tinker": "^2.10.1",
         "league/glide": "^3.2"
