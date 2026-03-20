@@ -3,5 +3,5 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/test', function () {
-    return request()->all();
+    return request()->headers->all();
 });
