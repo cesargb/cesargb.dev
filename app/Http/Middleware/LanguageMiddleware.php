@@ -25,7 +25,9 @@ class LanguageMiddleware
         app()->setLocale($currentLanguage);
 
         if (Route::currentRouteName() === 'index') {
-            return redirect()->route(route: $currentLanguage.'.index', status: 301)->setContent('');
+            return redirect()
+                ->route(route: $currentLanguage.'.index', status: 301, headers: ['X-Robots-Tag' => 'noindex'])
+                ->setContent('');
         }
 
         $canonical = $languageByPath
