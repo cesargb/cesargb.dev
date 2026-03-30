@@ -142,3 +142,38 @@ button {
 button:hover {
     background-color: var(--fg-color-light);
 }
+
+a {
+    color: var(--fg-color-special);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a[target="_blank"]::after {
+    content: "↗";
+    display: inline-block;
+    margin-left: 0.25em;
+    font-size: 0.85em;
+}
+
+input,
+textarea {
+    background-color: var(--bg-color-special);
+    color: var(--fg-color-content);
+    border: none;
+    outline: 1px solid var(--bg-color-special);
+    padding: 0.5em;
+    border-radius: 4px;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+input:hover,
+textarea:hover {
+    background-color: var(--bg-color-special);
+}
