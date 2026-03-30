@@ -46,13 +46,13 @@ Route::withoutMiddleware('web')->group(function () {
 
     Route::prefix('/en')->name('en.')->middleware(LanguageMiddleware::class.':en')->group(function () {
         Route::middleware('cache.headers:public;max_age=5;etag')->group(function () {
-            Route::view('/', 'index')->name('index');
+            include __DIR__.'/all_lang.php';
         });
     });
 
     Route::prefix('/es')->name('es.')->middleware(LanguageMiddleware::class.':es')->group(function () {
         Route::middleware('cache.headers:public;max_age=5;etag')->group(function () {
-            Route::view('/', 'index')->name('index');
+            include __DIR__.'/all_lang.php';
         });
     });
 });

@@ -22,7 +22,7 @@
         <meta property="og:description" content="{{ __("page-index.description") }}">
         <meta property="og:image" content="https://www.cesargb.dev/assets/images/profile.webp?w=800&h=800&fit=crop">
         <x-schema-person />
-        @vite('resources/css/app.css')
+        @vite('resources/css/home.css')
     </head>
     <body>
         <header>
