@@ -1,16 +1,17 @@
 @extends('components.layout')
 
 
-@section('title', 'Laboratorio: Experimentando con la API para traducir texto desde Javascript')
-@section('description', 'Ejemplo de uso de la API de traducción desde Javascript, detectando el idioma de entrada automáticamente y traduciendo al otro idioma (español <=> inglés).')
+@section('title', __('labs_translate.title'))
+@section('description', __('labs_translate.description'))
 
 @section('head')
     <style>
         #translator-lab form {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            align-items: anchor-center;
             gap: 1em;
-            margin: 3em auto;
+            margin: 5em auto;
         }
     </style>
 
@@ -79,28 +80,28 @@
 @section('main')
     <section id="translator-lab">
         <p>
-            Ejemplo de uso de la API de traducción desde Javascript, detectando el idioma de entrada automáticamente
-            y traduciendo al otro idioma <code>español <=> inglés</code>.
+            {{ __('labs_translate.intro') }}
+            <code>{{ __('labs_translate.language_pair') }}</code>.
         </p>
         <form onsubmit="event.preventDefault(); run();">
-            <textarea id="source" rows="10" placeholder="Escribe aquí el texto a traducir, la API detectará automáticamente el idioma ..." autofocus></textarea>
+            <textarea id="source" rows="10" placeholder="{{ __('labs_translate.placeholder_source') }}" autofocus></textarea>
 
-            <textarea id="target" placeholder="Resultado" rows="10" disabled></textarea>
+            <button type="submit">{{ __('labs_translate.btn_translate') }}</button>
 
-            <button type="submit">Traducir</button>
+            <textarea id="target" placeholder="{{ __('labs_translate.placeholder_target') }}" rows="10" disabled></textarea>
         </form>
 
         <p>
-            <small>Esta API es una está en fase Experimental, implementado en chrome a partir de la version 138</small>
+            <small>{{ __('labs_translate.experimental_notice') }}</small>
         </p>
         <p>
-            Fuentes:
+            {{ __('labs_translate.sources_label') }}
             <ul>
                 <li>
-                    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Translator" target="_blank">MDN Docs</a>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Translator" target="_blank" class="external-link">{{ __('labs_translate.mdn_label') }}</a>
                 </li>
                 <li>
-                    <a href="https://chromestatus.com/feature/5172811302961152" target="_blank">Chrome Platform Status</a>
+                    <a href="https://chromestatus.com/feature/5172811302961152" target="_blank" class="external-link">{{ __('labs_translate.chrome_status_label') }}</a>
                 </li>
             </ul>
         </p>

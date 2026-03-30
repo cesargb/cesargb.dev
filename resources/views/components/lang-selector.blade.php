@@ -20,13 +20,15 @@
         </option>
     </select>
 </label>
-
+@php
+    $altLang = app()->getLocale() === 'en' ? 'es' : 'en';
+@endphp
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const langSelector = document.getElementById("selectedLang");
         langSelector.addEventListener("change", function () {
             window.location.href =
-                "{{ app()->getLocale() === 'es' ? '/en' : '/es' }}";
+                "{{ Context::getHidden('meta.hreflang')[$altLang] ?? ($altLang === 'en' ? '/en' : '/es') }}";
         });
     });
 </script>
