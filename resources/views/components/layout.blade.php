@@ -9,7 +9,7 @@
         @endif
         <meta name="description" content="@yield('description', __("page-index.description"))" />
         <link rel="canonical" href="{{ Context::getHidden('meta.canonical') }}" />
-        <link rel="icon" href="favicon.ico" />
+        <link rel="icon" href="/favicon.ico" />
         @foreach (Context::getHidden('meta.hreflang') as $lang => $url)
         <link rel="alternate" hreflang="{{ $lang }}" href="{{ $url }}" />
         @endforeach

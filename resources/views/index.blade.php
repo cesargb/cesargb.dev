@@ -139,6 +139,42 @@
                         </div>
                     </div>
                 </section>
+
+                <section class="lab">
+                    <div class="lab__title">
+                        <div class="lab__title-icon">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <h2>
+                            {{ __("main.lab_title") }}:
+                        </h2>
+                    </div>
+
+                    <div class="lab__description">
+                        {{ __("main.lab_description") }}
+                    </div>
+
+                    <a class="lab__card" href="{{ route(app()->getLocale().'.lab.js-api-translate') }}">
+                        <div class="lab__card-header">
+                        <div class="lab__eyebrow">
+                            <span class="lab__eyebrow-icon" aria-hidden="true"></span>
+                            {{ __("main.lab_experiment_label") }}
+                        </div>
+                            <div class="lab__card-icon">
+                                {!! file_get_contents(resource_path('icons/external.svg')) !!}
+                            </div>
+                        </div>
+
+                        <h3>
+                            {{ __("main.lab_experiment_title") }}
+                        </h3>
+
+                        <p>
+                            {{ __("main.lab_experiment_description") }}
+                        </p>
+                    </a>
+                </section>
             </div>
         </main>
     </body>

@@ -17,4 +17,9 @@ return [
     'experience_title_backend' => 'Languages & Backend',
     'experience_title_frontend' => 'Frontend & Frameworks',
     'experience_title_cloud' => 'Infrastructure & Cloud',
+    'lab_title' => 'Experiment Lab',
+    'lab_description' => 'A space dedicated to testing experimental APIs, new libraries, and cutting-edge concepts. Here I document how technologies still in development or emerging standards behave.',
+    'lab_experiment_label' => 'Experiment #01',
+    'lab_experiment_title' => 'Chrome AI Translation API',
+    'lab_experiment_description' => 'Test the new Chrome-integrated API that enables local text translations using AI models (Gemini Nano) without sending data to the server.',
 ];

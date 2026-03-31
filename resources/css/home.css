@@ -606,6 +606,140 @@ body {
                 }
             }
         }
+
+        .lab {
+            margin-top: 5em;
+
+            .lab__title {
+                font-size: 1.5em;
+                display: flex;
+                align-items: flex-start;
+                gap: 0.5em;
+                margin-bottom: 1em;
+
+                h2 {
+                    font-size: 1em;
+                }
+            }
+
+            .lab__title-icon {
+                width: 26px;
+                height: 26px;
+                display: grid;
+                place-items: center;
+                border-radius: 8px;
+                background: rgba(249, 115, 22, 0.12);
+                position: relative;
+
+                span {
+                    position: absolute;
+                    width: 12px;
+                    height: 12px;
+                    border: 1.5px solid rgb(249, 115, 22);
+                    border-radius: 3px;
+                }
+
+                span:last-child {
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 2px;
+                }
+            }
+
+            .lab__description {
+                color: var(--fg-color-content);
+                line-height: 1.6;
+                max-width: 900px;
+                margin-bottom: 2em;
+            }
+
+            .lab__card {
+                display: block;
+                text-decoration: none;
+                color: inherit;
+                padding: 2em;
+                border-radius: 1.25em;
+                background-color: var(--bg-color);
+                border: 1px solid rgba(255, 255, 255, 0.06);
+                position: relative;
+                overflow: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .lab__card::before {
+                content: "";
+                position: absolute;
+                inset: -1px;
+                border-radius: 1.3em;
+                background: linear-gradient(
+                    135deg,
+                    rgba(249, 115, 22, 0.35),
+                    rgba(124, 58, 237, 0.25),
+                    rgba(249, 115, 22, 0.2)
+                );
+                opacity: 0.4;
+                z-index: -1;
+                transition: opacity 0.3s ease;
+            }
+
+            .lab__card:hover {
+                border-color: rgba(249, 115, 22, 0.3);
+                transform: translateY(-4px);
+            }
+
+            .lab__card:hover::before {
+                opacity: 0.7;
+            }
+
+            .lab__card-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 1em;
+            }
+
+            .lab__eyebrow {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5em;
+                text-transform: uppercase;
+                letter-spacing: 0.15em;
+                font-size: 0.7em;
+                color: rgb(147 197 253);
+                font-weight: 600;
+            }
+
+            .lab__eyebrow-icon {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: rgb(59 130 246);
+                box-shadow: 0 0 10px rgba(59, 130, 246, 0.7);
+            }
+
+            .lab__card-icon {
+                color: rgb(113 113 122);
+
+                svg {
+                    width: 20px;
+                    height: 20px;
+                    color: rgb(113 113 122);
+                }
+            }
+
+            h3 {
+                font-size: 1.25em;
+                margin: 0 0 0.75em;
+                color: rgb(244 244 245);
+            }
+
+            p {
+                margin: 0;
+                color: var(--fg-color-light);
+                line-height: 1.6;
+                max-width: 900px;
+            }
+        }
     }
 }
 
