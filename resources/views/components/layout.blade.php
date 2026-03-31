@@ -28,7 +28,7 @@
             <nav>
                 <ul class="logo">
                     <li>
-                        CÉSAR<span>GARCÍA</span>
+                        <a href="/{{ app()->getLocale() }}">CÉSAR<span>GARCÍA</span></a>
                     </li>
                 </ul>
                 <ul>

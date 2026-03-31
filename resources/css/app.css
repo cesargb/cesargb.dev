@@ -69,7 +69,7 @@ body {
 
                 li {
                     text-transform: uppercase;
-                    color: var(--fg-color-light);
+                    color: var(--fg-color-light) !important;
                     fill: var(--fg-color-light);
 
                     svg {
@@ -85,8 +85,13 @@ body {
                 font-size: 1.25em;
                 letter-spacing: -0.05em;
 
+                a {
+                    color: inherit !important;
+                    text-decoration: none;
+                }
+
                 span {
-                    color: var(--fg-color-special);
+                    color: var(--fg-color-special) !important;
                 }
             }
         }
