@@ -22,7 +22,7 @@
         <meta property="og:description" content="{{ __("page-index.description") }}">
         <meta property="og:image" content="https://www.cesargb.dev/assets/images/profile.webp?w=800&h=800&fit=crop">
         <x-schema-person />
-        @if (app()->environment('production'))
+        @if (App\Cesargb::isProduction())
         <script defer src="https://cloud.umami.is/script.js" data-website-id="498a72ff-8feb-4ca3-8464-b60b85c73850"></script>
         @endif
         @vite('resources/css/home.css')

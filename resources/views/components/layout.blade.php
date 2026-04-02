@@ -22,7 +22,7 @@
         <x-schema-person />
         @vite(['resources/css/app.css', 'resources/css/layout.css'])
         @yield('head')
-        @if (app()->environment('production'))
+        @if (App\Cesargb::isProduction())
         <script defer src="https://cloud.umami.is/script.js" data-website-id="498a72ff-8feb-4ca3-8464-b60b85c73850"></script>
         @endif
     </head>
