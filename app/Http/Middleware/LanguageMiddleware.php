@@ -97,7 +97,7 @@ class LanguageMiddleware
     private function languagePreferred(): ?string
     {
         return collect(request()->getLanguages())
-            ->map(fn ($locale) => explode('-', $locale)[0])
+            ->map(fn ($locale) => preg_split('/[-_]/', $locale)[0])
             ->first(fn ($locale) => $this->isLanguagePermitted($locale));
     }
 
