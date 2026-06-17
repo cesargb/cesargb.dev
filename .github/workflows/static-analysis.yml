@@ -2,16 +2,17 @@ name: static analysis
 
 on:
   push:
-      paths:
-          - '**.php'
-          - 'phpstan.neon.dist'
-          - '.github/workflows/static-analysis.yml'
+    branches: [main]
+    paths:
+      - '**.php'
+      - 'phpstan.neon.dist'
+      - '.github/workflows/static-analysis.yml'
 
   pull_request:
-      paths:
-          - '**.php'
-          - 'phpstan.neon.dist'
-          - '.github/workflows/static-analysis.yml'
+    paths:
+      - '**.php'
+      - 'phpstan.neon.dist'
+      - '.github/workflows/static-analysis.yml'
 
 jobs:
   phpstan:
