@@ -7,11 +7,13 @@ on:
           - '**.php'
           - 'phpunit.xml.dist'
           - '.github/workflows/tests.yml'
+          - 'composer.lock'
   pull_request:
       paths:
           - '**.php'
           - 'phpunit.xml.dist'
           - '.github/workflows/tests.yml'
+          - 'composer.lock'
 
 jobs:
   tests:
