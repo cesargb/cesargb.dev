@@ -23,9 +23,11 @@
         <meta property="og:image" content="https://www.cesargb.dev/assets/images/profile.webp?w=800&h=800&fit=crop">
         <x-schema-person />
         <link rel="preload" href="{{ Vite::asset('node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2') }}" as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href="{{ Vite::asset('node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2') }}" as="font" type="font/woff2" crossorigin />
         @vite('resources/css/app.css')
         @yield('head')
         @if (App\Cesargb::isProduction())
+        <link rel="preconnect" href="https://gateway.umami.is" crossorigin />
         <script defer src="https://cloud.umami.is/script.js" data-website-id="498a72ff-8feb-4ca3-8464-b60b85c73850"></script>
         @endif
     </head>

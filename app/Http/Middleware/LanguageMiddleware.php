@@ -26,7 +26,10 @@ class LanguageMiddleware
 
         if (Route::currentRouteName() === 'index') {
             return redirect()
-                ->route(route: $currentLanguage.'.index', status: 301, headers: ['X-Robots-Tag' => 'noindex'])
+                ->route(route: $currentLanguage.'.index', status: 302, headers: [
+                    'X-Robots-Tag' => 'noindex',
+                    'Vary' => 'Accept-Language',
+                ])
                 ->setContent('');
         }
 

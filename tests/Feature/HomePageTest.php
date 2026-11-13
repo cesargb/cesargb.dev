@@ -43,7 +43,7 @@ class HomePageTest extends TestCase
     public function test_root_redirect_is_not_indexable(): void
     {
         $this->get('/')
-            ->assertStatus(301)
+            ->assertStatus(302)
             ->assertHeader('X-Robots-Tag', 'noindex');
     }
 
