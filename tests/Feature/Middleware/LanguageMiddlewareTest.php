@@ -16,9 +16,10 @@ class LanguageMiddlewareTest extends TestCase
     public function test_root_defaults_to_english_without_accept_language(): void
     {
         $this->get('/')
-            ->assertStatus(301)
+            ->assertStatus(302)
             ->assertRedirect('/en')
-            ->assertHeader('X-Robots-Tag', 'noindex');
+            ->assertHeader('X-Robots-Tag', 'noindex')
+            ->assertHeader('Vary', 'Accept-Language');
     }
 
     public function test_root_falls_back_to_english_for_unsupported_language(): void
