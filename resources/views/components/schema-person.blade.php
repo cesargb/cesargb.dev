@@ -2,14 +2,16 @@
     $schema = [
         '@context' => 'https://schema.org',
         '@type' => 'Person',
+        '@id' => App\Cesargb::PERSON_ID,
         'name' => 'César García',
         'jobTitle' => __('main.schema_person_job_title'),
         'description' => __('main.schema_person_description'),
-        'image' => 'https://www.cesargb.dev/assets/images/profile.webp?w=500&h=500&fit=crop',
+        'image' => App\Cesargb::PROFILE_IMAGE,
         'url' => 'https://www.cesargb.dev',
         'worksFor' => [
             '@type' => 'Organization',
             'name' => 'Descom.es',
+            'url' => 'https://www.descom.es',
         ],
         'knowsAbout' => __('main.schema_person_knows_about'),
         'sameAs' => [

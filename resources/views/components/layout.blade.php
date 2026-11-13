@@ -20,7 +20,15 @@
         <meta property="og:type" content="website">
         <meta property="og:title" content="@yield('title', __('page-index.title'))">
         <meta property="og:description" content="@yield('description', __('page-index.description'))">
-        <meta property="og:image" content="https://www.cesargb.dev/assets/images/profile.webp?w=800&h=800&fit=crop">
+        <meta property="og:site_name" content="César García">
+        <meta property="og:locale" content="{{ $locale === 'es' ? 'es_ES' : 'en_US' }}">
+        <meta property="og:locale:alternate" content="{{ $locale === 'es' ? 'en_US' : 'es_ES' }}">
+        <meta property="og:image" content="{{ App\Cesargb::PROFILE_IMAGE }}">
+        <meta property="og:image:type" content="image/jpeg">
+        <meta property="og:image:width" content="800">
+        <meta property="og:image:height" content="800">
+        <meta property="og:image:alt" content="César García">
+        <meta name="twitter:card" content="summary">
         <x-schema-person />
         <link rel="preload" href="{{ Vite::asset('node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2') }}" as="font" type="font/woff2" crossorigin />
         <link rel="preload" href="{{ Vite::asset('node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2') }}" as="font" type="font/woff2" crossorigin />

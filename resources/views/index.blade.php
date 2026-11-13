@@ -1,5 +1,20 @@
 @extends('components.layout')
 
+@section('head')
+    @php
+        $profilePage = [
+            '@context' => 'https://schema.org',
+            '@type' => 'ProfilePage',
+            'url' => Context::getHidden('meta.canonical'),
+            'inLanguage' => app()->getLocale(),
+            'mainEntity' => ['@id' => App\Cesargb::PERSON_ID],
+        ];
+    @endphp
+    <script type="application/ld+json">
+        {!! json_encode($profilePage, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+    </script>
+@endsection
+
 @section('main')
     <section class="bp-hero bp-grid" aria-labelledby="hero-title">
         <div class="bp-container bp-hero__inner">

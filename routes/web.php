@@ -26,7 +26,7 @@ Route::withoutMiddleware('web')->group(function () {
             'cache' => storage_path('app/private/glide-cache'),
         ]);
 
-        $request = request()->only('w', 'h', 'fit');
+        $request = request()->only('w', 'h', 'fit', 'fm');
 
         try {
             $serverFilename = $server->makeImage($path, $request);
