@@ -17,41 +17,63 @@
 
 @section('main')
     <section class="bp-hero bp-grid" aria-labelledby="hero-title">
-        <div class="bp-container bp-hero__inner">
-            <div class="bp-hero__id">
-                <div class="bp-avatar bp-corners">
-                    <img
-                        src="/assets/images/profile.webp?w=144&h=144&fit=crop"
-                        alt="César García"
-                        width="62"
-                        height="62"
-                    />
+        <div class="bp-container bp-hero__layout">
+            <div class="bp-hero__inner">
+                <div class="bp-hero__id">
+                    <div class="bp-avatar bp-corners">
+                        <img
+                            src="/assets/images/profile.webp?w=144&h=144&fit=crop"
+                            alt="César García"
+                            width="62"
+                            height="62"
+                        />
+                    </div>
+                    <span class="bp-label">{{ __('page-index.profile_eyebrow') }}</span>
                 </div>
-                <span class="bp-label">{{ __('page-index.profile_eyebrow') }}</span>
+
+                <h1 id="hero-title">
+                    {{ __('page-index.profile_title_hello') }}
+                    <span>{{ __('page-index.profile_title_name') }}</span>
+                </h1>
+
+                <p class="bp-hero__lead">{{ __('page-index.profile_content') }}</p>
+
+                <div class="bp-hero__actions">
+                    <a class="bp-btn bp-btn--primary" href="#open-source">
+                        {{ __('page-index.profile_cta_projects') }}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+                    </a>
+                    <a class="bp-btn bp-btn--secondary" href="https://github.com/cesargb" target="_blank" rel="noopener">
+                        {!! file_get_contents(resource_path('icons/github.svg')) !!}
+                        {{ __('page-index.profile_cta_github') }}
+                    </a>
+                </div>
             </div>
 
-            <h1 id="hero-title">
-                {{ __('page-index.profile_title_hello') }}
-                <span>{{ __('page-index.profile_title_name') }}</span>
-            </h1>
-
-            <p class="bp-hero__lead">{{ __('page-index.profile_content') }}</p>
-
-            <div class="bp-hero__actions">
-                <a class="bp-btn bp-btn--primary" href="#open-source">
-                    {{ __('page-index.profile_cta_projects') }}
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
-                </a>
-                <a class="bp-btn bp-btn--secondary" href="https://github.com/cesargb" target="_blank" rel="noopener">
-                    {!! file_get_contents(resource_path('icons/github.svg')) !!}
-                    {{ __('page-index.profile_cta_github') }}
-                </a>
-            </div>
-
-            <p class="bp-badge">
-                {{ __('page-index.profile_work_current_prefix') }}
-                <a href="https://www.descom.es" target="_blank" rel="noopener">Descom.es ↗</a>
-            </p>
+            <dl class="bp-spec bp-corners">
+                <div>
+                    <dt class="bp-label">{{ __('page-index.spec_experience') }}</dt>
+                    <dd>
+                        <span class="bp-spec__value">{{ __('page-index.spec_years', ['years' => date('Y') - \App\Data\Career::startYear()]) }}</span>
+                        <span class="bp-spec__meta">· {{ __('page-index.spec_since', ['year' => \App\Data\Career::startYear()]) }}</span>
+                    </dd>
+                </div>
+                <div>
+                    <dt class="bp-label">{{ __('page-index.spec_now') }}</dt>
+                    <dd>
+                        <a href="https://www.descom.es" target="_blank" rel="noopener">Descom.es ↗</a>
+                        <span class="bp-spec__meta">· {{ __('page-index.spec_since', ['year' => \App\Data\Career::all()[0]['from']]) }}</span>
+                    </dd>
+                </div>
+                <div>
+                    <dt class="bp-label">{{ __('page-index.spec_before') }}</dt>
+                    <dd><a href="#trajectory">EDS · Wanadoo</a></dd>
+                </div>
+                <div>
+                    <dt class="bp-label">{{ __('page-index.spec_focus') }}</dt>
+                    <dd>Laravel · Vue · AWS</dd>
+                </div>
+            </dl>
         </div>
     </section>
 
@@ -69,9 +91,23 @@
         </div>
     </section>
 
+    <section class="bp-section" id="trajectory" aria-labelledby="trajectory-title">
+        <div class="bp-container">
+            <x-section-header id="trajectory-title" eyebrow="02 · {{ __('page-index.career_eyebrow') }}" :title="__('page-index.career_title')">
+                {{ __('page-index.career_content') }}
+            </x-section-header>
+
+            <ol class="bp-career" role="list">
+                @foreach (\App\Data\Career::all() as $job)
+                    <x-career-item :job="$job" />
+                @endforeach
+            </ol>
+        </div>
+    </section>
+
     <section class="bp-section" id="open-source" aria-labelledby="open-source-title">
         <div class="bp-container">
-            <x-section-header id="open-source-title" eyebrow="02 · {{ __('page-index.projects_eyebrow') }}" :title="__('page-index.projects_title')">
+            <x-section-header id="open-source-title" eyebrow="03 · {{ __('page-index.projects_eyebrow') }}" :title="__('page-index.projects_title')">
                 {{ __('page-index.projects_content') }}
             </x-section-header>
 
@@ -85,7 +121,7 @@
 
     <section class="bp-section" id="lab" aria-labelledby="lab-title">
         <div class="bp-container">
-            <x-section-header id="lab-title" eyebrow="03 · {{ __('page-index.lab_eyebrow') }}" :title="__('main.lab_title')">
+            <x-section-header id="lab-title" eyebrow="04 · {{ __('page-index.lab_eyebrow') }}" :title="__('main.lab_title')">
                 {{ __('main.lab_description') }}
             </x-section-header>
 

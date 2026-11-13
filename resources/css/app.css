@@ -565,6 +565,71 @@ code {
     margin-top: var(--space-2);
 }
 
+.bp-hero__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    align-items: center;
+    gap: var(--space-12);
+}
+
+/* Title block of a drawing: key facts as label / value rows */
+.bp-spec {
+    margin: 0;
+    padding: var(--space-2) var(--space-6);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+}
+
+.bp-spec div {
+    display: grid;
+    gap: var(--space-1);
+    padding: var(--space-4) 0;
+}
+
+.bp-spec div + div {
+    border-top: 1px dashed var(--border);
+}
+
+.bp-spec dd {
+    margin: 0;
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+.bp-spec dd a {
+    color: var(--ink);
+}
+
+.bp-spec dd a:hover {
+    color: var(--accent);
+}
+
+.bp-spec__value {
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 650;
+    letter-spacing: -0.025em;
+}
+
+.bp-spec__meta {
+    color: var(--ink-subtle);
+    font-weight: 400;
+}
+
+@media (max-width: 960px) {
+    .bp-hero__layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--space-8);
+    }
+
+    .bp-spec {
+        max-width: var(--measure);
+    }
+}
+
 @media (max-width: 640px) {
     .bp-hero {
         padding: var(--space-12) 0;
@@ -809,6 +874,148 @@ code {
     .bp-layer__chips {
         grid-template-columns: 1fr;
         gap: var(--space-2);
+    }
+}
+
+/* ==========================================================================
+   Career timeline
+   ========================================================================== */
+
+.bp-career {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: var(--space-6);
+}
+
+.bp-job {
+    position: relative;
+    display: grid;
+    grid-template-columns: 160px minmax(0, 1fr);
+    gap: var(--space-6);
+}
+
+/* Dashed rail with a node per job, like the stack layers */
+.bp-job::before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: calc(var(--space-6) + 11px);
+    bottom: calc(-1 * (var(--space-6) + var(--space-6) + 4px));
+    border-left: 1px dashed var(--border-strong);
+}
+
+.bp-job:last-child::before {
+    display: none;
+}
+
+.bp-job__years {
+    position: relative;
+    padding: var(--space-6) 0 0 var(--space-6);
+    white-space: nowrap;
+}
+
+.bp-job__years::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: calc(var(--space-6) + 4px);
+    width: 7px;
+    height: 7px;
+    border-radius: var(--radius-full);
+    background: var(--bg);
+    border: 1px solid var(--accent);
+}
+
+.bp-job:first-child .bp-job__years::before {
+    background: var(--accent);
+}
+
+.bp-job__body {
+    display: grid;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+}
+
+.bp-job__head {
+    display: grid;
+    gap: var(--space-1);
+}
+
+.bp-job__head h3 {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+}
+
+.bp-job__head h3 a {
+    color: var(--ink);
+}
+
+.bp-job__head h3 a:hover {
+    color: var(--accent);
+}
+
+.bp-job__role {
+    color: var(--ink-subtle);
+    font-size: 15px;
+    line-height: 22px;
+}
+
+.bp-job p {
+    color: var(--ink-muted);
+}
+
+.bp-job ul {
+    display: grid;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.bp-job li {
+    display: flex;
+    gap: var(--space-2);
+    color: var(--ink-muted);
+    font-size: 15px;
+    line-height: 22px;
+}
+
+.bp-job li::before {
+    content: "→";
+    flex: none;
+    color: var(--accent);
+    font-family: var(--font-mono);
+}
+
+@media (max-width: 720px) {
+    .bp-job {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--space-3);
+    }
+
+    .bp-job__years {
+        padding-top: 0;
+    }
+
+    .bp-job__years::before {
+        top: 4px;
+    }
+
+    .bp-job::before {
+        top: 11px;
+        bottom: calc(-1 * (var(--space-3) + 4px));
+    }
+
+    .bp-job__body {
+        margin-left: var(--space-6);
+        padding: var(--space-4);
     }
 }
 

@@ -52,6 +52,7 @@
                 <nav class="bp-nav" aria-label="{{ __('page-index.nav_label') }}">
                     <ul class="bp-nav__links">
                         <li><a href="/{{ $locale }}#stack">{{ __('page-index.nav_stack') }}</a></li>
+                        <li><a href="/{{ $locale }}#trajectory">{{ __('page-index.nav_career') }}</a></li>
                         <li><a href="/{{ $locale }}#open-source">{{ __('page-index.nav_projects') }}</a></li>
                         <li><a href="/{{ $locale }}#lab">{{ __('page-index.nav_lab') }}</a></li>
                     </ul>

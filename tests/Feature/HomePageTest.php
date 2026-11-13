@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Cesargb;
+use App\Data\Career;
 use Tests\TestCase;
 
 class HomePageTest extends TestCase
@@ -120,6 +121,37 @@ class HomePageTest extends TestCase
         $this->get($path)
             ->assertOk()
             ->assertHeader('Content-Type', 'image/jpeg');
+    }
+
+    public function test_home_hero_shows_years_of_experience(): void
+    {
+        $years = date('Y') - Career::startYear();
+
+        $this->get('/es')
+            ->assertOk()
+            ->assertSee("{$years} años")
+            ->assertSee('desde 1999');
+
+        $this->get('/en')
+            ->assertOk()
+            ->assertSee("{$years} years")
+            ->assertSee('since 1999');
+    }
+
+    public function test_home_lists_professional_trajectory(): void
+    {
+        foreach (['en', 'es'] as $lang) {
+            $response = $this->get("/{$lang}")
+                ->assertOk()
+                ->assertSee('id="trajectory"', false)
+                ->assertSee("href=\"/{$lang}#trajectory\"", false);
+
+            foreach (Career::all() as $job) {
+                $response
+                    ->assertSee($job['company'])
+                    ->assertSee($job['role'][$lang]);
+            }
+        }
     }
 
     public function test_home_is_not_indexable_outside_production(): void
