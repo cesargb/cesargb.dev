@@ -48,9 +48,20 @@ class LanguageMiddleware
             fn ($url) => Uri::of($url)->value(),
             $hrefLangs
         ));
-        Context::addHidden('meta.hreflang-default', Uri::of(url('/'))->value());
+        Context::addHidden('meta.hreflang-default', Uri::of(
+            self::hrefLangDefault(Route::currentRouteName(), $hrefLangs['en'] ?? $canonical)
+        )->value());
 
         return $next($request);
+    }
+
+    /**
+     * The x-default alternate: the root URL for the home page (it redirects to the
+     * visitor's language), the English version for any other page.
+     */
+    public static function hrefLangDefault(?string $routeName, string $englishUrl): string
+    {
+        return Str::after((string) $routeName, '.') === 'index' ? url('/') : $englishUrl;
     }
 
     private function getHrefLangs(string $canonical): array

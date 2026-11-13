@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Seo;
 
+use App\Cesargb;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\App;
 
 class RobotsTxtController extends Controller
 {
     public function __invoke()
     {
-        $environment = App::environment('production') ? 'production' : 'default';
+        $environment = Cesargb::isProduction() ? 'production' : 'default';
 
         return response()->view('robots.'.$environment, [], 200, [
             'Content-Type' => 'text/plain',

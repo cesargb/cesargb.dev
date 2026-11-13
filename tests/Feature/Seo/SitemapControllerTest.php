@@ -33,4 +33,12 @@ class SitemapControllerTest extends TestCase
             ->assertSee('<xhtml:link rel="alternate" hreflang="en" href="'.route('en.lab.js-api-translate').'"/>', false)
             ->assertSee('<xhtml:link rel="alternate" hreflang="es" href="'.route('es.lab.js-api-translate').'"/>', false);
     }
+
+    public function test_sitemap_exposes_x_default_for_each_url(): void
+    {
+        $this->get('/sitemap.xml')
+            ->assertOk()
+            ->assertSee('<xhtml:link rel="alternate" hreflang="x-default" href="'.url('/').'"/>', false)
+            ->assertSee('<xhtml:link rel="alternate" hreflang="x-default" href="'.route('en.lab.js-api-translate').'"/>', false);
+    }
 }
