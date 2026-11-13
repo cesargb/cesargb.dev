@@ -29,7 +29,7 @@ class LabPageTest extends TestCase
     {
         $en = route('en.lab.js-api-translate');
         $es = route('es.lab.js-api-translate');
-        $default = url('/');
+        $default = $en;
 
         $this->get('/en/lab/js-api-translate')
             ->assertOk()
@@ -44,7 +44,7 @@ class LabPageTest extends TestCase
     {
         $en = route('en.lab.js-api-translate');
         $es = route('es.lab.js-api-translate');
-        $default = url('/');
+        $default = $en;
 
         $this->get('/es/laboratorio/js-api-traduccion')
             ->assertOk()

@@ -19,6 +19,7 @@
 @foreach ($locales as $altLocale)
         <xhtml:link rel="alternate" hreflang="{{ $altLocale }}" href="{{ route("{$altLocale}.{$path}") }}"/>
 @endforeach
+        <xhtml:link rel="alternate" hreflang="x-default" href="{{ App\Http\Middleware\LanguageMiddleware::hrefLangDefault($routeName, route("en.{$path}")) }}"/>
     </url>
 @endforeach
 @endforeach
