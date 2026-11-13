@@ -7,9 +7,8 @@
     <meta name="robots" content="noindex,nofollow">
     <title>{{ __('page-404.meta_title') }}</title>
     <link rel="icon" href="/favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="{{ Vite::asset('node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2') }}" as="font" type="font/woff2" crossorigin>
+    @vite('resources/css/app.css')
     <style>
         * { box-sizing: border-box; }
         html, body { margin: 0; padding: 0; }
@@ -19,13 +18,14 @@
         @keyframes gridmove { from { background-position: 0 0; } to { background-position: 40px 40px; } }
         @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
         :focus-visible { outline: 2px solid #ff5f6d; outline-offset: 2px; }
+        .logo:hover, .lang:hover, .icon-btn:hover, .btn:hover { text-decoration: none; }
         ::selection { background: #ff5f6d; color: #0a0a0b; }
 
         .page {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            font-family: 'Inter', system-ui, sans-serif;
+            font-family: var(--font-sans);
             background: #0a0a0b;
             color: #f4f4f5;
             position: relative;
@@ -81,7 +81,7 @@
             display: flex;
             align-items: center;
             gap: 9px;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: var(--font-mono);
             font-size: 12px;
             font-weight: 500;
         }
@@ -120,7 +120,7 @@
         }
 
         .eyebrow {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: var(--font-mono);
             font-size: 13px;
             letter-spacing: .18em;
             text-transform: uppercase;
@@ -129,7 +129,7 @@
         }
 
         .code-404 {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-sans);
             font-weight: 700;
             font-size: 148px;
             line-height: .9;
@@ -184,7 +184,7 @@
         .dot-green { background: #28c840; }
         .terminal-title {
             margin-left: 8px;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: var(--font-mono);
             font-size: 12px;
             color: #8b8b94;
         }
@@ -192,7 +192,7 @@
         .terminal-body {
             margin: 0;
             padding: 18px 18px 20px;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: var(--font-mono);
             font-size: 13.5px;
             line-height: 1.85;
             color: #a1a1aa;
@@ -242,7 +242,7 @@
             z-index: 2;
             text-align: center;
             padding: 20px;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: var(--font-mono);
             font-size: 12px;
             color: #8b8b94;
         }
