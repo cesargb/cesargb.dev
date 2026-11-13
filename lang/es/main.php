@@ -11,7 +11,6 @@ return [
         'Cloud computing',
         'Soluciones tecnológicas escalables',
     ],
-    'experiences_senior' => 'senior',
     'experiences_expert' => 'experto',
     'experiences_advance' => 'avanzado',
     'experience_title_backend' => 'Backend',
@@ -19,7 +18,7 @@ return [
     'experience_title_cloud' => 'Infraestructura',
     'lab_title' => 'Laboratorio de experimentos',
     'lab_description' => 'Pruebo APIs experimentales y estándares emergentes, y documento cómo se comportan.',
-    'lab_experiment_label' => 'Experimento #01',
+    'lab_experiment_label' => 'Experimento #01 · 2026',
     'lab_experiment_title' => 'Chrome AI Translation API',
     'lab_experiment_description' => 'La API integrada en Chrome que traduce texto en local con un modelo de IA (Gemini Nano), sin enviar datos a ningún servidor.',
 ];

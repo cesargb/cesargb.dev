@@ -17,7 +17,7 @@ return [
     'profile_cta_github' => 'GitHub',
     'profile_work_current_prefix' => 'Actualmente en',
     'experience_eyebrow' => 'Stack',
-    'experience_title' => 'Arquitectura del stack',
+    'experience_title' => 'Stack tecnológico',
     'experience_content' => 'De la interfaz a la infraestructura: las tecnologías con las que trabajo a diario.',
     'experience_legend' => 'Nivel',
     'projects_eyebrow' => 'Open source',
