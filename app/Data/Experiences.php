@@ -13,8 +13,8 @@ class Experiences
             'title' => 'experience_title_frontend',
             'layer' => 'L3',
             'items' => [
-                ['name' => 'HTML/CSS', 'mark' => 'HC', 'level' => 'expert'],
-                ['name' => 'JavaScript', 'mark' => 'JS', 'level' => 'advance'],
+                ['name' => 'CSS/SASS', 'mark' => 'CSS', 'level' => 'expert'],
+                ['name' => 'JavaScript', 'mark' => 'JS', 'level' => 'expert'],
                 ['name' => 'Vue.js', 'mark' => 'Vue', 'level' => 'expert'],
             ],
         ],
@@ -25,6 +25,9 @@ class Experiences
                 ['name' => 'PHP', 'mark' => 'PHP', 'level' => 'expert'],
                 ['name' => 'Laravel', 'mark' => 'Lv', 'level' => 'expert'],
                 ['name' => 'Node.js', 'mark' => 'Nd', 'level' => 'advance'],
+                ['name' => 'MySQL', 'mark' => 'My', 'level' => 'expert'],
+                ['name' => 'PostgreSQL', 'mark' => 'Pg', 'level' => 'advance'],
+                ['name' => 'Redis', 'mark' => 'Rd', 'level' => 'expert'],
             ],
         ],
         [
@@ -34,6 +37,7 @@ class Experiences
                 ['name' => 'Linux', 'mark' => 'Lx', 'level' => 'expert'],
                 ['name' => 'AWS', 'mark' => 'AWS', 'level' => 'advance'],
                 ['name' => 'Docker', 'mark' => 'Dk', 'level' => 'advance'],
+                ['name' => 'GitHub Actions', 'mark' => 'CI', 'level' => 'advance'],
             ],
         ],
     ];

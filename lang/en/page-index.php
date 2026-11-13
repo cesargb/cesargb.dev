@@ -17,7 +17,7 @@ return [
     'profile_cta_github' => 'GitHub',
     'profile_work_current_prefix' => 'Currently at',
     'experience_eyebrow' => 'Stack',
-    'experience_title' => 'Stack architecture',
+    'experience_title' => 'Tech stack',
     'experience_content' => 'From the interface down to the infrastructure: the technologies I work with every day.',
     'experience_legend' => 'Level',
     'projects_eyebrow' => 'Open source',
