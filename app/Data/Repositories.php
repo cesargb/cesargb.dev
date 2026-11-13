@@ -9,9 +9,21 @@ class Repositories
             'repository' => 'laravel-magiclink',
             'owner' => 'cesargb',
             'tags' => ['Laravel', 'PHP'],
-            'description' => [
-                'es' => "`MagicLink` es un paquete para Laravel que permite generar enlaces seguros que ejecutan acciones que requieren autenticación o validación.\n\nCasos de uso habituales:\n\n- Inicio de sesión sin contraseña mediante enlaces seguros (passwordless)\n- Acceso a contenido privado\n- Ejecución de acciones protegidas mediante enlaces temporales\n\nEste paquete facilita la implementación de flujos seguros y simplifica la experiencia de usuario en aplicaciones Laravel.",
-                'en' => "`MagicLink` is a package for Laravel that allows you to generate secure links that execute actions requiring authentication or validation.\n\nCommon use cases:\n\n- Passwordless login through secure links\n- Access to private content\n- Execution of protected actions through temporary links\n\nThis package makes it easy to implement secure flows and simplifies the user experience in Laravel applications.",
+            'summary' => [
+                'es' => 'Genera enlaces seguros que ejecutan acciones autenticadas en aplicaciones Laravel.',
+                'en' => 'Generates secure links that run authenticated actions in Laravel applications.',
+            ],
+            'uses' => [
+                'es' => [
+                    'Inicio de sesión sin contraseña',
+                    'Acceso a contenido privado',
+                    'Acciones protegidas con enlaces temporales',
+                ],
+                'en' => [
+                    'Passwordless login',
+                    'Access to private content',
+                    'Protected actions through temporary links',
+                ],
             ],
             'badges' => [
                 [
@@ -30,9 +42,21 @@ class Repositories
             'repository' => 'php-log-rotation',
             'owner' => 'cesargb',
             'tags' => ['PHP'],
-            'description' => [
-                'es' => "Paquete en PHP diseñado para `gestionar la rotación de logs de aplicaciones` de forma sencilla mediante una API ligera.\n\nFuncionalidades principales:\n\n- Rotación automática de archivos de log\n- Eliminación de logs antiguos\n- Compresión de archivos para optimizar el almacenamiento\n\nEste paquete permite integrar fácilmente la gestión de logs en cualquier aplicación PHP.",
-                'en' => "PHP package designed to `manage application log rotation` easily through a lightweight API.\n\nMain features:\n\n- Automatic log file rotation\n- Deletion of old logs\n- File compression to optimize storage\n\nThis package allows you to easily integrate log management into any PHP application.",
+            'summary' => [
+                'es' => 'Rota, comprime y elimina los logs de aplicaciones PHP con una API ligera.',
+                'en' => 'Rotates, compresses and prunes PHP application logs through a lightweight API.',
+            ],
+            'uses' => [
+                'es' => [
+                    'Rotación automática de ficheros de log',
+                    'Borrado de logs antiguos',
+                    'Compresión para ahorrar espacio',
+                ],
+                'en' => [
+                    'Automatic log file rotation',
+                    'Pruning of old logs',
+                    'Compression to save storage',
+                ],
             ],
             'badges' => [
                 [

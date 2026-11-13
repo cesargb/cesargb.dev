@@ -3,7 +3,7 @@
 return [
     'change_lang' => 'Change language',
     'schema_person_job_title' => 'Software architect and developer',
-    'schema_person_description' => 'Developer specialized in designing and building scalable technology solutions. Passionate about creating efficient software, staying up to date with new technologies, and tackling challenges that bring real value to projects.',
+    'schema_person_description' => 'Software architect and developer. I design and build scalable backend systems, Laravel applications and cloud infrastructure.',
     'schema_person_knows_about' => [
         'Web development',
         'Software architecture',
@@ -14,12 +14,12 @@ return [
     'experiences_senior' => 'senior',
     'experiences_expert' => 'expert',
     'experiences_advance' => 'advanced',
-    'experience_title_backend' => 'Languages & Backend',
-    'experience_title_frontend' => 'Frontend & Frameworks',
-    'experience_title_cloud' => 'Infrastructure & Cloud',
-    'lab_title' => 'Experiment Lab',
-    'lab_description' => 'A space dedicated to testing experimental APIs, new libraries, and cutting-edge concepts. Here I document how technologies still in development or emerging standards behave.',
+    'experience_title_backend' => 'Backend',
+    'experience_title_frontend' => 'Frontend',
+    'experience_title_cloud' => 'Infrastructure',
+    'lab_title' => 'Experiment lab',
+    'lab_description' => 'I try out experimental APIs and emerging standards, and document how they behave.',
     'lab_experiment_label' => 'Experiment #01',
     'lab_experiment_title' => 'Chrome AI Translation API',
-    'lab_experiment_description' => 'Test the new Chrome-integrated API that enables local text translations using AI models (Gemini Nano) without sending data to the server.',
+    'lab_experiment_description' => 'Chrome\'s built-in API that translates text locally with an AI model (Gemini Nano), without sending data to any server.',
 ];
