@@ -140,6 +140,23 @@ class HomePageTest extends TestCase
             ->assertSeeInOrder(['Systems', 'Networks', 'Development', 'Software architecture', 'DevOps']);
     }
 
+    public function test_stack_shows_area_cards_with_disclosures(): void
+    {
+        $this->get('/es')
+            ->assertOk()
+            ->assertSee('Del servidor a la interfaz.')
+            ->assertSeeInOrder(['La lógica detrás.', 'Lo que se ve. Y se siente.', 'Del código a producción.', 'Todo conectado.'])
+            ->assertSeeInOrder(['También trabajo con', 'Node.js', 'PostgreSQL'])
+            ->assertSeeInOrder(['Protocolos y servicios', 'HTTP · FTP · SMTP · POP / IMAP'])
+            ->assertSeeHtml('<details class="bp-stack-card__more">');
+
+        $this->get('/en')
+            ->assertOk()
+            ->assertSee('From server to interface.')
+            ->assertSeeInOrder(['The logic behind.', 'What you see. And feel.', 'From code to production.', 'Everything connected.'])
+            ->assertSee('Email');
+    }
+
     public function test_home_hero_intro_and_meta_description(): void
     {
         foreach (['es', 'en'] as $lang) {
