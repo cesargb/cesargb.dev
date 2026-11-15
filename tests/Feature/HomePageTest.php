@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Cesargb;
+use App\Data\Career;
 use Tests\TestCase;
 
 class HomePageTest extends TestCase
@@ -120,6 +121,56 @@ class HomePageTest extends TestCase
         $this->get($path)
             ->assertOk()
             ->assertHeader('Content-Type', 'image/jpeg');
+    }
+
+    public function test_home_hero_shows_years_of_experience_and_focus(): void
+    {
+        $years = date('Y') - Career::startYear();
+
+        $this->get('/es')
+            ->assertOk()
+            ->assertSeeHtml("<span class=\"bp-xp__number\">{$years}</span>")
+            ->assertSee('de experiencia')
+            ->assertSeeInOrder(['Sistemas', 'Redes', 'Desarrollo', 'Arquitectura de software', 'DevOps']);
+
+        $this->get('/en')
+            ->assertOk()
+            ->assertSeeHtml("<span class=\"bp-xp__number\">{$years}</span>")
+            ->assertSee('of experience')
+            ->assertSeeInOrder(['Systems', 'Networks', 'Development', 'Software architecture', 'DevOps']);
+    }
+
+    public function test_home_hero_intro_and_meta_description(): void
+    {
+        foreach (['es', 'en'] as $lang) {
+            app()->setLocale($lang);
+            $description = __('page-index.description');
+
+            $this->assertGreaterThanOrEqual(120, mb_strlen($description));
+            $this->assertLessThanOrEqual(160, mb_strlen($description));
+
+            $this->get("/{$lang}")
+                ->assertOk()
+                ->assertSee(__('page-index.profile_content'))
+                ->assertSee(__('page-index.profile_content_detail'))
+                ->assertSeeHtml('<meta name="description" content="'.e($description).'" />');
+        }
+    }
+
+    public function test_home_lists_professional_trajectory(): void
+    {
+        foreach (['en', 'es'] as $lang) {
+            $response = $this->get("/{$lang}")
+                ->assertOk()
+                ->assertSee('id="trajectory"', false)
+                ->assertSee("href=\"/{$lang}#trajectory\"", false);
+
+            foreach (Career::all() as $job) {
+                $response
+                    ->assertSee($job['company'])
+                    ->assertSee($job['role'][$lang]);
+            }
+        }
     }
 
     public function test_home_is_not_indexable_outside_production(): void
