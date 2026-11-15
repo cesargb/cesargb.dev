@@ -5,40 +5,49 @@ namespace App\Data;
 class Experiences
 {
     /**
-     * Layers of the stack, from the top (closest to the user) to the bottom.
-     * Each item's `mark` is the short monospace label shown in its chip.
+     * Areas of the stack shown as cards on the home page. Translatable copy lives in
+     * `lang/{locale}/main.php` under `stack_{key}_*`. Items with a `mark` render a short
+     * monospace label; `highlight` marks the core technologies of the area. Items with a
+     * `label` key are translated instead of shown verbatim.
+     * `more` is an optional disclosure: extra chips or a single line of text.
      */
     private static array $experiences = [
         [
-            'title' => 'experience_title_frontend',
-            'layer' => 'L3',
+            'key' => 'backend',
+            'featured' => true,
             'items' => [
-                ['name' => 'CSS/SASS', 'mark' => 'CSS', 'level' => 'expert'],
-                ['name' => 'JavaScript', 'mark' => 'JS', 'level' => 'expert'],
-                ['name' => 'Vue.js', 'mark' => 'Vue', 'level' => 'expert'],
+                ['name' => 'Laravel', 'mark' => 'Lr', 'highlight' => true],
+                ['name' => 'PHP', 'mark' => '<?>', 'highlight' => true],
+                ['name' => 'MySQL'],
+                ['name' => 'Redis'],
+            ],
+            'more' => ['type' => 'chips', 'items' => ['Node.js', 'PostgreSQL']],
+        ],
+        [
+            'key' => 'frontend',
+            'items' => [
+                ['name' => 'Vue.js', 'mark' => 'V', 'highlight' => true],
+                ['name' => 'JavaScript', 'mark' => 'JS'],
+                ['name' => 'CSS / Sass'],
             ],
         ],
         [
-            'title' => 'experience_title_backend',
-            'layer' => 'L2',
+            'key' => 'infrastructure',
             'items' => [
-                ['name' => 'PHP', 'mark' => 'PHP', 'level' => 'expert'],
-                ['name' => 'Laravel', 'mark' => 'Lv', 'level' => 'expert'],
-                ['name' => 'Node.js', 'mark' => 'Nd', 'level' => 'advance'],
-                ['name' => 'MySQL', 'mark' => 'My', 'level' => 'expert'],
-                ['name' => 'PostgreSQL', 'mark' => 'Pg', 'level' => 'advance'],
-                ['name' => 'Redis', 'mark' => 'Rd', 'level' => 'expert'],
+                ['name' => 'Linux'],
+                ['name' => 'Docker'],
+                ['name' => 'AWS'],
+                ['name' => 'GitHub Actions'],
             ],
         ],
         [
-            'title' => 'experience_title_cloud',
-            'layer' => 'L1',
+            'key' => 'services',
             'items' => [
-                ['name' => 'Linux', 'mark' => 'Lx', 'level' => 'expert'],
-                ['name' => 'AWS', 'mark' => 'AWS', 'level' => 'advance'],
-                ['name' => 'Docker', 'mark' => 'Dk', 'level' => 'advance'],
-                ['name' => 'GitHub Actions', 'mark' => 'CI', 'level' => 'advance'],
+                ['name' => 'Hosting'],
+                ['name' => 'DNS'],
+                ['label' => 'stack_email'],
             ],
+            'more' => ['type' => 'text', 'items' => ['HTTP', 'FTP', 'SMTP', 'POP / IMAP']],
         ],
     ];
 

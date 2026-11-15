@@ -82,9 +82,9 @@
                 {{ __('page-index.experience_content') }}
             </x-section-header>
 
-            <ol class="bp-stack bp-grid" role="list">
+            <ol class="bp-stack" role="list">
                 @foreach (\App\Data\Experiences::all() as $experience)
-                    <x-experience-item :experience="$experience" />
+                    <x-experience-item :experience="$experience" :index="$loop->iteration" />
                 @endforeach
             </ol>
         </div>
