@@ -3,7 +3,7 @@
 return [
     'change_lang' => 'Change language',
     'schema_person_job_title' => 'Software architect and developer',
-    'schema_person_description' => 'Software architect and developer. I design and build scalable backend systems, Laravel applications and cloud infrastructure.',
+    'schema_person_description' => 'Software architect and developer. I design and build scalable, robust and maintainable technology solutions.',
     'schema_person_knows_about' => [
         'Web development',
         'Software architecture',

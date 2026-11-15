@@ -3,7 +3,7 @@
 return [
     'change_lang' => 'Cambiar idioma',
     'schema_person_job_title' => 'Arquitecto de software y desarrollador',
-    'schema_person_description' => 'Arquitecto de software y desarrollador. Diseño y construyo sistemas backend escalables, aplicaciones Laravel e infraestructura cloud.',
+    'schema_person_description' => 'Arquitecto de software y desarrollador. Diseño y construyo soluciones tecnológicas escalables, robustas y fáciles de mantener.',
     'schema_person_knows_about' => [
         'Desarrollo web',
         'Arquitectura de software',

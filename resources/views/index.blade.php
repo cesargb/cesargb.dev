@@ -36,7 +36,10 @@
                     <span>{{ __('page-index.profile_title_name') }}</span>
                 </h1>
 
-                <p class="bp-hero__lead">{{ __('page-index.profile_content') }}</p>
+                <div class="bp-hero__intro">
+                    <p class="bp-hero__lead">{{ __('page-index.profile_content') }}</p>
+                    <p class="bp-hero__detail">{{ __('page-index.profile_content_detail') }}</p>
+                </div>
 
                 <div class="bp-hero__actions">
                     <a class="bp-btn bp-btn--primary" href="#open-source">
@@ -50,30 +53,26 @@
                 </div>
             </div>
 
-            <dl class="bp-spec bp-corners">
+            <div class="bp-xp bp-corners">
                 <div>
-                    <dt class="bp-label">{{ __('page-index.spec_experience') }}</dt>
-                    <dd>
-                        <span class="bp-spec__value">{{ __('page-index.spec_years', ['years' => date('Y') - \App\Data\Career::startYear()]) }}</span>
-                        <span class="bp-spec__meta">· {{ __('page-index.spec_since', ['year' => \App\Data\Career::startYear()]) }}</span>
-                    </dd>
+                    <span class="bp-label">{{ __('page-index.spec_experience') }}</span>
+                    <p class="bp-xp__years">
+                        <span class="bp-xp__number">{{ date('Y') - \App\Data\Career::startYear() }}</span>
+                        <span class="bp-xp__unit">{{ __('page-index.spec_years_unit') }} <span>{{ __('page-index.spec_years_suffix') }}</span></span>
+                    </p>
                 </div>
-                <div>
-                    <dt class="bp-label">{{ __('page-index.spec_now') }}</dt>
-                    <dd>
-                        <a href="https://www.descom.es" target="_blank" rel="noopener">Descom.es ↗</a>
-                        <span class="bp-spec__meta">· {{ __('page-index.spec_since', ['year' => \App\Data\Career::all()[0]['from']]) }}</span>
-                    </dd>
+
+                <hr class="bp-xp__rule" />
+
+                <div class="bp-xp__focus">
+                    <span class="bp-label">{{ __('page-index.spec_focus') }}</span>
+                    <ul class="bp-xp__areas" role="list">
+                        @foreach (__('page-index.spec_focus_areas') as $area)
+                            <li>{{ $area }}</li>
+                        @endforeach
+                    </ul>
                 </div>
-                <div>
-                    <dt class="bp-label">{{ __('page-index.spec_before') }}</dt>
-                    <dd><a href="#trajectory">EDS · Wanadoo</a></dd>
-                </div>
-                <div>
-                    <dt class="bp-label">{{ __('page-index.spec_focus') }}</dt>
-                    <dd>Laravel · Vue · AWS</dd>
-                </div>
-            </dl>
+            </div>
         </div>
     </section>
 

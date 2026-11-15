@@ -123,19 +123,38 @@ class HomePageTest extends TestCase
             ->assertHeader('Content-Type', 'image/jpeg');
     }
 
-    public function test_home_hero_shows_years_of_experience(): void
+    public function test_home_hero_shows_years_of_experience_and_focus(): void
     {
         $years = date('Y') - Career::startYear();
 
         $this->get('/es')
             ->assertOk()
-            ->assertSee("{$years} años")
-            ->assertSee('desde 1999');
+            ->assertSeeHtml("<span class=\"bp-xp__number\">{$years}</span>")
+            ->assertSee('de experiencia')
+            ->assertSeeInOrder(['Sistemas', 'Redes', 'Desarrollo', 'Arquitectura de software', 'DevOps']);
 
         $this->get('/en')
             ->assertOk()
-            ->assertSee("{$years} years")
-            ->assertSee('since 1999');
+            ->assertSeeHtml("<span class=\"bp-xp__number\">{$years}</span>")
+            ->assertSee('of experience')
+            ->assertSeeInOrder(['Systems', 'Networks', 'Development', 'Software architecture', 'DevOps']);
+    }
+
+    public function test_home_hero_intro_and_meta_description(): void
+    {
+        foreach (['es', 'en'] as $lang) {
+            app()->setLocale($lang);
+            $description = __('page-index.description');
+
+            $this->assertGreaterThanOrEqual(120, mb_strlen($description));
+            $this->assertLessThanOrEqual(160, mb_strlen($description));
+
+            $this->get("/{$lang}")
+                ->assertOk()
+                ->assertSee(__('page-index.profile_content'))
+                ->assertSee(__('page-index.profile_content_detail'))
+                ->assertSeeHtml('<meta name="description" content="'.e($description).'" />');
+        }
     }
 
     public function test_home_lists_professional_trajectory(): void
