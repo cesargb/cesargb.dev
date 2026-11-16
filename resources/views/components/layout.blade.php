@@ -53,6 +53,7 @@
                     <ul class="bp-nav__links">
                         <li><a href="/{{ $locale }}#stack">{{ __('page-index.nav_stack') }}</a></li>
                         <li><a href="/{{ $locale }}#trajectory">{{ __('page-index.nav_career') }}</a></li>
+                        <li><a href="{{ route($locale.'.experience') }}">{{ __('page-index.nav_experience') }}</a></li>
                         <li><a href="{{ route($locale.'.open-source.index') }}">{{ __('page-index.nav_projects') }}</a></li>
                         <li><a href="/{{ $locale }}#lab">{{ __('page-index.nav_lab') }}</a></li>
                     </ul>

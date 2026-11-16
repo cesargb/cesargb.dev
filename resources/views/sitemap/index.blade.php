@@ -4,6 +4,7 @@
     $locales = ['es', 'en'];
     $paths = [
         ['index', []],
+        ['experience', []],
         ['lab.js-api-translate', []],
         ['open-source.index', []],
         ...array_map(
