@@ -213,7 +213,8 @@ function start(section, categories) {
     let parallaxY = 0;
 
     function moveCamera(step, dt) {
-        travelled = (travelled + step) % tunnel.length;
+        const safeStep = Number.isFinite(step) ? step : 0;
+        travelled = (((travelled + safeStep) % tunnel.length) + tunnel.length) % tunnel.length;
         const u = travelled / tunnel.length;
         const ahead = (u + LOOK_AHEAD / tunnel.length) % 1;
 
@@ -247,7 +248,8 @@ function start(section, categories) {
     let ready = false;
 
     const frame = (now) => {
-        const dt = Math.min((now - last) / 1000, 0.1);
+        // rAF timestamps mark the start of the frame and can be older than `last`.
+        const dt = clamp((now - last) / 1000, 0, 0.1);
         last = now;
 
         if (!paused) {
