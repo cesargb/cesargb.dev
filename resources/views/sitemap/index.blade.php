@@ -5,6 +5,7 @@
     $paths = [
         ['index', []],
         ['experience', []],
+        ['cv', []],
         ['lab.js-api-translate', []],
         ['open-source.index', []],
         ...array_map(
