@@ -1099,6 +1099,10 @@ code {
     gap: var(--space-6);
 }
 
+.bp-section-more {
+    margin-top: var(--space-8);
+}
+
 @media (max-width: 800px) {
     .bp-cards {
         grid-template-columns: 1fr;

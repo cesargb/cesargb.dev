@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Context;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
@@ -68,7 +69,8 @@ class LanguageMiddleware
     {
         $currentLanguage = app()->getLocale();
 
-        $routeNameCanonical = $this->getRouteName($canonical);
+        $routeCanonical = $this->getRoute($canonical);
+        $routeNameCanonical = $routeCanonical->getName();
 
         if (! $routeNameCanonical) {
             return [];
@@ -84,25 +86,36 @@ class LanguageMiddleware
 
         $hrefLangs = collect(self::$languages)
             ->mapWithKeys(fn ($language) => [
-                $language => $this->getUrlFromRouteName($language.'.'.$routeNameWithoutLang),
+                $language => $this->getUrlFromRouteName(
+                    $language.'.'.$routeNameWithoutLang,
+                    $this->getPathParameters($routeCanonical),
+                ),
             ])
             ->filter();
 
         return $hrefLangs->toArray();
     }
 
-    private function getRouteName(string $path): ?string
+    private function getRoute(string $path): RoutingRoute
     {
         $request = Request::create($path, 'GET');
-        $route = app('router')->getRoutes()->match($request);
 
-        return $route->getName() ?? null;
+        return (clone app('router')->getRoutes()->match($request))->bind($request);
     }
 
-    private function getUrlFromRouteName(string $routeName): ?string
+    /**
+     * Only the parameters declared in the URI: `Route::view()` stores its view and data as
+     * route defaults, which would otherwise leak into the alternate URLs as a query string.
+     */
+    private function getPathParameters(RoutingRoute $route): array
+    {
+        return array_intersect_key($route->parameters(), array_flip($route->parameterNames()));
+    }
+
+    private function getUrlFromRouteName(string $routeName, array $parameters = []): ?string
     {
         try {
-            return route($routeName);
+            return route($routeName, $parameters);
         } catch (\Exception $e) {
             return null;
         }

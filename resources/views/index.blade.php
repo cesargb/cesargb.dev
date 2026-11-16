@@ -111,10 +111,16 @@
             </x-section-header>
 
             <div class="bp-cards">
-                @foreach (\App\Data\Repositories::all() as $repository)
+                @foreach (\App\Data\Repositories::featured() as $repository)
                     <x-repository-item :repository="$repository" :index="$loop->iteration" />
                 @endforeach
             </div>
+
+            <p class="bp-section-more">
+                <a class="bp-btn bp-btn--secondary" href="{{ route(app()->getLocale().'.open-source.index') }}">
+                    {{ __('open-source.view_all_docs') }}
+                </a>
+            </p>
         </div>
     </section>
 

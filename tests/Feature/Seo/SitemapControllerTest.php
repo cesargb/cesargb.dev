@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Seo;
 
+use App\Data\Repositories;
 use Tests\TestCase;
 
 class SitemapControllerTest extends TestCase
@@ -19,8 +20,24 @@ class SitemapControllerTest extends TestCase
     {
         $response = $this->get('/sitemap.xml')->assertOk();
 
-        foreach (['en.index', 'es.index', 'en.lab.js-api-translate', 'es.lab.js-api-translate'] as $routeName) {
+        foreach (['en.index', 'es.index', 'en.lab.js-api-translate', 'es.lab.js-api-translate', 'en.open-source.index', 'es.open-source.index'] as $routeName) {
             $response->assertSee('<loc>'.route($routeName).'</loc>', false);
+        }
+    }
+
+    public function test_sitemap_lists_every_open_source_project_page(): void
+    {
+        $response = $this->get('/sitemap.xml')->assertOk();
+
+        foreach (Repositories::slugs() as $repository) {
+            $en = route('en.open-source.show', $repository);
+            $es = route('es.open-source.show', $repository);
+
+            $response
+                ->assertSee('<loc>'.$en.'</loc>', false)
+                ->assertSee('<loc>'.$es.'</loc>', false)
+                ->assertSee('<xhtml:link rel="alternate" hreflang="es" href="'.$es.'"/>', false)
+                ->assertSee('<xhtml:link rel="alternate" hreflang="x-default" href="'.$en.'"/>', false);
         }
     }
 
