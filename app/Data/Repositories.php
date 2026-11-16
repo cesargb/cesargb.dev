@@ -47,6 +47,27 @@ class Repositories
                 ],
             ],
         ],
+        [
+            'repository' => 'laravel-logs-rotate',
+            'owner' => 'cesargb',
+            'tags' => ['Laravel', 'PHP'],
+            'summary' => [
+                'es' => 'Rota y comprime los ficheros de log de Laravel de forma programada.',
+                'en' => 'Rotates and compresses Laravel log files on a schedule.',
+            ],
+            'uses' => [
+                'es' => [
+                    'Rotación diaria automática del log de Laravel',
+                    'Compresión y límite de ficheros archivados',
+                    'Rotación de otros ficheros con un comando Artisan',
+                ],
+                'en' => [
+                    'Automatic daily rotation of the Laravel log',
+                    'Compression and a cap on archived files',
+                    'Rotation of other files through an Artisan command',
+                ],
+            ],
+        ],
     ];
 
     public static function all(): array

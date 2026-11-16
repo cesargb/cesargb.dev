@@ -19,7 +19,8 @@ class OpenSourcePageTest extends TestCase
             $this->get("/{$locale}/open-source")
                 ->assertOk()
                 ->assertSee(route("{$locale}.open-source.show", 'laravel-magiclink'), false)
-                ->assertSee(route("{$locale}.open-source.show", 'php-log-rotation'), false);
+                ->assertSee(route("{$locale}.open-source.show", 'php-log-rotation'), false)
+                ->assertSee(route("{$locale}.open-source.show", 'laravel-logs-rotate'), false);
         }
     }
 
@@ -35,6 +36,20 @@ class OpenSourcePageTest extends TestCase
             ->assertOk()
             ->assertSeeHtml('<h1 class="doc-title">PHP Log Rotation</h1>')
             ->assertSeeHtml('<h2>Instalación</h2>');
+    }
+
+    public function test_laravel_logs_rotate_documentation_is_published(): void
+    {
+        $this->get('/en/open-source/laravel-logs-rotate')
+            ->assertOk()
+            ->assertSeeHtml('<h1 class="doc-title">Laravel Logs Rotate</h1>')
+            ->assertSee('Cesargb\\LaravelLog\\Events\\RotateHasFailed')
+            ->assertDontSee('RotativeHandler');
+
+        $this->get('/es/open-source/laravel-logs-rotate')
+            ->assertOk()
+            ->assertSeeHtml('<h1 class="doc-title">Laravel Logs Rotate</h1>')
+            ->assertSeeHtml('<h2>Configuración</h2>');
     }
 
     public function test_code_blocks_are_syntax_highlighted(): void
