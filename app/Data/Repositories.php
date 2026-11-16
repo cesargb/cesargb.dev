@@ -68,6 +68,27 @@ class Repositories
                 ],
             ],
         ],
+        [
+            'repository' => 'laravel-cascade-delete',
+            'owner' => 'cesargb',
+            'tags' => ['Laravel', 'PHP', 'Eloquent'],
+            'summary' => [
+                'es' => 'Borrado en cascada de las relaciones polimórficas en los modelos Eloquent de Laravel.',
+                'en' => 'Cascade deletion of polymorphic relations in Laravel Eloquent models.',
+            ],
+            'uses' => [
+                'es' => [
+                    'Borrado de relaciones MorphOne, MorphMany y MorphToMany',
+                    'Limpieza de datos huérfanos tras borrados masivos',
+                    'Comando Artisan para limpiar todos los modelos',
+                ],
+                'en' => [
+                    'Deletion of MorphOne, MorphMany and MorphToMany relations',
+                    'Cleanup of orphaned data after bulk deletes',
+                    'Artisan command to clean every model',
+                ],
+            ],
+        ],
     ];
 
     public static function all(): array
