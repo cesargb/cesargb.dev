@@ -37,6 +37,20 @@ class OpenSourcePageTest extends TestCase
             ->assertSeeHtml('<h2>Instalación</h2>');
     }
 
+    public function test_code_blocks_are_syntax_highlighted(): void
+    {
+        $this->get('/en/open-source/laravel-magiclink')
+            ->assertOk()
+            ->assertSeeHtml('<pre data-lang="php" class="notranslate">')
+            ->assertSeeHtml('<span class="hl-keyword">use</span>')
+            ->assertSeeHtml('<span class="hl-variable">$action</span>')
+            ->assertSeeHtml(')-&gt;<span class="hl-property">url</span>');
+
+        $this->get('/es/open-source/php-log-rotation')
+            ->assertOk()
+            ->assertSeeHtml('<span class="hl-comment">');
+    }
+
     public function test_unknown_project_returns_not_found(): void
     {
         $this->get('/en/open-source/unknown-project')->assertNotFound();

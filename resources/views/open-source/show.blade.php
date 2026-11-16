@@ -117,9 +117,50 @@
             background: var(--surface);
         }
 
+        #open-source-doc .doc-content pre {
+            color: var(--ink);
+            font: 400 14px/1.6 var(--font-mono);
+        }
+
         #open-source-doc .doc-content pre code {
             padding: 0;
             background: transparent;
+        }
+
+        /* Syntax highlighting (tempest/highlight, rendered server-side) */
+        #open-source-doc .doc-content .hl-keyword,
+        #open-source-doc .doc-content .hl-operator {
+            color: var(--accent);
+        }
+
+        #open-source-doc .doc-content .hl-type,
+        #open-source-doc .doc-content .hl-property,
+        #open-source-doc .doc-content .hl-attribute {
+            color: var(--accent-2);
+        }
+
+        #open-source-doc .doc-content .hl-value,
+        #open-source-doc .doc-content .hl-literal,
+        #open-source-doc .doc-content .hl-number {
+            color: #8fd3a8;
+        }
+
+        #open-source-doc .doc-content .hl-variable,
+        #open-source-doc .doc-content .hl-generic {
+            color: #9ecbff;
+        }
+
+        #open-source-doc .doc-content .hl-comment {
+            color: var(--ink-subtle);
+            font-style: italic;
+        }
+
+        #open-source-doc .doc-content .hl-addition {
+            color: #8fd3a8;
+        }
+
+        #open-source-doc .doc-content .hl-deletion {
+            color: var(--accent);
         }
 
         #open-source-doc .doc-content table {

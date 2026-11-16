@@ -6,6 +6,7 @@ use App\Data\Repositories;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use Tempest\Highlight\CommonMark\HighlightExtension;
 
 class OpenSourceController extends Controller
 {
@@ -32,6 +33,8 @@ class OpenSourceController extends Controller
             'content' => Str::markdown($this->withoutTitle($markdown), [
                 'html_input' => 'strip',
                 'allow_unsafe_links' => false,
+            ], [
+                new HighlightExtension,
             ]),
         ]);
     }
