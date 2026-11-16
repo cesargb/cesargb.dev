@@ -47,4 +47,5 @@ return [
     'footer_tagline' => 'Development, open source and experiments.',
     'footer_explore' => 'Explore',
     'footer_connect' => 'Connect',
+    'footer_new_tab' => '(opens in a new tab)',
 ];

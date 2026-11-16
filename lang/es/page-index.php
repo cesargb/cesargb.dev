@@ -47,4 +47,5 @@ return [
     'footer_tagline' => 'Desarrollo, código abierto y experimentos.',
     'footer_explore' => 'Explora',
     'footer_connect' => 'Conecta',
+    'footer_new_tab' => '(se abre en una pestaña nueva)',
 ];

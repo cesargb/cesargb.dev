@@ -86,11 +86,11 @@
                     <nav class="bp-footer__col" aria-label="{{ __('page-index.footer_nav_label') }}">
                         <p class="bp-label">{{ __('page-index.footer_explore') }}</p>
                         <ul class="bp-footer__links bp-footer__links--grid">
-                            <li><a href="/{{ $locale }}">{{ __('page-index.nav_home') }}</a></li>
+                            <li><a href="/{{ $locale }}" @if (request()->routeIs($locale.'.index')) aria-current="page" @endif>{{ __('page-index.nav_home') }}</a></li>
                             <li><a href="/{{ $locale }}#stack">{{ __('page-index.nav_stack') }}</a></li>
                             <li><a href="/{{ $locale }}#trajectory">{{ __('page-index.nav_career') }}</a></li>
-                            <li><a href="{{ route($locale.'.experience') }}">{{ __('page-index.nav_experience') }}</a></li>
-                            <li><a href="{{ route($locale.'.open-source.index') }}">{{ __('page-index.nav_projects') }}</a></li>
+                            <li><a href="{{ route($locale.'.experience') }}" @if (request()->routeIs($locale.'.experience')) aria-current="page" @endif>{{ __('page-index.nav_experience') }}</a></li>
+                            <li><a href="{{ route($locale.'.open-source.index') }}" @if (request()->routeIs($locale.'.open-source.*')) aria-current="page" @endif>{{ __('page-index.nav_projects') }}</a></li>
                             <li><a href="/{{ $locale }}#lab">{{ __('page-index.nav_lab') }}</a></li>
                         </ul>
                     </nav>
@@ -102,6 +102,7 @@
                                     {!! file_get_contents(resource_path('icons/github.svg')) !!}
                                     GitHub
                                     <span aria-hidden="true">↗</span>
+                                    <span class="sr-only">{{ __('page-index.footer_new_tab') }}</span>
                                 </a>
                             </li>
                         </ul>
