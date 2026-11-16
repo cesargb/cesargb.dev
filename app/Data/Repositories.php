@@ -76,6 +76,14 @@ class Repositories
     }
 
     /**
+     * The main projects, highlighted on the home page: the first ones in the list.
+     */
+    public static function featured(int $limit = 2): array
+    {
+        return array_slice(self::$projects, 0, $limit);
+    }
+
+    /**
      * @return array<int, string>
      */
     public static function slugs(): array

@@ -111,7 +111,7 @@
             </x-section-header>
 
             <div class="bp-cards">
-                @foreach (\App\Data\Repositories::all() as $repository)
+                @foreach (\App\Data\Repositories::featured() as $repository)
                     <x-repository-item :repository="$repository" :index="$loop->iteration" />
                 @endforeach
             </div>

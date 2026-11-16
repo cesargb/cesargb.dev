@@ -24,6 +24,15 @@ class OpenSourcePageTest extends TestCase
         }
     }
 
+    public function test_home_only_features_the_two_main_projects(): void
+    {
+        $this->get('/en')
+            ->assertOk()
+            ->assertSee('cesargb/<b>laravel-magiclink</b>', false)
+            ->assertSee('cesargb/<b>php-log-rotation</b>', false)
+            ->assertDontSee('cesargb/<b>laravel-logs-rotate</b>', false);
+    }
+
     public function test_project_page_renders_markdown_documentation(): void
     {
         $this->get('/en/open-source/laravel-magiclink')
