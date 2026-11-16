@@ -100,7 +100,8 @@
                             <li><a href="/{{ $locale }}#trajectory"><span class="bp-footer__num" aria-hidden="true">02</span>{{ __('page-index.nav_career') }}</a></li>
                             <li><a href="{{ route($locale.'.open-source.index') }}" @if (request()->routeIs($locale.'.open-source.*')) aria-current="page" @endif><span class="bp-footer__num" aria-hidden="true">03</span>{{ __('page-index.nav_projects') }}</a></li>
                             <li><a href="/{{ $locale }}#lab"><span class="bp-footer__num" aria-hidden="true">04</span>{{ __('page-index.nav_lab') }}</a></li>
-                            <li><a href="{{ route($locale.'.experience') }}" @if (request()->routeIs($locale.'.experience')) aria-current="page" @endif><span class="bp-footer__num" aria-hidden="true">CV</span>{{ __('page-index.nav_experience') }}</a></li>
+                            <li><a href="{{ route($locale.'.experience') }}" @if (request()->routeIs($locale.'.experience')) aria-current="page" @endif><span class="bp-footer__num" aria-hidden="true">05</span>{{ __('page-index.nav_experience') }}</a></li>
+                            <li><a href="{{ route($locale.'.cv') }}" @if (request()->routeIs($locale.'.cv')) aria-current="page" @endif><span class="bp-footer__num" aria-hidden="true">CV</span>{{ __('page-index.nav_cv') }}</a></li>
                         </ul>
                     </nav>
 

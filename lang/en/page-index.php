@@ -8,6 +8,7 @@ return [
     'nav_label' => 'Main navigation',
     'nav_stack' => 'Stack',
     'nav_career' => 'Trajectory',
+    'nav_cv' => 'Resume',
     'nav_experience' => 'Experience',
     'nav_projects' => 'Open source',
     'nav_lab' => 'Lab',
