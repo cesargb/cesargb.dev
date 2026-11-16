@@ -6,7 +6,6 @@ return [
     'header_github_alt' => 'Visita mi perfil de GitHub',
     'skip_to_content' => 'Saltar al contenido',
     'nav_label' => 'Navegación principal',
-    'nav_home' => 'Inicio',
     'nav_stack' => 'Stack',
     'nav_career' => 'Trayectoria',
     'nav_experience' => 'Experiencia',
@@ -48,4 +47,10 @@ return [
     'footer_explore' => 'Explora',
     'footer_connect' => 'Conecta',
     'footer_new_tab' => '(se abre en una pestaña nueva)',
+    'footer_role' => 'Software Architect & Developer.',
+    'footer_now' => 'Ahora',
+    'footer_now_at' => 'en',
+    'footer_github_hint' => 'Issues y pull requests bienvenidos en cualquier repo.',
+    'footer_back_to_top' => 'Volver arriba',
+    'footer_home_label' => 'César García, volver al inicio',
 ];

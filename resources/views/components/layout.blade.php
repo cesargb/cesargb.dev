@@ -39,7 +39,7 @@
         <script defer src="https://cloud.umami.is/script.js" data-website-id="498a72ff-8feb-4ca3-8464-b60b85c73850"></script>
         @endif
     </head>
-    <body>
+    <body id="top">
         <a class="skip-link" href="#content">{{ __('page-index.skip_to_content') }}</a>
 
         <header class="bp-header">
@@ -77,42 +77,59 @@
         </main>
 
         <footer class="bp-footer">
-            <div class="bp-footer__top">
-                <div class="bp-container bp-footer__grid">
-                    <div class="bp-footer__brand">
-                        <p class="bp-footer__name"><span class="bp-footer__dash" aria-hidden="true"></span>César García</p>
-                        <p class="bp-footer__tagline">{{ __('page-index.footer_tagline') }}</p>
-                    </div>
+            <div class="bp-container bp-footer__top">
+                <div class="bp-footer__brand">
+                    <a class="bp-footer__wordmark" href="/{{ $locale }}" aria-label="{{ __('page-index.footer_home_label') }}">
+                        césar<span class="bp-logo__accent">garcía</span>
+                    </a>
+                    <p class="bp-footer__tagline">{{ __('page-index.footer_role') }} {{ __('page-index.footer_tagline') }}</p>
+                    <p class="bp-footer__now">
+                        <span class="bp-label">{{ __('page-index.footer_now') }}</span>
+                        <span>
+                            {{ __('page-index.footer_now_at') }}
+                            <a href="https://descom.es" target="_blank" rel="noopener">Descom.es<span class="sr-only"> {{ __('page-index.footer_new_tab') }}</span></a>
+                        </span>
+                    </p>
+                </div>
+
+                <div class="bp-footer__cols">
                     <nav class="bp-footer__col" aria-label="{{ __('page-index.footer_nav_label') }}">
-                        <p class="bp-label">{{ __('page-index.footer_explore') }}</p>
-                        <ul class="bp-footer__links bp-footer__links--grid">
-                            <li><a href="/{{ $locale }}" @if (request()->routeIs($locale.'.index')) aria-current="page" @endif>{{ __('page-index.nav_home') }}</a></li>
-                            <li><a href="/{{ $locale }}#stack">{{ __('page-index.nav_stack') }}</a></li>
-                            <li><a href="/{{ $locale }}#trajectory">{{ __('page-index.nav_career') }}</a></li>
-                            <li><a href="{{ route($locale.'.experience') }}" @if (request()->routeIs($locale.'.experience')) aria-current="page" @endif>{{ __('page-index.nav_experience') }}</a></li>
-                            <li><a href="{{ route($locale.'.open-source.index') }}" @if (request()->routeIs($locale.'.open-source.*')) aria-current="page" @endif>{{ __('page-index.nav_projects') }}</a></li>
-                            <li><a href="/{{ $locale }}#lab">{{ __('page-index.nav_lab') }}</a></li>
+                        <h2 class="bp-label">{{ __('page-index.footer_explore') }}</h2>
+                        <ul class="bp-footer__links">
+                            <li><a href="/{{ $locale }}#stack"><span class="bp-footer__num" aria-hidden="true">01</span>{{ __('page-index.nav_stack') }}</a></li>
+                            <li><a href="/{{ $locale }}#trajectory"><span class="bp-footer__num" aria-hidden="true">02</span>{{ __('page-index.nav_career') }}</a></li>
+                            <li><a href="{{ route($locale.'.open-source.index') }}" @if (request()->routeIs($locale.'.open-source.*')) aria-current="page" @endif><span class="bp-footer__num" aria-hidden="true">03</span>{{ __('page-index.nav_projects') }}</a></li>
+                            <li><a href="/{{ $locale }}#lab"><span class="bp-footer__num" aria-hidden="true">04</span>{{ __('page-index.nav_lab') }}</a></li>
+                            <li><a href="{{ route($locale.'.experience') }}" @if (request()->routeIs($locale.'.experience')) aria-current="page" @endif><span class="bp-footer__num" aria-hidden="true">CV</span>{{ __('page-index.nav_experience') }}</a></li>
                         </ul>
                     </nav>
-                    <div class="bp-footer__col bp-footer__col--connect">
-                        <p class="bp-label">{{ __('page-index.footer_connect') }}</p>
-                        <ul class="bp-footer__links">
-                            <li>
-                                <a href="https://github.com/cesargb" target="_blank" rel="noopener">
-                                    {!! file_get_contents(resource_path('icons/github.svg')) !!}
-                                    GitHub
-                                    <span aria-hidden="true">↗</span>
-                                    <span class="sr-only">{{ __('page-index.footer_new_tab') }}</span>
-                                </a>
-                            </li>
-                        </ul>
+
+                    <div class="bp-footer__col">
+                        <h2 class="bp-label">{{ __('page-index.footer_connect') }}</h2>
+                        <a class="bp-footer__card" href="https://github.com/cesargb" target="_blank" rel="noopener">
+                            {!! file_get_contents(resource_path('icons/github.svg')) !!}
+                            <span class="bp-footer__card-text">
+                                <span class="bp-footer__card-title">GitHub</span>
+                                <span class="bp-footer__card-handle">@cesargb</span>
+                            </span>
+                            <svg class="bp-footer__card-arrow" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                            <span class="sr-only">{{ __('page-index.footer_new_tab') }}</span>
+                        </a>
+                        <p class="bp-footer__hint">{{ __('page-index.footer_github_hint') }}</p>
                     </div>
                 </div>
             </div>
+
             <div class="bp-footer__bottom">
                 <div class="bp-container bp-footer__bar">
-                    <span>© {{ date('Y') }} César García</span>
-                    <x-lang-selector />
+                    <p>© {{ date('Y') }} César García</p>
+                    <div class="bp-footer__actions">
+                        <a class="bp-footer__top-link" href="#top">
+                            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+                            {{ __('page-index.footer_back_to_top') }}
+                        </a>
+                        <x-lang-selector />
+                    </div>
                 </div>
             </div>
         </footer>
