@@ -15,4 +15,5 @@ return [
     'copy_code' => 'Copiar',
     'copied' => 'Copiado',
     'copy_failed' => 'No se pudo copiar',
+    'toc_title' => 'En esta página',
 ];

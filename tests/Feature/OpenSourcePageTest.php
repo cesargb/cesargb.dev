@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Data\Repositories;
 use Tests\TestCase;
 
 class OpenSourcePageTest extends TestCase
@@ -39,13 +40,13 @@ class OpenSourcePageTest extends TestCase
         $this->get('/en/open-source/laravel-magiclink')
             ->assertOk()
             ->assertSeeHtml('<h1 class="doc-title">Laravel MagicLink</h1>')
-            ->assertSeeHtml('<h2>Installation</h2>')
+            ->assertSeeHtml('<h2 id="installation">Installation<a href="#installation" class="heading-anchor"')
             ->assertSee('<title>Laravel MagicLink · Documentation · César García</title>', false);
 
         $this->get('/es/open-source/php-log-rotation')
             ->assertOk()
             ->assertSeeHtml('<h1 class="doc-title">PHP Log Rotation</h1>')
-            ->assertSeeHtml('<h2>Instalación</h2>');
+            ->assertSeeHtml('<h2 id="instalación">Instalación');
     }
 
     public function test_laravel_logs_rotate_documentation_is_published(): void
@@ -59,7 +60,7 @@ class OpenSourcePageTest extends TestCase
         $this->get('/es/open-source/laravel-logs-rotate')
             ->assertOk()
             ->assertSeeHtml('<h1 class="doc-title">Laravel Logs Rotate</h1>')
-            ->assertSeeHtml('<h2>Configuración</h2>');
+            ->assertSeeHtml('<h2 id="configuración">Configuración');
     }
 
     public function test_laravel_cascade_delete_documentation_is_published(): void
@@ -72,7 +73,7 @@ class OpenSourcePageTest extends TestCase
         $this->get('/es/open-source/laravel-cascade-delete')
             ->assertOk()
             ->assertSeeHtml('<h1 class="doc-title">Laravel Cascade Delete</h1>')
-            ->assertSeeHtml('<h2>Borrar datos residuales</h2>');
+            ->assertSeeHtml('<h2 id="borrar-datos-residuales">Borrar datos residuales');
     }
 
     public function test_code_blocks_are_syntax_highlighted(): void
@@ -100,6 +101,48 @@ class OpenSourcePageTest extends TestCase
             ->assertOk()
             ->assertSee('copy: "Copiar"', false)
             ->assertSee('copied: "Copiado"', false);
+    }
+
+    public function test_long_documents_get_a_table_of_contents(): void
+    {
+        $this->get('/en/open-source/laravel-magiclink')
+            ->assertOk()
+            ->assertSeeHtml('<aside class="doc-toc">')
+            ->assertSee('On this page')
+            ->assertSeeHtml('<a href="#login-action">Login Action</a>')
+            ->assertSeeHtml('<a href="#protect-with-an-access-code">Protect with an access code</a>')
+            ->assertSeeHtml('<h3 id="login-action">');
+
+        $this->get('/es/open-source/laravel-magiclink')
+            ->assertOk()
+            ->assertSee('En esta página')
+            ->assertSeeHtml('<a href="#iniciar-sesión">Iniciar sesión</a>');
+    }
+
+    public function test_short_documents_have_no_table_of_contents(): void
+    {
+        $this->get('/en/open-source/php-log-rotation')
+            ->assertOk()
+            ->assertDontSeeHtml('<aside class="doc-toc">');
+    }
+
+    public function test_every_in_page_link_points_to_an_existing_heading(): void
+    {
+        foreach (['en', 'es'] as $locale) {
+            foreach (Repositories::slugs() as $repository) {
+                $html = $this->get("/{$locale}/open-source/{$repository}")->assertOk()->getContent();
+
+                preg_match_all('/\bid="([^"]+)"/', $html, $ids);
+                preg_match_all('/href="#([^"]+)"/', $html, $anchors);
+
+                $missing = array_diff(
+                    array_map(fn ($anchor) => html_entity_decode(rawurldecode($anchor)), $anchors[1]),
+                    array_map('html_entity_decode', $ids[1]),
+                );
+
+                $this->assertSame([], array_values(array_unique($missing)), "Broken anchors in {$locale}/{$repository}");
+            }
+        }
     }
 
     public function test_unknown_project_returns_not_found(): void

@@ -1,6 +1,9 @@
 @extends('components.layout')
 
-@php($locale = app()->getLocale())
+@php
+    $locale = app()->getLocale();
+    $hasToc = count($toc) >= 5;
+@endphp
 
 @section('title', __('open-source.meta_title_project', ['project' => $title]))
 @section('description', $repository['summary'][$locale])
@@ -16,6 +19,153 @@
             max-width: calc(var(--measure) + 2 * var(--space-6));
             margin: 0 auto;
             padding: 0 var(--space-6);
+        }
+
+        #open-source-doc .doc-container--with-toc {
+            max-width: var(--container);
+        }
+
+        #open-source-doc .doc-main {
+            min-width: 0;
+            max-width: var(--measure);
+        }
+
+        #open-source-doc .doc-toc {
+            margin-bottom: var(--space-8);
+            padding: var(--space-4);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            background: var(--surface);
+        }
+
+        #open-source-doc .doc-toc__title {
+            display: block;
+            margin-bottom: var(--space-3);
+            font: 500 12px/16px var(--font-mono);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-subtle);
+        }
+
+        #open-source-doc .doc-toc ul {
+            display: grid;
+            gap: var(--space-1);
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #open-source-doc .doc-toc a {
+            display: block;
+            padding: 2px 0;
+            color: var(--ink-muted);
+            font-size: 14px;
+            line-height: 20px;
+            text-decoration: none;
+        }
+
+        #open-source-doc .doc-toc a:hover {
+            color: var(--ink);
+        }
+
+        #open-source-doc .doc-toc .doc-toc__item--3 a {
+            padding-left: var(--space-4);
+            font-size: 13px;
+            color: var(--ink-subtle);
+        }
+
+        #open-source-doc .doc-toc a[aria-current="true"] {
+            color: var(--accent);
+        }
+
+        @media (min-width: 1024px) {
+            /* The index sits in a left column; .doc-main's children join the parent grid. */
+            #open-source-doc .doc-container--with-toc {
+                display: grid;
+                grid-template-columns: 240px minmax(0, var(--measure));
+                column-gap: var(--space-12);
+                align-items: start;
+            }
+
+            #open-source-doc .doc-container--with-toc .doc-main {
+                display: contents;
+            }
+
+            #open-source-doc .doc-container--with-toc .doc-main > * {
+                grid-column: 2;
+            }
+
+            #open-source-doc .doc-container--with-toc .doc-back {
+                justify-self: start;
+            }
+
+            #open-source-doc .doc-container--with-toc .doc-main > .doc-toc {
+                grid-column: 1;
+                grid-row: 1 / span 3;
+                align-self: start;
+                position: sticky;
+                top: calc(var(--header-h) + var(--space-6));
+                max-height: calc(100vh - var(--header-h) - var(--space-12));
+                overflow-y: auto;
+                margin-bottom: 0;
+                padding: 0 var(--space-4) 0 0;
+                border: none;
+                border-right: 1px solid var(--border);
+                border-radius: 0;
+                background: transparent;
+            }
+
+            #open-source-doc .doc-toc a {
+                border-left: 2px solid transparent;
+                margin-left: -2px;
+                padding-left: var(--space-3);
+            }
+
+            #open-source-doc .doc-toc .doc-toc__item--3 a {
+                padding-left: var(--space-6);
+            }
+
+            #open-source-doc .doc-toc a[aria-current="true"] {
+                border-left-color: var(--accent);
+            }
+        }
+
+        #open-source-doc .doc-content .heading-anchor {
+            margin-left: var(--space-2);
+            color: var(--ink-subtle);
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity var(--dur-fast) var(--ease-out);
+        }
+
+        #open-source-doc .doc-content :is(h2, h3, h4):hover .heading-anchor {
+            opacity: 1;
+        }
+
+        #open-source-doc .doc-content .heading-anchor:hover {
+            color: var(--accent);
+        }
+
+        #open-source-doc .doc-content h4 {
+            margin-top: var(--space-6);
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        #open-source-doc .doc-content blockquote {
+            margin-left: 0;
+            margin-right: 0;
+            padding: var(--space-3) var(--space-4);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            background: var(--accent-soft);
+            color: var(--ink);
+        }
+
+        #open-source-doc .doc-content blockquote > * + * {
+            margin-top: var(--space-2);
         }
 
         #open-source-doc .doc-back {
@@ -321,36 +471,96 @@
             });
         });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const links = new Map();
+
+            document.querySelectorAll('#open-source-doc .doc-toc a[href^="#"]').forEach((link) => {
+                links.set(decodeURIComponent(link.hash.slice(1)), link);
+            });
+
+            if (links.size === 0 || !('IntersectionObserver' in window)) {
+                return;
+            }
+
+            const headings = [...links.keys()]
+                .map((id) => document.getElementById(id))
+                .filter(Boolean);
+
+            const activate = (id) => {
+                links.forEach((link, key) => {
+                    if (key === id) {
+                        link.setAttribute('aria-current', 'true');
+                    } else {
+                        link.removeAttribute('aria-current');
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(() => {
+                const offset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 64;
+                let current = headings[0];
+
+                for (const heading of headings) {
+                    if (heading.getBoundingClientRect().top - offset - 32 <= 0) {
+                        current = heading;
+                    }
+                }
+
+                activate(current.id);
+            }, { rootMargin: '0px 0px -60% 0px' });
+
+            headings.forEach((heading) => observer.observe(heading));
+        });
+    </script>
 @endsection
 
 @section('main')
     <section id="open-source-doc">
-        <div class="doc-container">
-            <a class="doc-back" href="{{ route($locale.'.open-source.index') }}">← {{ __('open-source.back_to_index') }}</a>
+        <div @class(['doc-container', 'doc-container--with-toc' => $hasToc])>
+            <div class="doc-main">
+                <a class="doc-back" href="{{ route($locale.'.open-source.index') }}">← {{ __('open-source.back_to_index') }}</a>
 
-            <header class="doc-header">
-                <span class="doc-repo">{{ $repository['owner'] }}/{{ $repository['repository'] }}</span>
-                <h1 class="doc-title">{{ $title }}</h1>
-                <p class="doc-summary">{{ $repository['summary'][$locale] }}</p>
-                <div class="doc-meta">
-                    @foreach ($repository['tags'] as $tag)
-                        <span class="bp-tag">{{ $tag }}</span>
-                    @endforeach
-                    <a
-                        class="bp-btn bp-btn--secondary"
-                        href="https://github.com/{{ $repository['owner'] }}/{{ $repository['repository'] }}"
-                        target="_blank"
-                        rel="noopener"
-                    >
-                        {!! file_get_contents(resource_path('icons/github.svg')) !!}
-                        {{ __('open-source.view_on_github') }}
-                    </a>
-                </div>
-            </header>
+                <header class="doc-header">
+                    <span class="doc-repo">{{ $repository['owner'] }}/{{ $repository['repository'] }}</span>
+                    <h1 class="doc-title">{{ $title }}</h1>
+                    <p class="doc-summary">{{ $repository['summary'][$locale] }}</p>
+                    <div class="doc-meta">
+                        @foreach ($repository['tags'] as $tag)
+                            <span class="bp-tag">{{ $tag }}</span>
+                        @endforeach
+                        <a
+                            class="bp-btn bp-btn--secondary"
+                            href="https://github.com/{{ $repository['owner'] }}/{{ $repository['repository'] }}"
+                            target="_blank"
+                            rel="noopener"
+                        >
+                            {!! file_get_contents(resource_path('icons/github.svg')) !!}
+                            {{ __('open-source.view_on_github') }}
+                        </a>
+                    </div>
+                </header>
 
-            <article class="doc-content">
-                {!! $content !!}
-            </article>
+                @if ($hasToc)
+                    <aside class="doc-toc">
+                        <nav aria-labelledby="doc-toc-title">
+                            <span class="doc-toc__title" id="doc-toc-title">{{ __('open-source.toc_title') }}</span>
+                            <ul>
+                                @foreach ($toc as $entry)
+                                    <li class="doc-toc__item--{{ $entry['level'] }}">
+                                        <a href="#{{ $entry['id'] }}">{{ $entry['text'] }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </nav>
+                    </aside>
+                @endif
+
+                <article class="doc-content">
+                    {!! $content !!}
+                </article>
+            </div>
         </div>
     </section>
 @endsection
