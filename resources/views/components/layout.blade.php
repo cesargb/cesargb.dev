@@ -77,13 +77,42 @@
         </main>
 
         <footer class="bp-footer">
-            <div class="bp-container">
-                <span>© {{ date('Y') }} César García</span>
-                <ul>
-                    <li><a href="https://github.com/cesargb" target="_blank" rel="noopener">GitHub</a></li>
-                    <li><a href="https://www.descom.es" target="_blank" rel="noopener">Descom.es</a></li>
-                    <li><span class="bp-label">{{ __('page-index.footer_built_with') }}</span></li>
-                </ul>
+            <div class="bp-footer__top">
+                <div class="bp-container bp-footer__grid">
+                    <div class="bp-footer__brand">
+                        <p class="bp-footer__name"><span class="bp-footer__dash" aria-hidden="true"></span>César García</p>
+                        <p class="bp-footer__tagline">{{ __('page-index.footer_tagline') }}</p>
+                    </div>
+                    <nav class="bp-footer__col" aria-label="{{ __('page-index.footer_nav_label') }}">
+                        <p class="bp-label">{{ __('page-index.footer_explore') }}</p>
+                        <ul class="bp-footer__links bp-footer__links--grid">
+                            <li><a href="/{{ $locale }}">{{ __('page-index.nav_home') }}</a></li>
+                            <li><a href="/{{ $locale }}#stack">{{ __('page-index.nav_stack') }}</a></li>
+                            <li><a href="/{{ $locale }}#trajectory">{{ __('page-index.nav_career') }}</a></li>
+                            <li><a href="{{ route($locale.'.experience') }}">{{ __('page-index.nav_experience') }}</a></li>
+                            <li><a href="{{ route($locale.'.open-source.index') }}">{{ __('page-index.nav_projects') }}</a></li>
+                            <li><a href="/{{ $locale }}#lab">{{ __('page-index.nav_lab') }}</a></li>
+                        </ul>
+                    </nav>
+                    <div class="bp-footer__col bp-footer__col--connect">
+                        <p class="bp-label">{{ __('page-index.footer_connect') }}</p>
+                        <ul class="bp-footer__links">
+                            <li>
+                                <a href="https://github.com/cesargb" target="_blank" rel="noopener">
+                                    {!! file_get_contents(resource_path('icons/github.svg')) !!}
+                                    GitHub
+                                    <span aria-hidden="true">↗</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="bp-footer__bottom">
+                <div class="bp-container bp-footer__bar">
+                    <span>© {{ date('Y') }} César García</span>
+                    <x-lang-selector />
+                </div>
             </div>
         </footer>
     </body>

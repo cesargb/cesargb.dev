@@ -6,6 +6,7 @@ return [
     'header_github_alt' => 'Visit my GitHub profile',
     'skip_to_content' => 'Skip to content',
     'nav_label' => 'Main navigation',
+    'nav_home' => 'Home',
     'nav_stack' => 'Stack',
     'nav_career' => 'Trajectory',
     'nav_experience' => 'Experience',
@@ -42,5 +43,8 @@ return [
     'projects_content' => 'Open source libraries and tools I write and maintain on GitHub.',
     'projects_view_repository' => 'View repository',
     'lab_eyebrow' => 'Lab',
-    'footer_built_with' => 'Built with Laravel + Octane',
+    'footer_nav_label' => 'Footer navigation',
+    'footer_tagline' => 'Development, open source and experiments.',
+    'footer_explore' => 'Explore',
+    'footer_connect' => 'Connect',
 ];
