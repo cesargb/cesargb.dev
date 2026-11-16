@@ -53,4 +53,23 @@ class Repositories
     {
         return self::$projects;
     }
+
+    /**
+     * @return array<int, string>
+     */
+    public static function slugs(): array
+    {
+        return array_column(self::$projects, 'repository');
+    }
+
+    public static function find(string $repository): ?array
+    {
+        foreach (self::$projects as $project) {
+            if ($project['repository'] === $repository) {
+                return $project;
+            }
+        }
+
+        return null;
+    }
 }

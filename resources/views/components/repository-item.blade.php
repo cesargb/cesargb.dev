@@ -1,10 +1,13 @@
-@props(['repository', 'index' => 1])
-@php($locale = app()->getLocale())
+@props(['repository', 'index' => 1, 'href' => null])
+@php
+    $locale = app()->getLocale();
+    $external = $href === null;
+    $href ??= "https://github.com/{$repository['owner']}/{$repository['repository']}";
+@endphp
 <a
     class="bp-card"
-    href="https://github.com/{{ $repository['owner'] }}/{{ $repository['repository'] }}"
-    target="_blank"
-    rel="noopener"
+    href="{{ $href }}"
+    @if ($external) target="_blank" rel="noopener" @endif
 >
     <div class="bp-card__head">
         <div class="bp-card__repo">
@@ -12,7 +15,11 @@
             <h3 class="bp-card__name">{{ $repository['owner'] }}/<b>{{ $repository['repository'] }}</b></h3>
         </div>
         <span class="bp-card__arrow" aria-hidden="true">
-            {!! file_get_contents(resource_path('icons/external.svg')) !!}
+            @if ($external)
+                {!! file_get_contents(resource_path('icons/external.svg')) !!}
+            @else
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            @endif
         </span>
     </div>
 
