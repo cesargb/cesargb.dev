@@ -8,6 +8,7 @@ return [
     'nav_label' => 'Navegación principal',
     'nav_stack' => 'Stack',
     'nav_career' => 'Trayectoria',
+    'nav_experience' => 'Experiencia',
     'nav_projects' => 'Open source',
     'nav_lab' => 'Lab',
     'profile_eyebrow' => 'Arquitecto de software y desarrollador',

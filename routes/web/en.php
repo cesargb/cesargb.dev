@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\ExperienceController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/experience', ExperienceController::class)->name('experience');
 
 Route::prefix('lab')->name('lab.')->group(function () {
     Route::get('/', function () {
