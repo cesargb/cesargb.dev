@@ -12,4 +12,7 @@ return [
     'back_to_index' => 'All projects',
     'meta_title_project' => ':project · Documentation · César García',
     'view_all_docs' => 'Browse the documentation',
+    'copy_code' => 'Copy',
+    'copied' => 'Copied',
+    'copy_failed' => 'Copy failed',
 ];

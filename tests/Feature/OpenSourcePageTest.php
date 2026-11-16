@@ -51,6 +51,19 @@ class OpenSourcePageTest extends TestCase
             ->assertSeeHtml('<span class="hl-comment">');
     }
 
+    public function test_code_blocks_get_a_localized_copy_button(): void
+    {
+        $this->get('/en/open-source/laravel-magiclink')
+            ->assertOk()
+            ->assertSee('copy: "Copy"', false)
+            ->assertSee('copied: "Copied"', false);
+
+        $this->get('/es/open-source/laravel-magiclink')
+            ->assertOk()
+            ->assertSee('copy: "Copiar"', false)
+            ->assertSee('copied: "Copiado"', false);
+    }
+
     public function test_unknown_project_returns_not_found(): void
     {
         $this->get('/en/open-source/unknown-project')->assertNotFound();

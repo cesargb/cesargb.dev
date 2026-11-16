@@ -176,6 +176,72 @@
             text-align: left;
         }
 
+        #open-source-doc .code-block {
+            position: relative;
+        }
+
+        #open-source-doc .code-block pre {
+            padding-right: calc(var(--space-4) + 96px);
+        }
+
+        #open-source-doc .code-copy {
+            position: absolute;
+            top: var(--space-2);
+            right: var(--space-2);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+            min-height: 32px;
+            padding: 0 var(--space-2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: var(--surface-raised);
+            color: var(--ink-muted);
+            font: 500 12px/1 var(--font-mono);
+            cursor: pointer;
+            opacity: 0;
+            transition:
+                opacity var(--dur-fast) var(--ease-out),
+                color var(--dur-fast) var(--ease-out),
+                border-color var(--dur-fast) var(--ease-out);
+        }
+
+        #open-source-doc .code-block:hover .code-copy,
+        #open-source-doc .code-block:focus-within .code-copy,
+        #open-source-doc .code-copy[data-state] {
+            opacity: 1;
+        }
+
+        #open-source-doc .code-copy:hover {
+            color: var(--ink);
+            border-color: var(--border-strong);
+        }
+
+        #open-source-doc .code-copy:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        #open-source-doc .code-copy[data-state="copied"] {
+            color: #8fd3a8;
+        }
+
+        #open-source-doc .code-copy[data-state="failed"] {
+            color: var(--accent);
+        }
+
+        #open-source-doc .code-copy svg {
+            width: 14px;
+            height: 14px;
+            flex: none;
+        }
+
+        @media (hover: none) {
+            #open-source-doc .code-copy {
+                opacity: 1;
+            }
+        }
+
         @media (max-width: 640px) {
             #open-source-doc {
                 padding: var(--space-12) 0;
@@ -191,6 +257,70 @@
             }
         }
     </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!navigator.clipboard) {
+                return;
+            }
+
+            const strings = {
+                copy: @json(__('open-source.copy_code')),
+                copied: @json(__('open-source.copied')),
+                failed: @json(__('open-source.copy_failed')),
+            };
+
+            const icons = {
+                copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
+                copied: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>',
+            };
+
+            const live = document.createElement('span');
+            live.className = 'sr-only';
+            live.setAttribute('aria-live', 'polite');
+            document.body.append(live);
+
+            const render = (button, state) => {
+                button.innerHTML = (state === 'copied' ? icons.copied : icons.copy) + '<span>' + strings[state] + '</span>';
+                if (state === 'copy') {
+                    button.removeAttribute('data-state');
+                } else {
+                    button.dataset.state = state;
+                }
+            };
+
+            document.querySelectorAll('#open-source-doc .doc-content pre').forEach((pre) => {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'code-block';
+                pre.replaceWith(wrapper);
+                wrapper.append(pre);
+
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'code-copy';
+                render(button, 'copy');
+                wrapper.append(button);
+
+                let timer;
+
+                button.addEventListener('click', async () => {
+                    let state = 'copied';
+
+                    try {
+                        await navigator.clipboard.writeText(pre.innerText);
+                    } catch {
+                        state = 'failed';
+                    }
+
+                    render(button, state);
+                    live.textContent = strings[state];
+
+                    clearTimeout(timer);
+                    timer = setTimeout(() => render(button, 'copy'), 2000);
+                });
+            });
+        });
+    </script>
 @endsection
 
 @section('main')
