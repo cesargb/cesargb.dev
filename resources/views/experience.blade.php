@@ -178,9 +178,103 @@
         }
 
         /* Without JavaScript or WebGL the space stays empty: hide it and keep the list. */
-        .xp-space:not(.is-ready) .xp-hud,
-        .xp-space:not(.is-ready) canvas {
+        .xp-space:not(.is-ready) .xp-hud {
             visibility: hidden;
+        }
+
+        .xp-space canvas {
+            opacity: 0;
+            transition: opacity 0.9s var(--ease-out);
+        }
+
+        .xp-space.is-ready canvas {
+            opacity: 1;
+        }
+
+        /* CSS-only tunnel shown while Three.js loads; it fades out on the first 3D frame. */
+        .xp-preview {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.9s var(--ease-out), visibility 0s linear 0.9s;
+            background: radial-gradient(circle at center, rgb(124 131 255 / 0.18) 0%, transparent 35%);
+        }
+
+        .xp-space.is-loading:not(.is-ready) .xp-preview {
+            opacity: 1;
+            visibility: visible;
+            transition: none;
+        }
+
+        .xp-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 70vmin;
+            height: 70vmin;
+            margin: -35vmin 0 0 -35vmin;
+            border: 1px solid rgb(154 160 255 / 0.55);
+            border-radius: 50%;
+            opacity: 0;
+            animation: xp-ring 4s cubic-bezier(0.55, 0, 1, 0.45) infinite;
+            animation-delay: calc(var(--i) * -0.5s);
+        }
+
+        @keyframes xp-ring {
+            0% {
+                transform: scale(0.04);
+                opacity: 0;
+            }
+
+            25% {
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: scale(2.6);
+                opacity: 0;
+            }
+        }
+
+        .xp-preview__label {
+            position: absolute;
+            left: 50%;
+            top: calc(50% + 48px);
+            transform: translateX(-50%);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            white-space: nowrap;
+        }
+
+        .xp-preview__label::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: xp-blink 1.2s ease-in-out infinite;
+        }
+
+        @keyframes xp-blink {
+            50% {
+                opacity: 0.2;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .xp-ring {
+                animation: none;
+                opacity: 0.35;
+                transform: scale(calc(0.15 + var(--i) * 0.3));
+            }
+
+            .xp-preview__label::before {
+                animation: none;
+            }
         }
 
         .xp-space.is-unsupported {
@@ -242,6 +336,12 @@
             role="img"
             aria-label="{{ __('experience.content') }}"
         ></canvas>
+        <div class="xp-preview" aria-hidden="true">
+            @for ($i = 0; $i < 8; $i++)
+                <span class="xp-ring" style="--i: {{ $i }}"></span>
+            @endfor
+            <span class="xp-preview__label bp-label">{{ __('experience.loading') }}</span>
+        </div>
         <div class="xp-labels" aria-hidden="true"></div>
 
         <div class="xp-overlay">
@@ -269,6 +369,18 @@
             </div>
         </div>
     </section>
+    <script>
+        (() => {
+            const space = document.querySelector('[data-xp]');
+            space.classList.add('is-loading');
+            setTimeout(() => {
+                if (!space.classList.contains('is-ready')) {
+                    space.classList.remove('is-loading');
+                    space.classList.add('is-unsupported');
+                }
+            }, 20000);
+        })();
+    </script>
 
     <section class="bp-section xp-list" aria-labelledby="xp-list-title">
         <div class="bp-container">

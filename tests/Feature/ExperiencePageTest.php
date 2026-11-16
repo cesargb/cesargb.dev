@@ -20,6 +20,17 @@ class ExperiencePageTest extends TestCase
         $this->get('/es/experiencia')->assertOk()->assertSee('Un viaje por mi experiencia');
     }
 
+    public function test_experience_pages_show_a_preview_while_the_scene_loads(): void
+    {
+        $this->get('/en/experience')
+            ->assertSeeHtml('<div class="xp-preview" aria-hidden="true">')
+            ->assertSee('Preparing the journey…');
+
+        $this->get('/es/experiencia')
+            ->assertSeeHtml('<div class="xp-preview" aria-hidden="true">')
+            ->assertSee('Preparando el viaje…');
+    }
+
     public function test_experience_pages_expose_canonical_and_hreflang(): void
     {
         $en = route('en.experience');

@@ -8,6 +8,7 @@ return [
     'content' => 'Every star is a technology I have worked with. The bigger it is, the more experience I have with it.',
     'hint' => 'Drag to speed up · Hold to pause',
     'hint_keys' => 'Space to pause · ↑ ↓ to change speed',
+    'loading' => 'Preparing the journey…',
     'speed' => 'Speed',
     'paused' => 'Paused',
     'legend' => 'Areas',

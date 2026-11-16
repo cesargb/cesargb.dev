@@ -8,6 +8,7 @@ return [
     'content' => 'Cada estrella es una tecnología con la que he trabajado. Cuanto más grande, más experiencia tengo con ella.',
     'hint' => 'Arrastra para acelerar · Mantén pulsado para pausar',
     'hint_keys' => 'Espacio para pausar · ↑ ↓ para cambiar la velocidad',
+    'loading' => 'Preparando el viaje…',
     'speed' => 'Velocidad',
     'paused' => 'En pausa',
     'legend' => 'Áreas',
