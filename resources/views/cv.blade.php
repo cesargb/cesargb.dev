@@ -15,6 +15,7 @@
             flex-wrap: wrap;
             justify-content: flex-end;
             gap: var(--space-3);
+            max-width: var(--measure);
             margin-bottom: var(--space-8);
         }
 
@@ -47,6 +48,10 @@
             margin-top: var(--space-2);
             color: var(--accent);
             font-size: 18px;
+        }
+
+        #cv .cv-body h1 + p strong {
+            color: inherit;
         }
 
         #cv .cv-body h2 {
@@ -82,7 +87,7 @@
 
         #cv .cv-body ul {
             margin-top: var(--space-3);
-            padding-left: var(--space-5);
+            padding-left: var(--space-6);
             list-style: disc;
         }
 
@@ -106,8 +111,10 @@
             text-underline-offset: 3px;
         }
 
-        #cv .cv-body a:hover {
-            color: var(--accent);
+        @media (hover: hover) {
+            #cv .cv-body a:hover {
+                color: var(--accent);
+            }
         }
 
         @media (max-width: 640px) {
@@ -126,9 +133,33 @@
             }
         }
 
+        /* Browser printing: just the CV, dark text on white */
         @media print {
-            #cv .cv-actions {
+            :root {
+                color-scheme: light;
+                --bg: #fff;
+                --surface: #fff;
+                --border: #d4d4d8;
+                --ink: #000;
+                --ink-muted: #27272a;
+                --ink-subtle: #52525b;
+                --accent: #000;
+            }
+
+            .skip-link,
+            .bp-header,
+            .bp-footer,
+            #cv .cv-actions,
+            #cv.bp-grid::before {
                 display: none;
+            }
+
+            #cv {
+                padding: 0;
+            }
+
+            #cv .cv-body {
+                max-width: none;
             }
         }
     </style>
@@ -151,7 +182,7 @@
                     src="/assets/images/profile.webp?w=240&h=240&fit=crop"
                     width="120"
                     height="120"
-                    alt="César García"
+                    alt=""
                 />
                 {!! $html !!}
             </article>

@@ -31,7 +31,9 @@ class CvPageTest extends TestCase
 
     public function test_cv_photo_is_shown_on_the_page_but_not_in_the_markdown(): void
     {
-        $this->get('/en/cv')->assertSeeHtml('src="/assets/images/profile.webp?w=240&h=240&fit=crop"');
+        $html = $this->get('/en/cv')->getContent();
+
+        $this->assertMatchesRegularExpression('#src="/assets/images/profile\.webp\?w=240&h=240&fit=crop"\s+width="120"\s+height="120"\s+alt=""#', $html);
 
         $this->get('/en/cv.md')->assertDontSee('profile.webp');
     }
