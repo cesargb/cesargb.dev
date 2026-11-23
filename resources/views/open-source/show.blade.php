@@ -539,6 +539,7 @@
                             {!! file_get_contents(resource_path('icons/github.svg')) !!}
                             {{ __('open-source.view_on_github') }}
                         </a>
+                        <x-repository-stats :repository="$repository" />
                     </div>
                 </header>
 
