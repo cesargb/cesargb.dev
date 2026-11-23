@@ -9,7 +9,7 @@
         <div class="bp-job__head">
             <h3>
                 @if ($job['url'])
-                    <a href="{{ $job['url'] }}" target="_blank" rel="noopener">{{ $job['company'] }}</a>
+                    <a href="{{ $job['url'] }}" target="_blank" rel="noopener">{{ $job['company'] }}<span class="sr-only"> {{ __('page-index.footer_new_tab') }}</span></a>
                 @else
                     {{ $job['company'] }}
                 @endif

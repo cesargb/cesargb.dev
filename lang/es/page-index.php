@@ -23,7 +23,6 @@ return [
     'profile_cta_github' => 'GitHub',
     'spec_experience' => 'Experiencia',
     'spec_years_unit' => 'años',
-    'spec_years_suffix' => 'de experiencia',
     'spec_focus_areas' => [
         'Sistemas',
         'Redes',

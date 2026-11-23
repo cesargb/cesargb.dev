@@ -40,4 +40,8 @@
 
         <x-repository-stats :repository="$repository" />
     </div>
+
+    @if ($external)
+        <span class="sr-only">{{ __('page-index.footer_new_tab') }}</span>
+    @endif
 </a>

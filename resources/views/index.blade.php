@@ -23,7 +23,7 @@
                     <div class="bp-avatar bp-corners">
                         <img
                             src="/assets/images/profile.webp?w=144&h=144&fit=crop"
-                            alt="César García"
+                            alt=""
                             width="62"
                             height="62"
                         />
@@ -49,6 +49,7 @@
                     <a class="bp-btn bp-btn--secondary" href="https://github.com/cesargb" target="_blank" rel="noopener">
                         {!! file_get_contents(resource_path('icons/github.svg')) !!}
                         {{ __('page-index.profile_cta_github') }}
+                        <span class="sr-only">{{ __('page-index.footer_new_tab') }}</span>
                     </a>
                 </div>
             </div>
@@ -58,7 +59,7 @@
                     <span class="bp-label">{{ __('page-index.spec_experience') }}</span>
                     <p class="bp-xp__years">
                         <span class="bp-xp__number">{{ date('Y') - \App\Data\Career::startYear() }}</span>
-                        <span class="bp-xp__unit">{{ __('page-index.spec_years_unit') }} <span>{{ __('page-index.spec_years_suffix') }}</span></span>
+                        <span class="bp-xp__unit">{{ __('page-index.spec_years_unit') }}</span>
                     </p>
                 </div>
 

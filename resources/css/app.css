@@ -308,19 +308,21 @@ code {
     color: var(--on-accent);
 }
 
-.bp-btn--primary:hover {
-    background: #ff7682;
-}
-
 .bp-btn--secondary {
     background: var(--surface);
     border-color: var(--border-strong);
     color: var(--ink);
 }
 
-.bp-btn--secondary:hover {
-    background: var(--surface-raised);
-    border-color: var(--ink-subtle);
+@media (hover: hover) {
+    .bp-btn--primary:hover {
+        background: #ff7682;
+    }
+
+    .bp-btn--secondary:hover {
+        background: var(--surface-raised);
+        border-color: var(--ink-subtle);
+    }
 }
 
 .bp-icon-btn {
@@ -896,11 +898,6 @@ code {
     color: var(--ink);
 }
 
-.bp-xp__unit span {
-    font-weight: 400;
-    color: var(--ink-muted);
-}
-
 /* Divider with a short coral lead-in, like a dimension line */
 .bp-xp__rule {
     height: 1px;
@@ -1303,8 +1300,10 @@ code {
     color: var(--ink);
 }
 
-.bp-job__head h3 a:hover {
-    color: var(--accent);
+@media (hover: hover) {
+    .bp-job__head h3 a:hover {
+        color: var(--accent);
+    }
 }
 
 .bp-job__role {
@@ -1403,13 +1402,27 @@ code {
         transform var(--dur) var(--ease-out);
 }
 
-a.bp-card:hover,
-a.bp-card:focus-visible {
+a.bp-card:hover {
     text-decoration: none;
+}
+
+/* Hover lift only on real pointers, so it does not stick after a tap */
+@media (hover: hover) {
+    a.bp-card:hover {
+        border-color: transparent;
+        box-shadow: var(--shadow-card-hover);
+        transform: translateY(-2px);
+    }
+}
+
+/* Keyboard focus keeps a solid outline (box-shadow is dropped in forced-colors mode) */
+a.bp-card:focus-visible {
     border-color: transparent;
     box-shadow: var(--shadow-card-hover);
     transform: translateY(-2px);
-    outline: none;
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-lg);
 }
 
 .bp-card__head {
@@ -1457,7 +1470,13 @@ a.bp-card:focus-visible {
     display: block;
 }
 
-a.bp-card:hover .bp-card__arrow,
+@media (hover: hover) {
+    a.bp-card:hover .bp-card__arrow {
+        color: var(--accent);
+        transform: translate(2px, -2px);
+    }
+}
+
 a.bp-card:focus-visible .bp-card__arrow {
     color: var(--accent);
     transform: translate(2px, -2px);
