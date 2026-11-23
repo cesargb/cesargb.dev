@@ -16,4 +16,6 @@ return [
     'copied' => 'Copied',
     'copy_failed' => 'Copy failed',
     'toc_title' => 'On this page',
+    'stars' => 'GitHub stars',
+    'downloads' => 'Downloads',
 ];

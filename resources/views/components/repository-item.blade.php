@@ -31,9 +31,13 @@
         @endforeach
     </ul>
 
-    <div class="bp-card__tags">
-        @foreach ($repository['tags'] as $tag)
-            <span class="bp-tag">{{ $tag }}</span>
-        @endforeach
+    <div class="bp-card__foot">
+        <div class="bp-card__tags">
+            @foreach ($repository['tags'] as $tag)
+                <span class="bp-tag">{{ $tag }}</span>
+            @endforeach
+        </div>
+
+        <x-repository-stats :repository="$repository" />
     </div>
 </a>

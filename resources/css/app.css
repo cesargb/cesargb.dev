@@ -1214,13 +1214,48 @@ a.bp-card:focus-visible .bp-card__arrow {
     font-family: var(--font-mono);
 }
 
+.bp-card__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3) var(--space-4);
+    margin-top: auto;
+    padding-top: var(--space-4);
+    border-top: 1px dashed var(--border);
+}
+
 .bp-card__tags {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-2);
-    margin-top: auto;
-    padding-top: var(--space-4);
-    border-top: 1px dashed var(--border);
+}
+
+.bp-stats {
+    display: flex;
+    gap: var(--space-4);
+    margin: 0;
+    font: 500 13px/20px var(--font-mono);
+    color: var(--ink-subtle);
+}
+
+.bp-stats > div {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.bp-stats dt {
+    display: inline-flex;
+}
+
+.bp-stats dd {
+    margin: 0;
+}
+
+.bp-stats svg {
+    width: 14px;
+    height: 14px;
 }
 
 .bp-status {

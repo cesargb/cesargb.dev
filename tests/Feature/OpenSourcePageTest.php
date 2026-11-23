@@ -26,6 +26,50 @@ class OpenSourcePageTest extends TestCase
         }
     }
 
+    public function test_project_cards_show_stored_stars_and_downloads(): void
+    {
+        $storage = sys_get_temp_dir().'/open-source-stats-'.uniqid();
+        mkdir($storage.'/app', 0777, true);
+        file_put_contents($storage.'/app/repositories_stats.php', '<?php return '.var_export([
+            'cesargb/laravel-magiclink' => ['github_starts' => 470, 'downloads' => 1876487],
+            'cesargb/php-log-rotation' => ['github_starts' => 19, 'downloads' => 398567],
+        ], true).';');
+        $this->app->useStoragePath($storage);
+
+        try {
+            $this->get('/en/open-source')
+                ->assertOk()
+                ->assertSee('GitHub stars')
+                ->assertSeeHtml('<dd>470</dd>')
+                ->assertSeeHtml('<dd>1.9M</dd>')
+                ->assertSeeHtml('title="1,876,487"')
+                ->assertSeeHtml('<dd>399k</dd>');
+
+            $this->get('/es')
+                ->assertOk()
+                ->assertSee('Estrellas en GitHub')
+                ->assertSeeHtml('<dd>1.9M</dd>');
+
+            $this->get('/en/open-source/laravel-magiclink')
+                ->assertOk()
+                ->assertSeeHtml('<dd>470</dd>')
+                ->assertSeeHtml('<dd>1.9M</dd>');
+        } finally {
+            unlink($storage.'/app/repositories_stats.php');
+            rmdir($storage.'/app');
+            rmdir($storage);
+        }
+    }
+
+    public function test_project_cards_render_without_stats(): void
+    {
+        $this->app->useStoragePath(sys_get_temp_dir().'/open-source-stats-missing-'.uniqid());
+
+        $this->get('/en/open-source')
+            ->assertOk()
+            ->assertDontSee('bp-stats', false);
+    }
+
     public function test_home_only_features_the_two_main_projects(): void
     {
         $this->get('/en')
