@@ -22,7 +22,8 @@
             width: 100%;
             height: 100%;
             display: block;
-            touch-action: none;
+            /* Vertical swipes scroll the page; horizontal drags speed up the journey */
+            touch-action: pan-y;
             cursor: grab;
             outline: none;
         }
@@ -32,7 +33,8 @@
         }
 
         .xp-space canvas:focus-visible {
-            box-shadow: inset 0 0 0 2px var(--accent);
+            outline: 2px solid var(--accent);
+            outline-offset: -2px;
         }
 
         .xp-labels {
@@ -81,6 +83,8 @@
             justify-content: space-between;
             padding: var(--space-6);
             pointer-events: none;
+            /* Keeps the text legible over the moving stars */
+            text-shadow: 0 0 8px rgb(0 0 0 / 0.9);
         }
 
         .xp-intro {
@@ -138,6 +142,27 @@
             background: var(--star-color);
             box-shadow: 0 0 10px var(--star-color);
             flex: none;
+        }
+
+        .xp-controls {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            gap: var(--space-4);
+        }
+
+        .xp-toggle {
+            pointer-events: auto;
+            text-shadow: none;
+        }
+
+        .xp-toggle .xp-toggle__play,
+        .xp-toggle[aria-pressed="true"] .xp-toggle__pause {
+            display: none;
+        }
+
+        .xp-toggle[aria-pressed="true"] .xp-toggle__play {
+            display: block;
         }
 
         .xp-meter {
@@ -277,13 +302,14 @@
             }
         }
 
-        .xp-space.is-unsupported {
+        /* Without JavaScript, after the load timeout or without WebGL: just the intro */
+        .xp-space:not(.is-loading, .is-ready) {
             height: auto;
             min-height: 0;
             padding-bottom: var(--space-12);
         }
 
-        .xp-space.is-unsupported .xp-overlay {
+        .xp-space:not(.is-loading, .is-ready) .xp-overlay {
             position: static;
         }
 
@@ -335,7 +361,10 @@
             tabindex="0"
             role="img"
             aria-label="{{ __('experience.content') }}"
+            aria-describedby="xp-keys"
         ></canvas>
+        <span class="sr-only" id="xp-keys">{{ __('experience.hint_keys') }}</span>
+        <span class="sr-only" aria-live="polite" data-xp-status></span>
         <div class="xp-preview" aria-hidden="true">
             @for ($i = 0; $i < 8; $i++)
                 <span class="xp-ring" style="--i: {{ $i }}"></span>
@@ -360,11 +389,26 @@
                     @endforeach
                 </ul>
 
-                <div class="xp-meter" aria-hidden="true">
-                    <span class="bp-label" data-xp-speed-label data-speed="{{ __('experience.speed') }}" data-paused="{{ __('experience.paused') }}">{{ __('experience.speed') }}</span>
-                    <div class="xp-meter__bar"><span data-xp-speed></span></div>
-                    <span class="xp-hint">{{ __('experience.hint') }}</span>
-                    <span class="xp-hint xp-hint--keys">{{ __('experience.hint_keys') }}</span>
+                <div class="xp-controls">
+                    <button
+                        type="button"
+                        class="bp-btn bp-btn--secondary xp-toggle"
+                        aria-pressed="false"
+                        data-xp-toggle
+                        data-pause="{{ __('experience.pause') }}"
+                        data-resume="{{ __('experience.resume') }}"
+                    >
+                        <svg class="xp-toggle__pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5v14"/><path d="M16 5v14"/></svg>
+                        <svg class="xp-toggle__play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 4 13 8-13 8z"/></svg>
+                        <span data-xp-toggle-label>{{ __('experience.pause') }}</span>
+                    </button>
+
+                    <div class="xp-meter" aria-hidden="true">
+                        <span class="bp-label" data-xp-speed-label data-speed="{{ __('experience.speed') }}" data-paused="{{ __('experience.paused') }}">{{ __('experience.speed') }}</span>
+                        <div class="xp-meter__bar"><span data-xp-speed></span></div>
+                        <span class="xp-hint">{{ __('experience.hint') }}</span>
+                        <span class="xp-hint xp-hint--keys">{{ __('experience.hint_keys') }}</span>
+                    </div>
                 </div>
             </div>
         </div>

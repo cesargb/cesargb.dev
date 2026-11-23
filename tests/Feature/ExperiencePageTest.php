@@ -31,6 +31,24 @@ class ExperiencePageTest extends TestCase
             ->assertSee('Preparando el viaje…');
     }
 
+    public function test_experience_scene_is_operable_without_gestures(): void
+    {
+        $pages = [
+            '/en/experience' => ['Pause', 'Space to pause · ↑ ↓ to change speed'],
+            '/es/experiencia' => ['Pausar', 'Espacio para pausar · ↑ ↓ para cambiar la velocidad'],
+        ];
+
+        foreach ($pages as $path => [$pause, $keys]) {
+            $html = $this->get($path)->assertOk()->getContent();
+
+            $this->assertMatchesRegularExpression('#<button\s+type="button"\s+class="bp-btn bp-btn--secondary xp-toggle"\s+aria-pressed="false"#', $html);
+            $this->assertStringContainsString("<span data-xp-toggle-label>{$pause}</span>", $html);
+            $this->assertStringContainsString('aria-describedby="xp-keys"', $html);
+            $this->assertStringContainsString("<span class=\"sr-only\" id=\"xp-keys\">{$keys}</span>", $html);
+            $this->assertStringContainsString('<span class="sr-only" aria-live="polite" data-xp-status></span>', $html);
+        }
+    }
+
     public function test_experience_pages_expose_canonical_and_hreflang(): void
     {
         $en = route('en.experience');
