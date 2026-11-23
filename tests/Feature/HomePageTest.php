@@ -28,6 +28,19 @@ class HomePageTest extends TestCase
             ->assertStatus(200);
     }
 
+    public function test_header_has_mobile_menu_with_cv_link(): void
+    {
+        foreach (['en' => 'Menu', 'es' => 'Menú'] as $lang => $label) {
+            $this->get("/{$lang}")
+                ->assertOk()
+                ->assertSeeHtml('popovertarget="site-menu"')
+                ->assertSeeHtml('<div id="site-menu" class="bp-menu" popover>')
+                ->assertSeeHtml('<span>@cesargb</span>')
+                ->assertSeeHtml("aria-label=\"{$label}\"")
+                ->assertSeeHtml('href="'.route("{$lang}.cv").'"');
+        }
+    }
+
     public function test_root_redirects_to_spanish_when_preferred(): void
     {
         $this->withHeaders(['Accept-Language' => 'es'])

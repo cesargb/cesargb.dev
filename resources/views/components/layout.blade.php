@@ -50,16 +50,38 @@
                 </a>
 
                 <nav class="bp-nav" aria-label="{{ __('page-index.nav_label') }}">
-                    <ul class="bp-nav__links">
-                        <li><a href="/{{ $locale }}#stack">{{ __('page-index.nav_stack') }}</a></li>
-                        <li><a href="/{{ $locale }}#trajectory">{{ __('page-index.nav_career') }}</a></li>
-                        <li><a href="{{ route($locale.'.experience') }}">{{ __('page-index.nav_experience') }}</a></li>
-                        <li><a href="{{ route($locale.'.open-source.index') }}">{{ __('page-index.nav_projects') }}</a></li>
-                        <li><a href="/{{ $locale }}#lab">{{ __('page-index.nav_lab') }}</a></li>
-                    </ul>
-                    <x-lang-selector />
+                    <button
+                        class="bp-icon-btn bp-nav__toggle"
+                        type="button"
+                        popovertarget="site-menu"
+                        aria-controls="site-menu"
+                        aria-label="{{ __('page-index.nav_menu') }}"
+                    >
+                        <svg class="bp-nav__burger" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
+                    </button>
+                    <div id="site-menu" class="bp-menu" popover>
+                        <p class="bp-menu__label bp-label" aria-hidden="true">{{ __('page-index.nav_menu') }}</p>
+                        <ul class="bp-nav__links">
+                            <li><a href="/{{ $locale }}#stack"><span class="bp-menu__num" aria-hidden="true">01</span>{{ __('page-index.nav_stack') }}<svg class="bp-menu__arrow" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a></li>
+                            <li><a href="/{{ $locale }}#trajectory"><span class="bp-menu__num" aria-hidden="true">02</span>{{ __('page-index.nav_career') }}<svg class="bp-menu__arrow" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a></li>
+                            <li><a href="{{ route($locale.'.experience') }}" @if (request()->routeIs($locale.'.experience')) aria-current="page" @endif><span class="bp-menu__num" aria-hidden="true">03</span>{{ __('page-index.nav_experience') }}<svg class="bp-menu__arrow" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a></li>
+                            <li><a href="{{ route($locale.'.open-source.index') }}" @if (request()->routeIs($locale.'.open-source.*')) aria-current="page" @endif><span class="bp-menu__num" aria-hidden="true">04</span>{{ __('page-index.nav_projects') }}<svg class="bp-menu__arrow" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a></li>
+                            <li><a href="/{{ $locale }}#lab"><span class="bp-menu__num" aria-hidden="true">05</span>{{ __('page-index.nav_lab') }}<svg class="bp-menu__arrow" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a></li>
+                            <li><a href="{{ route($locale.'.cv') }}" title="{{ __('page-index.nav_cv') }}" @if (request()->routeIs($locale.'.cv')) aria-current="page" @endif><span class="bp-menu__num" aria-hidden="true">06</span>{{ __('page-index.nav_cv_short') }}<svg class="bp-menu__arrow" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a></li>
+                        </ul>
+                        <div class="bp-menu__footer">
+                            <x-lang-selector class="bp-lang--lg" />
+                            <a class="bp-menu__github" href="https://github.com/cesargb" target="_blank" rel="noopener">
+                                {!! file_get_contents(resource_path('icons/github.svg')) !!}
+                                <span>@cesargb</span>
+                                <svg class="bp-menu__github-arrow" aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                                <span class="sr-only">{{ __('page-index.footer_new_tab') }}</span>
+                            </a>
+                        </div>
+                    </div>
+                    <x-lang-selector class="bp-nav__desktop-only" />
                     <a
-                        class="bp-icon-btn"
+                        class="bp-icon-btn bp-nav__desktop-only"
                         href="https://github.com/cesargb"
                         target="_blank"
                         rel="noopener"
@@ -70,6 +92,14 @@
                     </a>
                 </nav>
             </div>
+            <script>
+                document.getElementById('site-menu').addEventListener('click', (event) => {
+                    const menu = event.currentTarget;
+                    if (event.target.closest('a') && menu.matches(':popover-open')) {
+                        menu.hidePopover();
+                    }
+                });
+            </script>
         </header>
 
         <main id="content">
@@ -101,7 +131,7 @@
                             <li><a href="{{ route($locale.'.open-source.index') }}" @if (request()->routeIs($locale.'.open-source.*')) aria-current="page" @endif><span class="bp-footer__num" aria-hidden="true">03</span>{{ __('page-index.nav_projects') }}</a></li>
                             <li><a href="/{{ $locale }}#lab"><span class="bp-footer__num" aria-hidden="true">04</span>{{ __('page-index.nav_lab') }}</a></li>
                             <li><a href="{{ route($locale.'.experience') }}" @if (request()->routeIs($locale.'.experience')) aria-current="page" @endif><span class="bp-footer__num" aria-hidden="true">05</span>{{ __('page-index.nav_experience') }}</a></li>
-                            <li><a href="{{ route($locale.'.cv') }}" @if (request()->routeIs($locale.'.cv')) aria-current="page" @endif><span class="bp-footer__num" aria-hidden="true">CV</span>{{ __('page-index.nav_cv') }}</a></li>
+                            <li><a href="{{ route($locale.'.cv') }}" @if (request()->routeIs($locale.'.cv')) aria-current="page" @endif><span class="bp-footer__num" aria-hidden="true">06</span>{{ __('page-index.nav_cv_short') }}</a></li>
                         </ul>
                     </nav>
 
