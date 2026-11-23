@@ -41,6 +41,20 @@ class HomePageTest extends TestCase
         }
     }
 
+    public function test_hero_avatar_is_decorative_and_external_links_announce_new_tab(): void
+    {
+        foreach (['en' => '(opens in a new tab)', 'es' => '(se abre en una pestaña nueva)'] as $lang => $hint) {
+            $html = $this->get("/{$lang}")->assertOk()->getContent();
+
+            $this->assertMatchesRegularExpression('#<div class="bp-avatar bp-corners">\s*<img\s+src="[^"]+"\s+alt=""#', $html);
+
+            $this->assertMatchesRegularExpression(
+                '#<a class="bp-btn bp-btn--secondary" href="https://github.com/cesargb" target="_blank" rel="noopener">.*?<span class="sr-only">'.preg_quote($hint, '#').'</span>\s*</a>#s',
+                $html,
+            );
+        }
+    }
+
     public function test_root_redirects_to_spanish_when_preferred(): void
     {
         $this->withHeaders(['Accept-Language' => 'es'])
@@ -143,13 +157,13 @@ class HomePageTest extends TestCase
         $this->get('/es')
             ->assertOk()
             ->assertSeeHtml("<span class=\"bp-xp__number\">{$years}</span>")
-            ->assertSee('de experiencia')
+            ->assertSeeHtml('<span class="bp-xp__unit">años</span>')
             ->assertSeeInOrder(['Sistemas', 'Redes', 'Desarrollo', 'Arquitectura de software', 'DevOps']);
 
         $this->get('/en')
             ->assertOk()
             ->assertSeeHtml("<span class=\"bp-xp__number\">{$years}</span>")
-            ->assertSee('of experience')
+            ->assertSeeHtml('<span class="bp-xp__unit">years</span>')
             ->assertSeeInOrder(['Systems', 'Networks', 'Development', 'Software architecture', 'DevOps']);
     }
 
