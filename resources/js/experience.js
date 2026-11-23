@@ -28,6 +28,9 @@ function start(section, categories) {
     const labelLayer = section.querySelector('.xp-labels');
     const speedBar = section.querySelector('[data-xp-speed]');
     const speedLabel = section.querySelector('[data-xp-speed-label]');
+    const toggle = section.querySelector('[data-xp-toggle]');
+    const toggleLabel = section.querySelector('[data-xp-toggle-label]');
+    const status = section.querySelector('[data-xp-status]');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     let renderer;
@@ -188,6 +191,10 @@ function start(section, categories) {
         }
     });
 
+    toggle.addEventListener('click', () => {
+        paused = !paused;
+    });
+
     canvas.addEventListener('keydown', (event) => {
         if (event.code === 'Space') {
             event.preventDefault();
@@ -323,10 +330,19 @@ function start(section, categories) {
 
     let hudSpeed = -1;
     let hudPaused = null;
+    let togglePaused = false;
 
     function updateHud() {
         const isPaused = paused || holding;
         const rounded = Math.round((speed / MAX_SPEED) * 100);
+
+        // The button and the screen reader status follow the explicit pause only, not a hold.
+        if (paused !== togglePaused) {
+            toggle.setAttribute('aria-pressed', String(paused));
+            toggleLabel.textContent = paused ? toggle.dataset.resume : toggle.dataset.pause;
+            status.textContent = paused ? speedLabel.dataset.paused : speedLabel.dataset.speed;
+            togglePaused = paused;
+        }
 
         if (rounded !== hudSpeed) {
             speedBar.style.width = `${rounded}%`;
