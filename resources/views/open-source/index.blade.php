@@ -65,6 +65,7 @@
                     <x-repository-item
                         :repository="$repository"
                         :index="$loop->iteration"
+                        :level="2"
                         :href="route(app()->getLocale().'.open-source.show', $repository['repository'])"
                     />
                 @endforeach

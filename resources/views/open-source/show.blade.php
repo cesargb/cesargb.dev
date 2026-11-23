@@ -32,19 +32,47 @@
 
         #open-source-doc .doc-toc {
             margin-bottom: var(--space-8);
-            padding: var(--space-4);
+            padding: 0 var(--space-4);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
             background: var(--surface);
         }
 
+        #open-source-doc .doc-toc nav {
+            padding-bottom: var(--space-4);
+        }
+
+        /* Collapsible on small screens, so a long index doesn't push the docs out of view */
         #open-source-doc .doc-toc__title {
-            display: block;
-            margin-bottom: var(--space-3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-3);
+            min-height: 44px;
+            list-style: none;
+            cursor: pointer;
             font: 500 12px/16px var(--font-mono);
             letter-spacing: 0.08em;
             text-transform: uppercase;
             color: var(--ink-subtle);
+        }
+
+        #open-source-doc .doc-toc__title::-webkit-details-marker {
+            display: none;
+        }
+
+        #open-source-doc .doc-toc__title::after {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-right: 1.5px solid currentColor;
+            border-bottom: 1.5px solid currentColor;
+            transform: translateY(-2px) rotate(45deg);
+            transition: transform var(--dur) var(--ease-out);
+        }
+
+        #open-source-doc .doc-toc[open] > .doc-toc__title::after {
+            transform: translateY(2px) rotate(-135deg);
         }
 
         #open-source-doc .doc-toc ul {
@@ -105,7 +133,7 @@
                 align-self: start;
                 position: sticky;
                 top: calc(var(--header-h) + var(--space-6));
-                max-height: calc(100vh - var(--header-h) - var(--space-12));
+                max-height: calc(100dvh - var(--header-h) - var(--space-12));
                 overflow-y: auto;
                 margin-bottom: 0;
                 padding: 0 var(--space-4) 0 0;
@@ -113,6 +141,18 @@
                 border-right: 1px solid var(--border);
                 border-radius: 0;
                 background: transparent;
+            }
+
+            /* On desktop the index is always open: the summary is just a title */
+            #open-source-doc .doc-toc__title {
+                min-height: 0;
+                margin-bottom: var(--space-3);
+                cursor: default;
+                pointer-events: none;
+            }
+
+            #open-source-doc .doc-toc__title::after {
+                display: none;
             }
 
             #open-source-doc .doc-toc a {
@@ -242,8 +282,12 @@
             color: var(--ink);
         }
 
+        /* Underlined so links don't rely on colour alone against the body text */
         #open-source-doc .doc-content a {
             color: var(--accent);
+            text-decoration: underline;
+            text-decoration-color: color-mix(in srgb, var(--accent) 50%, transparent);
+            text-underline-offset: 3px;
         }
 
         #open-source-doc .doc-content ul,
@@ -257,6 +301,8 @@
             background: var(--surface-raised);
             color: var(--ink);
             font: 400 14px/1.5 var(--font-mono);
+            /* Long class names and calls wrap instead of widening the page on mobile */
+            overflow-wrap: anywhere;
         }
 
         #open-source-doc .doc-content pre {
@@ -405,6 +451,12 @@
                 font-size: 32px;
                 line-height: 38px;
             }
+
+            /* The copy button sits above the code instead of reserving a third of the width */
+            #open-source-doc .code-block pre {
+                padding-top: calc(var(--space-2) + 32px + var(--space-2));
+                padding-right: var(--space-4);
+            }
         }
     </style>
 
@@ -474,6 +526,35 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Code blocks wider than the column scroll sideways: make them reachable by keyboard.
+            document.querySelectorAll('#open-source-doc .doc-content pre').forEach((pre) => {
+                if (pre.scrollWidth > pre.clientWidth) {
+                    pre.tabIndex = 0;
+                }
+            });
+
+            // The index starts collapsed on small screens and is always open on desktop.
+            const toc = document.querySelector('[data-doc-toc]');
+
+            if (toc) {
+                const desktop = window.matchMedia('(min-width: 1024px)');
+                const sync = () => {
+                    toc.open = desktop.matches;
+                };
+
+                sync();
+                desktop.addEventListener('change', sync);
+                toc.addEventListener('toggle', () => {
+                    if (desktop.matches && !toc.open) {
+                        toc.open = true;
+                    }
+                });
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
             const links = new Map();
 
             document.querySelectorAll('#open-source-doc .doc-toc a[href^="#"]').forEach((link) => {
@@ -488,10 +569,27 @@
                 .map((id) => document.getElementById(id))
                 .filter(Boolean);
 
+            const toc = document.querySelector('[data-doc-toc]');
+
+            // A long index scrolls inside the sticky column: keep the current entry in view.
+            const keepVisible = (link) => {
+                if (!toc || toc.scrollHeight <= toc.clientHeight) {
+                    return;
+                }
+
+                const box = toc.getBoundingClientRect();
+                const item = link.getBoundingClientRect();
+
+                if (item.top < box.top || item.bottom > box.bottom) {
+                    toc.scrollTop += item.top - box.top - box.height / 2;
+                }
+            };
+
             const activate = (id) => {
                 links.forEach((link, key) => {
                     if (key === id) {
                         link.setAttribute('aria-current', 'true');
+                        keepVisible(link);
                     } else {
                         link.removeAttribute('aria-current');
                     }
@@ -520,7 +618,7 @@
     <section id="open-source-doc">
         <div @class(['doc-container', 'doc-container--with-toc' => $hasToc])>
             <div class="doc-main">
-                <a class="doc-back" href="{{ route($locale.'.open-source.index') }}">← {{ __('open-source.back_to_index') }}</a>
+                <a class="doc-back" href="{{ route($locale.'.open-source.index') }}"><span aria-hidden="true">←</span> {{ __('open-source.back_to_index') }}</a>
 
                 <header class="doc-header">
                     <span class="doc-repo">{{ $repository['owner'] }}/{{ $repository['repository'] }}</span>
@@ -538,15 +636,16 @@
                         >
                             {!! file_get_contents(resource_path('icons/github.svg')) !!}
                             {{ __('open-source.view_on_github') }}
+                            <span class="sr-only">{{ __('page-index.footer_new_tab') }}</span>
                         </a>
                         <x-repository-stats :repository="$repository" />
                     </div>
                 </header>
 
                 @if ($hasToc)
-                    <aside class="doc-toc">
+                    <details class="doc-toc" open data-doc-toc>
+                        <summary class="doc-toc__title" id="doc-toc-title">{{ __('open-source.toc_title') }}</summary>
                         <nav aria-labelledby="doc-toc-title">
-                            <span class="doc-toc__title" id="doc-toc-title">{{ __('open-source.toc_title') }}</span>
                             <ul>
                                 @foreach ($toc as $entry)
                                     <li class="doc-toc__item--{{ $entry['level'] }}">
@@ -555,7 +654,7 @@
                                 @endforeach
                             </ul>
                         </nav>
-                    </aside>
+                    </details>
                 @endif
 
                 <article class="doc-content">

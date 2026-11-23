@@ -1,4 +1,4 @@
-@props(['repository', 'index' => 1, 'href' => null])
+@props(['repository', 'index' => 1, 'href' => null, 'level' => 3])
 @php
     $locale = app()->getLocale();
     $external = $href === null;
@@ -12,7 +12,7 @@
     <div class="bp-card__head">
         <div class="bp-card__repo">
             <span class="bp-label">MOD-{{ str_pad((string) $index, 2, '0', STR_PAD_LEFT) }}</span>
-            <h3 class="bp-card__name">{{ $repository['owner'] }}/<b>{{ $repository['repository'] }}</b></h3>
+            <h{{ $level }} class="bp-card__name">{{ $repository['owner'] }}/<b>{{ $repository['repository'] }}</b></h{{ $level }}>
         </div>
         <span class="bp-card__arrow" aria-hidden="true">
             @if ($external)

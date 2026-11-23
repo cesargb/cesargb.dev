@@ -79,6 +79,24 @@ class OpenSourcePageTest extends TestCase
             ->assertDontSee('cesargb/<b>laravel-logs-rotate</b>', false);
     }
 
+    public function test_index_cards_use_h2_right_under_the_h1_while_home_keeps_h3(): void
+    {
+        $this->get('/en/open-source')
+            ->assertOk()
+            ->assertSeeHtml('<h2 class="bp-card__name">cesargb/<b>laravel-magiclink</b></h2>')
+            ->assertDontSeeHtml('<h3 class="bp-card__name">');
+
+        $this->get('/en')->assertSeeHtml('<h3 class="bp-card__name">cesargb/<b>laravel-magiclink</b></h3>');
+    }
+
+    public function test_project_page_github_link_announces_new_tab_and_back_arrow_is_hidden(): void
+    {
+        $html = $this->get('/en/open-source/laravel-magiclink')->assertOk()->getContent();
+
+        $this->assertMatchesRegularExpression('#target="_blank"\s+rel="noopener"\s*>.*?View on GitHub\s*<span class="sr-only">\(opens in a new tab\)</span>\s*</a>#s', $html);
+        $this->assertStringContainsString('<span aria-hidden="true">←</span> All projects', $html);
+    }
+
     public function test_project_page_renders_markdown_documentation(): void
     {
         $this->get('/en/open-source/laravel-magiclink')
@@ -151,7 +169,8 @@ class OpenSourcePageTest extends TestCase
     {
         $this->get('/en/open-source/laravel-magiclink')
             ->assertOk()
-            ->assertSeeHtml('<aside class="doc-toc">')
+            ->assertSeeHtml('<details class="doc-toc" open data-doc-toc>')
+            ->assertSeeHtml('<summary class="doc-toc__title" id="doc-toc-title">On this page</summary>')
             ->assertSee('On this page')
             ->assertSeeHtml('<a href="#login-action">Login Action</a>')
             ->assertSeeHtml('<a href="#protect-with-an-access-code">Protect with an access code</a>')
@@ -167,7 +186,7 @@ class OpenSourcePageTest extends TestCase
     {
         $this->get('/en/open-source/php-log-rotation')
             ->assertOk()
-            ->assertDontSeeHtml('<aside class="doc-toc">');
+            ->assertDontSeeHtml('<details class="doc-toc"');
     }
 
     public function test_every_in_page_link_points_to_an_existing_heading(): void
